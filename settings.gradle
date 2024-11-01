@@ -1,0 +1,6 @@
+rootProject.name = 'genealogie'
+
+include "applicatie"
+include "domein"
+include "infrastructuur"
+include "frontend"

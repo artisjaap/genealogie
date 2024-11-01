@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: #254d78;
+  color: white;
+
+  .menu-item {
+    margin: 5px;
+  }
+}

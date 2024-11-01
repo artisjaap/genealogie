@@ -1,0 +1,23 @@
+.page-container{
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 10px;
+}
+
+.center {
+  align-items: center;
+}
+
+.input-line {
+
+}
+
+.zoek-input {
+  //height: 50px;
+  width: 400px;
+  border-radius: 15px;
+  border: none;
+  margin: 4px;
+  padding: 5px;
+  font-size: 2em;
+}

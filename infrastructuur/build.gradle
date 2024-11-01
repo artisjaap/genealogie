@@ -1,0 +1,42 @@
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+bootJar {
+    launchScript()
+    archiveBaseName = 'genealogie-server'
+    archiveClassifier = "bootable-test"
+    enabled = true
+}
+
+
+springBoot {
+    mainClass = 'be.genealogie.GenealogieApplication'
+}
+
+bootRun {
+    println "Using target environment as spring.profile: tst"
+    args = ["--spring.profiles.active=tst"]
+}
+
+
+
+dependencies {
+    implementation project(":domein")
+    implementation project(":applicatie")
+//    implementation project(":frontend")
+
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.flywaydb:flyway-core'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+
+}
