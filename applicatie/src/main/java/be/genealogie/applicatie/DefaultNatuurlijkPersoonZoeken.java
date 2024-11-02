@@ -18,6 +18,16 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
     @Override
     public List<NatuurlijkPersoonDTO> alle() {
         List<NatuurlijkPersoon> all = natuurlijkPersoonRepository.findAll();
+        return mapLijst(all);
+    }
+
+    @Override
+    public List<NatuurlijkPersoonDTO> voorZoekstring(String zoekString) {
+        List<NatuurlijkPersoon> all = natuurlijkPersoonRepository.findByNaamLikeOrVoornaamLike(zoekString);
+        return mapLijst(all);
+    }
+
+    private List<NatuurlijkPersoonDTO> mapLijst(List<NatuurlijkPersoon> all) {
         return all.stream().map(e -> modelMapper.map(e, NatuurlijkPersoonDTO.class)).toList();
     }
 }

@@ -1,13 +1,20 @@
 package be.genealogie.domein.entiteit;
 
+import be.genealogie.domein.Geslacht;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
 @Table(name = "HUWELIJK")
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Huwelijk {
     @Id
     @Column(name = "ID")
@@ -30,4 +37,12 @@ public class Huwelijk {
 
     @Column(name = "GEHUWD_TE")
     private String gehuwedTe;
+
+    public NatuurlijkPersoon getMan() {
+        return (persoon1.getGeslacht() == Geslacht.MAN)?persoon1:persoon2;
+    }
+
+    public NatuurlijkPersoon getVrouw() {
+        return (persoon1.getGeslacht() == Geslacht.VROUW)?persoon1:persoon2;
+    }
 }

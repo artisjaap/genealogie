@@ -10,4 +10,6 @@ public interface NatuurlijkPersoonRepository {
     NatuurlijkPersoon getById(Long id);
 
     List<NatuurlijkPersoon> findAll();
+
+    List<NatuurlijkPersoon> findByNaamLikeOrVoornaamLike(String naam);
 }

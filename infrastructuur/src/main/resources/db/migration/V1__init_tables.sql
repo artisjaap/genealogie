@@ -34,6 +34,7 @@ CREATE TABLE natuurlijk_persoon
     geboren_te   VARCHAR(255),
     overleden_op date,
     overleden_te VARCHAR(255),
+    geslacht     VARCHAR(255),
     CONSTRAINT pk_natuurlijk_persoon PRIMARY KEY (id)
 );
 
