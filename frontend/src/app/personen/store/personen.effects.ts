@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {NatuurlijkPersoonService} from "../app/service/NatuurlijkPersoonService";
-import {maakNieuwNatuurlijkPersoon} from "./genealogie.acties";
+import {NatuurlijkPersoonService} from "../../service/NatuurlijkPersoonService";
+import {maakNieuwNatuurlijkPersoon} from "./personen.acties";
 import {catchError, EMPTY, exhaustMap, map, withLatestFrom} from "rxjs";
 
 @Injectable()
-export class GenealogieEffects {
+export class PersonenEffects {
 
 
   nieuwNatuurlijkPersoon$ = createEffect(() => this.actions$.pipe(

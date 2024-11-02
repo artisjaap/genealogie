@@ -1,24 +1,21 @@
 import {RouterModule, Routes} from '@angular/router';
-import {InstellingenComponent} from "./components/instellingen/instellingen.component";
-import {PersonenZoekenComponent} from "./components/personen-zoeken/personen-zoeken.component";
-import {PersoonNieuwFicheComponent} from "./components/persoon-nieuw-fiche/persoon-nieuw-fiche.component";
 import {NgModule} from "@angular/core";
+import {AppComponent} from "./app.component";
 
-export const routes: Routes = [
-
+const routes: Routes = [
   {
-    path: 'instellingen',
-    component: InstellingenComponent
+    path: '',
+    component: AppComponent
   },
   {
-    path: 'zoeken',
-    component: PersonenZoekenComponent
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
   },
   {
-    path: 'persoon-nieuw',
-    component: PersoonNieuwFicheComponent
+    path: 'personen',
+    loadChildren: () => import('./personen/personen.module').then(m => m.PersonenModule),
   },
-];
+ ];
 
 
 @NgModule({

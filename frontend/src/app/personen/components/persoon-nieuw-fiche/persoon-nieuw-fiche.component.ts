@@ -10,11 +10,12 @@ import {
 } from "@angular/material/datepicker";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {Store} from "@ngrx/store";
-import {NatuurlijkPersoonFormValue, nieuwNatuurlijkPersoonForm} from "../../../store/genealogie.reducer";
 import {FormGroupState, NgrxFormsModule, NgrxValueConverters} from "ngrx-forms";
 import {map, Observable, tap} from "rxjs";
 import {AsyncPipe, NgIf} from "@angular/common";
-import {maakNieuwNatuurlijkPersoon} from "../../../store/genealogie.acties";
+import {NatuurlijkPersoonFormValue} from "../../store/personen-nieuw-persoon-form.reducer";
+import {maakNieuwNatuurlijkPersoon} from "../../store/personen.acties";
+import {getPersonenNieuwFormState} from "../../store/personen.reducer";
 
 @Component({
   selector: 'app-persoon-nieuw-fiche',
@@ -29,8 +30,7 @@ export class PersoonNieuwFicheComponent {
   formState$: Observable<FormGroupState<NatuurlijkPersoonFormValue>>;
 
   constructor(private store: Store<any>) {
-    this.formState$ = store.select('genealogie').pipe(map(s => s.nieuwNatuurlijkPersoon));
-   // this.formState$ = store.select(nieuwNatuurlijkPersoonForm).pipe(tap(console.log));
+    this.formState$ = store.select(getPersonenNieuwFormState).pipe(map(s => s.nieuwNatuurlijkPersoon));
   }
 
   dateValueConverter = NgrxValueConverters.dateToISOString;
