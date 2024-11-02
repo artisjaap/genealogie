@@ -35,8 +35,11 @@ $frontend-theme: mat.define-theme((
 // Comment out the line below if you want to use the deprecated `color` inputs.
 // @include mat.color-variants-backwards-compatibility($frontend-theme);
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+
 body {
   background-color: steelblue;
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .applicatie {
@@ -45,5 +48,41 @@ body {
   flex-flow: column nowrap;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.infocard {
+  display: flex;
+  flex-flow: column nowrap;
+
+  background-color: white;
+  color: steelblue;
+  box-shadow: black 2px 2px 10px;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 10px ;
+
+  .infocard-titel {
+    font-weight: bold;
+    font-size: 2em;
+  }
+
+  .infocard-body {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .infocard-sectie {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1;
+    border: 1px dashed steelblue;
+    margin: 20px;
+    padding: 16px;
+
+    .infocard-sectie-titel {
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+  }
+}
+
+
+

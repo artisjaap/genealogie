@@ -1,7 +1,29 @@
 <div class="page-container center">
   <div class="input-line">
-    <input type="text" class="zoek-input">
-    <button>Zoeken</button>
-    <button [routerLink]="['/persoon-nieuw']">Nieuw</button>
+    <input type="text" #zoek class="zoek-input">
+    <button mat-raised-button (click)="zoeken(zoek)">Zoeken</button>
+    <button mat-raised-button [routerLink]="['/personen/nieuw']">Nieuw</button>
   </div>
 </div>
+
+<table *ngIf=" gevondenPersonen$ | async as gevondenPersonen">
+  <tr>
+    <th>Naam</th>
+    <th>Voornaam</th>
+    <th>Geboren Op</th>
+    <th>Geboren Te</th>
+    <th>Overleden Op</th>
+    <th>Overleden Te</th>
+    <th>Acties</th>
+  </tr>
+  <tr *ngFor="let persoon of gevondenPersonen">
+    <td>{{ persoon.naam }}</td>
+    <td>{{ persoon.voornaam }}</td>
+    <td>{{ persoon.geborenOp }}</td>
+    <td>{{ persoon.geborenTe }}</td>
+    <td>{{ persoon.overledenOp }}</td>
+    <td>{{ persoon.overledenTe }}</td>
+    <td> <span [routerLink]="['/personen', 'detail', persoon.id]">Detail</span> </td>
+  </tr>
+
+</table>

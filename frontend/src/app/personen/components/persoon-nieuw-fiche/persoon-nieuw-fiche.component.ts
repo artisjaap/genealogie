@@ -11,18 +11,19 @@ import {
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {Store} from "@ngrx/store";
 import {FormGroupState, NgrxFormsModule, NgrxValueConverters} from "ngrx-forms";
-import {map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {NatuurlijkPersoonFormValue} from "../../store/personen-nieuw-persoon-form.reducer";
 import {maakNieuwNatuurlijkPersoon} from "../../store/personen.acties";
-import {getPersonenNieuwFormState} from "../../store/personen.reducer";
+import {getPersonenNieuwForm} from "../../store/personen.selector";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-persoon-nieuw-fiche',
   standalone: true,
   providers: [provideNativeDateAdapter()],
 
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule, MatDatepickerInput, MatDatepickerToggle, MatDatepicker, AsyncPipe, NgrxFormsModule, NgIf],
+  imports: [MatFormFieldModule, MatInputModule,MatButtonModule, MatIconModule, MatDatepickerModule, MatDatepickerInput, MatDatepickerToggle, MatDatepicker, AsyncPipe, NgrxFormsModule, NgIf],
   templateUrl: './persoon-nieuw-fiche.component.html',
   styleUrl: './persoon-nieuw-fiche.component.scss'
 })
@@ -30,7 +31,7 @@ export class PersoonNieuwFicheComponent {
   formState$: Observable<FormGroupState<NatuurlijkPersoonFormValue>>;
 
   constructor(private store: Store<any>) {
-    this.formState$ = store.select(getPersonenNieuwFormState).pipe(map(s => s.nieuwNatuurlijkPersoon));
+    this.formState$ = store.select(getPersonenNieuwForm);
   }
 
   dateValueConverter = NgrxValueConverters.dateToISOString;
