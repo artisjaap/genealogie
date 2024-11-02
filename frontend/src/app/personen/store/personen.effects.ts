@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {NatuurlijkPersoonService} from "../../service/NatuurlijkPersoonService";
 import {maakNieuwNatuurlijkPersoon} from "./personen.acties";
-import {catchError, EMPTY, exhaustMap, map, withLatestFrom} from "rxjs";
+import {catchError, EMPTY, exhaustMap, map} from "rxjs";
 
 @Injectable()
 export class PersonenEffects {
