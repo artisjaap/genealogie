@@ -22,14 +22,18 @@ public class NatuurlijkPersoonController {
         return ResponseEntity.ok(natuurlijkPersoonMaken.maak(nieuwNatuurlijkPersoonDTO));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<NatuurlijkPersoonFicheDto> ficheVoor(@PathVariable Long id){
+        return ResponseEntity.ok(natuurlijkPersoonZoeken.ficheVoor(id));
+    }
 
     @PostMapping("/huwelijk")
-    public ResponseEntity<HuwelijkDto> maakHuwelijkTussenTweeBestaandeNatuurlijkePersonen(@RequestBody HuwelijkDto huwelijk){
+    public ResponseEntity<RelatieDto> maakHuwelijkTussenTweeBestaandeNatuurlijkePersonen(@RequestBody RelatieDto huwelijk){
         return ResponseEntity.ok(natuurlijkPersoonMaken.maakHuwelijk(huwelijk));
     }
 
     @PostMapping("/huwelijk-nieuw")
-    public ResponseEntity<HuwelijkDto> maakHuwelijkTussenMetNieuwNatuurlijkePersoon(@RequestBody HuwelijkMetNieuwNatuurlijkPersoonDto huwelijk){
+    public ResponseEntity<RelatieDto> maakHuwelijkTussenMetNieuwNatuurlijkePersoon(@RequestBody RelatieMetNieuwNatuurlijkPersoonDto huwelijk){
         return ResponseEntity.ok(natuurlijkPersoonMaken.maakHuwelijk(huwelijk));
     }
 
@@ -39,8 +43,8 @@ public class NatuurlijkPersoonController {
         return ResponseEntity.ok(natuurlijkPersoonZoeken.alle());
     }
 
-    @GetMapping("zoek/{zoekString}")
-    public ResponseEntity<List<NatuurlijkPersoonDTO>> zoekNatuurlijkePersonen(@PathVariable String zoekString) {
+    @GetMapping("zoek")
+    public ResponseEntity<List<NatuurlijkPersoonDTO>> zoekNatuurlijkePersonen(@RequestParam String zoekString) {
         return ResponseEntity.ok(natuurlijkPersoonZoeken.voorZoekstring(zoekString));
     }
 

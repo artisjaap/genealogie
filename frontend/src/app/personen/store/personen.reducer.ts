@@ -5,7 +5,7 @@ import {ActionReducerMap} from '@ngrx/store';
 export const personenFeatureKey = 'personen'
 
 export interface PersonenState {
-  [fromPersonenReducer.personenInfoFeatureKey]: fromPersonenReducer.PersonenState;
+  [fromPersonenReducer.personenInfoFeatureKey]: fromPersonenReducer.PersoonDataState;
   [fromPersonenNieuwFormReducer.personenNieuwFormFeatureKey]: fromPersonenNieuwFormReducer.PersonenNieuwFormState;
 }
 

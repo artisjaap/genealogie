@@ -1,6 +1,8 @@
 package be.genealogie.applicatie;
 
 import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
+import be.genealogie.domein.dto.NatuurlijkPersoonFicheDto;
+import be.genealogie.domein.dto.RelatieDto;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
 import be.genealogie.domein.repository.NatuurlijkPersoonRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,8 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
+    private final GenealogischDriekhoekjeZoeken genealogischDriekhoekjeZoeken;
+    private final ReleatiesZoeken releatiesZoeken;
     private final NatuurlijkPersoonRepository natuurlijkPersoonRepository;
     private final ModelMapper modelMapper;
 
@@ -26,6 +30,30 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
         List<NatuurlijkPersoon> all = natuurlijkPersoonRepository.findByNaamLikeOrVoornaamLike(zoekString);
         return mapLijst(all);
     }
+
+    @Override
+    public NatuurlijkPersoonFicheDto ficheVoor(Long persoonId) {
+        NatuurlijkPersoonDTO persoonDto = natuurlijkPersoonDTO(persoonId);
+        NatuurlijkPersoonDTO moeder = genealogischDriekhoekjeZoeken.moederVan(persoonDto).orElse(null);
+        NatuurlijkPersoonDTO vader = genealogischDriekhoekjeZoeken.vaderVan(persoonDto).orElse(null);
+        List<RelatieDto> relaties = releatiesZoeken.relatiesMet(persoonDto);
+        List<NatuurlijkPersoonDTO> kinderen = genealogischDriekhoekjeZoeken.kinderenVan(persoonDto);
+
+        return NatuurlijkPersoonFicheDto.builder()
+                .natuurlijkPersoon(persoonDto)
+                .vader(vader)
+                .moeder(moeder)
+                .relaties(relaties)
+                .kinderen(kinderen)
+                .build();
+    }
+
+    private NatuurlijkPersoonDTO natuurlijkPersoonDTO(Long persoonId) {
+        NatuurlijkPersoon persoon = natuurlijkPersoonRepository.getById(persoonId);
+        NatuurlijkPersoonDTO persoonDto = modelMapper.map(persoon, NatuurlijkPersoonDTO.class);
+        return persoonDto;
+    }
+
 
     private List<NatuurlijkPersoonDTO> mapLijst(List<NatuurlijkPersoon> all) {
         return all.stream().map(e -> modelMapper.map(e, NatuurlijkPersoonDTO.class)).toList();

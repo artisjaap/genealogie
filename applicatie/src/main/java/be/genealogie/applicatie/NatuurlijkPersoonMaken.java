@@ -5,8 +5,8 @@ import be.genealogie.domein.dto.*;
 public interface NatuurlijkPersoonMaken {
     NatuurlijkPersoonDTO maak(NieuwNatuurlijkPersoonDTO natuurlijkPersoonDTO);
 
-    HuwelijkDto maakHuwelijk(HuwelijkDto huwelijk);
+    RelatieDto maakHuwelijk(RelatieDto huwelijk);
 
 
-    HuwelijkDto maakHuwelijk(HuwelijkMetNieuwNatuurlijkPersoonDto huwelijk);
+    RelatieDto maakHuwelijk(RelatieMetNieuwNatuurlijkPersoonDto huwelijk);
 }

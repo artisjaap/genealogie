@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class HuwelijkMetNieuwNatuurlijkPersoonDto {
+public class RelatieMetNieuwNatuurlijkPersoonDto {
     private Long id;
     private NatuurlijkPersoonDTO persoon1;
     private NieuwNatuurlijkPersoonDTO persoon2;

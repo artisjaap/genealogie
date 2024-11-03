@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
-@Table(name = "HUWELIJK")
+@Table(name = "RELATIE")
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Huwelijk {
+public class Relatie {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,11 +38,11 @@ public class Huwelijk {
     @Column(name = "GEHUWD_TE")
     private String gehuwedTe;
 
-    public NatuurlijkPersoon getMan() {
+    public NatuurlijkPersoon man() {
         return (persoon1.getGeslacht() == Geslacht.MAN)?persoon1:persoon2;
     }
 
-    public NatuurlijkPersoon getVrouw() {
+    public NatuurlijkPersoon vrouw() {
         return (persoon1.getGeslacht() == Geslacht.VROUW)?persoon1:persoon2;
     }
 }

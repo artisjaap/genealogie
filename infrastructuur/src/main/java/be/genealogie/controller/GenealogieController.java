@@ -2,7 +2,6 @@ package be.genealogie.controller;
 
 import be.genealogie.applicatie.GenealogischDriekhoekjeMaken;
 import be.genealogie.domein.dto.GenealogischDriehoekjeDTO;
-import be.genealogie.domein.dto.HuwelijkDto;
 import be.genealogie.domein.dto.KindUitRelatieDto;
 import be.genealogie.domein.dto.OudersVanKindDto;
 import lombok.RequiredArgsConstructor;

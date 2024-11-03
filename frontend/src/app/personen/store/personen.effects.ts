@@ -1,7 +1,12 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {NatuurlijkPersoonService} from "../../service/NatuurlijkPersoonService";
-import {maakNieuwNatuurlijkPersoon, personenGevonden, zoekPersonen} from "./personen.acties";
+import {
+  laadNatuurlijkPersoonFiche,
+  maakNieuwNatuurlijkPersoon, natuurlijkPersoonFicheGeladen,
+  personenGevonden,
+  zoekPersonen
+} from "./personen.acties";
 import {catchError, EMPTY, exhaustMap, map, withLatestFrom} from "rxjs";
 import {Store} from "@ngrx/store";
 import {PersonenState} from "./personen.reducer";
@@ -32,6 +37,14 @@ export class PersonenEffects {
     exhaustMap(data => this.natuurlijkPersoonService.zoekPersonen(data.zoekString)
       .pipe(
         map(personen => personenGevonden({personen}))
+      ))
+  ))
+
+  laadNatuurlijkPersoonFiche$ = createEffect(() => this.actions$.pipe(
+    ofType(laadNatuurlijkPersoonFiche),
+    exhaustMap(data => this.natuurlijkPersoonService.laadFicheVoorNatuurlijkPersoon(data.natuurlijkPersoonId)
+      .pipe(
+        map(natuurlijkPersoonFiche => natuurlijkPersoonFicheGeladen({natuurlijkPersoonFiche}))
       ))
   ))
 
