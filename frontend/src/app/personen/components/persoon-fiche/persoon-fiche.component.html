@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="infocard-sectie">
-      <span  class="infocard-sectie-titel">relatie</span>
+      <span  class="infocard-sectie-titel">relatie </span>
       <div *ngFor="let relatie of persoonFiche.relaties">
         <span [routerLink]="['/personen/detail', relatie.persoon1.id]">{{relatie.persoon1.naam}}</span>
         <span [routerLink]="['/personen/detail', relatie.persoon2.id]">{{relatie.persoon2.naam}}</span>
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="infocard-sectie">
-      <span class="infocard-sectie-titel">Documenten</span>
+      <span class="infocard-sectie-titel">Documenten <span (click)="documentToevoegen()">TOEVOEGEN</span></span>
     </div>
   </div>
 </div>

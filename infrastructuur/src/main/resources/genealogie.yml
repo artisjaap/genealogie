@@ -14,3 +14,7 @@ server:
 
 hibernate:
   show_sql: true
+
+genealogie:
+  document:
+    path: /temp/genealogie
