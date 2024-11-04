@@ -2,6 +2,8 @@ import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {NatuurlijkPersoonService} from "../../service/NatuurlijkPersoonService";
 import {
+  documentTypesGeladen,
+  laadDocumentTypes,
   laadNatuurlijkPersoonFiche,
   maakNieuwNatuurlijkPersoon, natuurlijkPersoonFicheGeladen,
   personenGevonden,
@@ -14,6 +16,7 @@ import {getPersonenNieuwForm} from "./personen.selector";
 import {FormGroupState} from "ngrx-forms";
 import {NatuurlijkPersoonFormValue} from "./personen-nieuw-persoon-form.reducer";
 import {NatuurlijkPersoonDto} from "../../model/natuurlijk-persoon-dto";
+import {ReferentieDataService} from "../../service/ReferentieDataService";
 
 @Injectable()
 export class PersonenEffects {
@@ -48,6 +51,14 @@ export class PersonenEffects {
       ))
   ))
 
+  laadDocumentTypes$ = createEffect(() => this.actions$.pipe(
+    ofType(laadDocumentTypes),
+    exhaustMap(data => this.referenceDataService.laadDocumentTypes()
+      .pipe(
+        map(documentTypes => documentTypesGeladen({documentTypes}))
+      ))
+  ))
+
   private formDataNaarDto(formData : NatuurlijkPersoonFormValue): NatuurlijkPersoonDto{
     return new NatuurlijkPersoonDto(0, formData.naam, formData.voornaam, new Date(formData.geborenOp), '', new Date(formData.overledenOp), '');
   }
@@ -55,6 +66,7 @@ export class PersonenEffects {
   constructor(
     private store$: Store<PersonenState>,
     private actions$: Actions,
-    private natuurlijkPersoonService: NatuurlijkPersoonService
+    private natuurlijkPersoonService: NatuurlijkPersoonService,
+    private referenceDataService: ReferentieDataService
   ) {}
 }

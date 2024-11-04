@@ -1,9 +1,10 @@
 package be.genealogie.domein.dto;
 
-import be.genealogie.domein.entiteit.DocumentType;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class DocumentToegevoegdDto {
     private Long id;
     private String pathNaarDocument;

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
-@Table(name = "INFO_TYPE")
+@Table(name = "DOCUMENT_TYPE")
 @Entity
 public class DocumentType {
     @Id

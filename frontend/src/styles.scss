@@ -86,3 +86,27 @@ body {
 
 
 
+.default-form {
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: white;
+  padding: 16px;
+  margin: 16px 20px;
+
+  .form-line {
+    flex: 1;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+  }
+}
+
+.form-titel {
+  background-color: white;
+  color: steelblue;
+  padding: 16px;
+  margin: 10px 20px 0 20px;
+  border-radius: 10px 10px 0 0;
+  font-weight: bold;
+  font-size: 2em;
+}

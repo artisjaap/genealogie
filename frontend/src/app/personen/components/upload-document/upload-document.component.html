@@ -1,23 +1,34 @@
-<h2>Single File Upload</h2>
+<p class="form-titel">Document toevoegen</p>
 
-<input type="file" class="file-input" (change)="onChange($event)" #fileUpload />
+<form class="default-form">
+  <mat-form-field>
+    <mat-label>Document Type</mat-label>
+    <mat-select>
+      @for (type of (documentTypes$ | async); track type) {
+        <mat-option [value]="type.id">{{ type.omschrijving }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
 
-<div *ngIf="file">
-  <section class="file-info">
-    File details:
-    <ul>
-      <li>Name: {{file.name}}</li>
-      <li>Type: {{file.type}}</li>
-      <li>Size: {{file.size}} bytes</li>
-    </ul>
-  </section>
+  <input type="file" class="file-input" (change)="onChange($event)" #fileUpload/>
 
-  <button (click)="onUpload()">Upload the file</button>
+  <div *ngIf="file">
+    <section class="file-info">
+      File details:
+      <ul>
+        <li>Name: {{ file.name }}</li>
+        <li>Type: {{ file.type }}</li>
+        <li>Size: {{ file.size }} bytes</li>
+      </ul>
+    </section>
 
-  <section [ngSwitch]="status">
-    <p *ngSwitchCase="'uploading'">⏳ Uploading...</p>
-    <p *ngSwitchCase="'success'">✅ Done!</p>
-    <p *ngSwitchCase="'fail'">❌ Error!</p>
-    <p *ngSwitchDefault>😶 Waiting to upload...</p>
-  </section>
-</div>
+    <button (click)="onUpload()">Upload the file</button>
+
+    <section [ngSwitch]="status">
+      <p *ngSwitchCase="'uploading'">⏳ Uploading...</p>
+      <p *ngSwitchCase="'success'">✅ Done!</p>
+      <p *ngSwitchCase="'fail'">❌ Error!</p>
+      <p *ngSwitchDefault>😶 Waiting to upload...</p>
+    </section>
+  </div>
+</form>

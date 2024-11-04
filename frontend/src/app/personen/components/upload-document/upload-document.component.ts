@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
-import {throwError} from "rxjs";
+import {AsyncPipe, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
+import {Observable, throwError} from "rxjs";
+import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
+import {MatOption, MatSelect} from "@angular/material/select";
+import {PersonenState} from "../../store/personen.reducer";
+import {Store} from "@ngrx/store";
+import {getGeladenDocumentTypes} from "../../store/personen.selector";
+import {DocumentTypeDto} from "../../../model/document-type-dto";
+import {NgrxFormsModule} from "ngrx-forms";
 
 @Component({
   selector: 'app-upload-document',
@@ -10,7 +17,13 @@ import {throwError} from "rxjs";
     NgSwitch,
     NgSwitchCase,
     NgIf,
-    NgSwitchDefault
+    NgSwitchDefault,
+    MatFormField,
+    MatSelect,
+    MatOption,
+    AsyncPipe,
+    NgrxFormsModule,
+    MatFormFieldModule
   ],
   templateUrl: './upload-document.component.html',
   styleUrl: './upload-document.component.scss'
@@ -18,8 +31,12 @@ import {throwError} from "rxjs";
 export class UploadDocumentComponent {
   status: "initial" | "uploading" | "success" | "fail" = "initial"; // Variable to store file status
   file: File | null = null; // Variable to store file
+  protected documentTypes$: Observable<DocumentTypeDto[]>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private state:Store<PersonenState>) {
+    this.documentTypes$ = this.state.select(getGeladenDocumentTypes);
+
+  }
 
   ngOnInit(): void {}
 

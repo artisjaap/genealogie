@@ -12,3 +12,4 @@ export const getPersonenNieuwForm = createSelector(getPersonenNieuwFormState, st
 export const getPersonenState = createSelector(getPersonenFeatureState, state => state[personenInfoFeatureKey]);
 export const getGevondenPersonen = createSelector(getPersonenState, state => state.gevondenPersonen);
 export const getGeladenPeroonFiche = createSelector(getPersonenState, state => state.geladenPersoonFiche);
+export const getGeladenDocumentTypes = createSelector(getPersonenState, state => state.documentTypes);

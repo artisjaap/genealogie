@@ -2,11 +2,13 @@ package be.genealogie;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 import java.util.Collections;
 import java.util.Map;
 
 @SpringBootApplication
+@ConfigurationPropertiesScan
 public class GenealogieApplication {
     public static final String APPLICATION_NAME = "genealogie";
 

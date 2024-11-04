@@ -4,6 +4,7 @@ import {PersonenZoekenComponent} from "./components/personen-zoeken/personen-zoe
 import {PersoonNieuwFicheComponent} from "./components/persoon-nieuw-fiche/persoon-nieuw-fiche.component";
 import {PersoonFicheComponent} from "./components/persoon-fiche/persoon-fiche.component";
 import {NatuurlijkPersoonFicheResolver} from "./resolve/natuurlijk-persoon-fiche.resolver";
+import {DocumentTypesResolver} from "./resolve/document-types.resolver";
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
     path: "detail/:id",
     component: PersoonFicheComponent,
     resolve: {
-      persoonFicheLaden: NatuurlijkPersoonFicheResolver
+      persoonFicheLaden: NatuurlijkPersoonFicheResolver,
+      documentTypes: DocumentTypesResolver
     }
   }
 ];
