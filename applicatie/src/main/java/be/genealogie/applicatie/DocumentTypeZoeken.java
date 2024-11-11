@@ -7,4 +7,6 @@ import java.util.List;
 public interface DocumentTypeZoeken {
 
     List<DocumentTypeDto> alleDocumentTypes();
+
+    DocumentTypeDto getById(Long documentTypeId);
 }

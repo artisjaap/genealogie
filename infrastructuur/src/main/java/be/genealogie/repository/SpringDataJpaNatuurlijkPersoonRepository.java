@@ -1,5 +1,6 @@
 package be.genealogie.repository;
 
+import be.genealogie.QueryUtils;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
 import be.genealogie.domein.repository.NatuurlijkPersoonRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +12,8 @@ public interface SpringDataJpaNatuurlijkPersoonRepository extends JpaRepository<
     List<NatuurlijkPersoon> findByNaamLikeOrVoornaamLike(String naam, String voornaam);
 
     default List<NatuurlijkPersoon> findByNaamLikeOrVoornaamLike(String naam){
-        return findByNaamLikeOrVoornaamLike(naam, naam);
+        String naamMetWildcard = QueryUtils.metDbWildcard(naam);
+        return findByNaamLikeOrVoornaamLike(naamMetWildcard, naamMetWildcard);
     }
 
 }

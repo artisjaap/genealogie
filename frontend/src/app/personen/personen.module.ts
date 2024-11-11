@@ -8,16 +8,15 @@ import {EffectsModule} from "@ngrx/effects";
 import {PersonenEffects} from "./store/personen.effects";
 
 @NgModule({
-  declarations: [
-
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     PersonenRoutingModule,
     StoreModule.forFeature(personenReducer.personenFeatureKey, personenReducer.reducers),
     EffectsModule.forFeature(PersonenEffects),
     PersonenZoekenComponent,
-  ]
+  ],
+  providers: []
 })
 export class PersonenModule {
 

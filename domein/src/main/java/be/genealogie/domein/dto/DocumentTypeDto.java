@@ -6,4 +6,5 @@ import lombok.Data;
 public class DocumentTypeDto {
     private Long id;
     private String omschrijving;
+    private String code;
 }

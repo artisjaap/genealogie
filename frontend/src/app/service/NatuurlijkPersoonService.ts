@@ -3,6 +3,9 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {NatuurlijkPersoonDto} from "../model/natuurlijk-persoon-dto";
 import {Observable, of} from "rxjs";
 import {NatuurlijkPersoonFicheDto} from "../model/natuurlijk-persoon-fiche-dto";
+import {OudersVanKindDto} from "../model/ouders-van-kind-dto";
+import {KindUitRelatieDto} from "../model/kind-uit-relatie-dto";
+import {GenealogischDriehoekjeDto} from "../model/genealogisch-driehoekje-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +17,15 @@ export class NatuurlijkPersoonService {
 
   natuurlijkPersoonOpslaan(natuurlijkPersoon:any): Observable<NatuurlijkPersoonDto> {
     return this.http.post<NatuurlijkPersoonDto>("api/natuurlijk-persoon", natuurlijkPersoon)
+  }
+
+
+  oudersVanNatuurlijkPersoonToevoegen(ouders: OudersVanKindDto): Observable<GenealogischDriehoekjeDto>{
+    return this.http.post<GenealogischDriehoekjeDto>("api/genealogie/registreerd-ouders", ouders)
+  }
+
+  persoonAanRelatieToevoegen(kindUitRelatieDto: KindUitRelatieDto): Observable<GenealogischDriehoekjeDto>{
+    return this.http.post<GenealogischDriehoekjeDto>("api/genealogie/kind-uit-relatie", kindUitRelatieDto)
   }
 
   zoekPersonen(zoekString: string):Observable<NatuurlijkPersoonDto[]> {

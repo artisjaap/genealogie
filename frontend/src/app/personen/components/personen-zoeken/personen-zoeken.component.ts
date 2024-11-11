@@ -7,12 +7,14 @@ import {maakNieuwNatuurlijkPersoon, zoekPersonen} from "../../store/personen.act
 import {async, Observable} from "rxjs";
 import {NatuurlijkPersoonDto} from "../../../model/natuurlijk-persoon-dto";
 import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
+import {faInfo, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-personen-zoeken',
   standalone: true,
   imports: [
-    RouterLink, MatButtonModule, AsyncPipe, NgIf, JsonPipe, NgForOf
+    RouterLink, MatButtonModule, AsyncPipe, NgIf, JsonPipe, NgForOf, FaIconComponent
   ],
   templateUrl: './personen-zoeken.component.html',
   styleUrl: './personen-zoeken.component.scss'
@@ -29,4 +31,6 @@ export class PersonenZoekenComponent {
   }
 
   protected readonly async = async;
+  protected readonly faXmark = faXmark;
+  protected readonly faInfo = faInfo;
 }

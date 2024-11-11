@@ -1,16 +1,16 @@
 package be.genealogie.applicatie;
 
-import be.genealogie.domein.dto.DocumentDto;
-import be.genealogie.domein.dto.DocumentToegevoegdDto;
-import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
-import be.genealogie.domein.dto.RelatieDto;
+import be.genealogie.domein.dto.*;
 import be.genealogie.domein.entiteit.Document;
+import be.genealogie.domein.entiteit.NatuurlijkPersoon;
+import be.genealogie.domein.entiteit.Relatie;
 import be.genealogie.domein.repository.DocumentRepository;
 import be.genealogie.domein.repository.DocumentTypeRepository;
 import be.genealogie.domein.repository.NatuurlijkPersoonRepository;
 import be.genealogie.domein.repository.RelatieRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -26,29 +26,48 @@ public class DefaultDocumentOpladen implements DocumentOpladen{
     private final DocumentTypeRepository documentTypeRepository;
     private final NatuurlijkPersoonRepository natuurlijkPersoonRepository;
     private final RelatieRepository relatieRepository;
+    private final DocumentTypeZoeken documentTypeZoeken;
+    private final ModelMapper modelMapper;
 
     @Override
     public DocumentToegevoegdDto voegDocumentToe(DocumentDto documentDto) {
-        String path = applicationProperties.getDocument().getPath();
-        File file = new File(path, documentDto.getOrigineleFilename());
+        String basePath = applicationProperties.getDocument().getPath();
+        DocumentTypeDto documentTypeDto = documentTypeZoeken.getById(documentDto.getDocumentTypeId());
+
+        Relatie relatie = Optional.ofNullable(documentDto.getRelatieId()).map(relatieRepository::getById).orElse(null);
+        NatuurlijkPersoon natuurlijkPersoon = Optional.ofNullable(documentDto.getNatuurlijkPersoonId()).map(natuurlijkPersoonRepository::getById).orElse(null);
+
+        String subPath = berekenSubPath(relatie, natuurlijkPersoon, documentTypeDto);
+        File file = new File(basePath + subPath, documentDto.getOrigineleFilename());
+
         DocumentToegevoegdDto.DocumentToegevoegdDtoBuilder builder = DocumentToegevoegdDto.builder()
-            .documentType(documentDto.getDocumentType())
-                .relatieDto(documentDto.getRelatieDto())
-                .natuurlijkPersoonDTO(documentDto.getNatuurlijkPersoonDTO())
+            .documentType(documentTypeDto)
+                .relatieDto(Optional.ofNullable(relatie).map(r -> modelMapper.map(r, RelatieDto.class)).orElse(null))
+                .natuurlijkPersoonDTO(Optional.ofNullable(natuurlijkPersoon).map(np -> modelMapper.map(np, NatuurlijkPersoonDTO.class)).orElse(null))
                 .pathNaarDocument(documentDto.getOrigineleFilename());
         try {
             FileUtils.writeByteArrayToFile(file, documentDto.getBytes());
 
             documentRepository.save(Document.builder()
-                            .documentType(documentTypeRepository.getById(documentDto.getDocumentType().getId()))
-                            .relatie(Optional.ofNullable(documentDto.getRelatieDto()).map(RelatieDto::getId).map(relatieRepository::getById).orElse(null))
-                            .natuurlijkPersoon(Optional.ofNullable(documentDto.getNatuurlijkPersoonDTO()).map(NatuurlijkPersoonDTO::getId).map(natuurlijkPersoonRepository::getById).orElse(null))
-                            .pathNaarDocument(file.getAbsolutePath())
+                            .documentType(documentTypeRepository.getById(documentDto.getDocumentTypeId()))
+                            .relatie(relatie)
+                            .natuurlijkPersoon(natuurlijkPersoon)
+                            .pathNaarDocument(subPath + documentDto.getOrigineleFilename())
 
                     .build());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return builder.build();
+    }
+
+    private String berekenSubPath(Relatie relatie, NatuurlijkPersoon natuurlijkPersoon, DocumentTypeDto documentTypeDto) {
+        if(relatie != null){
+            return documentTypeDto.getCode() + "/R" + relatie.getId() + "/";
+        }
+        if(natuurlijkPersoon != null){
+            return documentTypeDto.getCode() + "/N" + natuurlijkPersoon.getId() + "/";
+        }
+        return documentTypeDto.getCode() + "/";
     }
 }

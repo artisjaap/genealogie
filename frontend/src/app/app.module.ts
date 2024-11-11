@@ -14,6 +14,7 @@ import {provideHttpClient} from "@angular/common/http";
 import {PersonenModule} from "./personen/personen.module";
 import {AdminModule} from "./admin/admin.module";
 import {NavigatieComponent} from "./components/navigatie/navigatie.component";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import {NavigatieComponent} from "./components/navigatie/navigatie.component";
     PersonenModule,
     AdminModule,
     NavigatieComponent,
+    FontAwesomeModule,
 
   ],
   providers: [

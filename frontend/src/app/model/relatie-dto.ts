@@ -10,3 +10,7 @@ export class RelatieDto {
   }
 }
 
+export class RelatieIdDto {
+  public constructor(public id: number) {
+  }
+}

@@ -1,34 +1,38 @@
-<p class="form-titel">Document toevoegen</p>
+<p class="form-titel">Document toevoegen <span class="spacer"></span><fa-icon class="actie" (click)="close()" [icon]="faXmark"></fa-icon></p>
 
 <form class="default-form">
   <mat-form-field>
     <mat-label>Document Type</mat-label>
-    <mat-select>
+    <mat-select #docType>
       @for (type of (documentTypes$ | async); track type) {
         <mat-option [value]="type.id">{{ type.omschrijving }}</mat-option>
       }
     </mat-select>
   </mat-form-field>
+  <mat-form-field >
+    <mat-label>Transcript</mat-label>
+    <textarea #transcript matInput placeholder="Transcript"></textarea>
+  </mat-form-field>
 
   <input type="file" class="file-input" (change)="onChange($event)" #fileUpload/>
+  <button  type="button" mat-raised-button  (click)="onUpload(docType.value, transcript.value)">Upload the file</button>
 
-  <div *ngIf="file">
-    <section class="file-info">
-      File details:
-      <ul>
-        <li>Name: {{ file.name }}</li>
-        <li>Type: {{ file.type }}</li>
-        <li>Size: {{ file.size }} bytes</li>
-      </ul>
-    </section>
+<!--  <div *ngIf="file">-->
+<!--    <section class="file-info">-->
+<!--      File details:-->
+<!--      <ul>-->
+<!--        <li>Name: {{ file.name }}</li>-->
+<!--        <li>Type: {{ file.type }}</li>-->
+<!--        <li>Size: {{ file.size }} bytes</li>-->
+<!--      </ul>-->
+<!--    </section>-->
 
-    <button (click)="onUpload()">Upload the file</button>
 
-    <section [ngSwitch]="status">
-      <p *ngSwitchCase="'uploading'">⏳ Uploading...</p>
-      <p *ngSwitchCase="'success'">✅ Done!</p>
-      <p *ngSwitchCase="'fail'">❌ Error!</p>
-      <p *ngSwitchDefault>😶 Waiting to upload...</p>
-    </section>
-  </div>
+<!--    <section [ngSwitch]="status">-->
+<!--      <p *ngSwitchCase="'uploading'">⏳ Uploading...</p>-->
+<!--      <p *ngSwitchCase="'success'">✅ Done!</p>-->
+<!--      <p *ngSwitchCase="'fail'">❌ Error!</p>-->
+<!--      <p *ngSwitchDefault>😶 Waiting to upload...</p>-->
+<!--    </section>-->
+<!--  </div>-->
 </form>

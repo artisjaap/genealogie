@@ -6,24 +6,27 @@
   </div>
 </div>
 
-<table *ngIf=" gevondenPersonen$ | async as gevondenPersonen">
-  <tr>
-    <th>Naam</th>
-    <th>Voornaam</th>
-    <th>Geboren Op</th>
-    <th>Geboren Te</th>
-    <th>Overleden Op</th>
-    <th>Overleden Te</th>
-    <th>Acties</th>
-  </tr>
-  <tr *ngFor="let persoon of gevondenPersonen">
-    <td>{{ persoon.naam }}</td>
-    <td>{{ persoon.voornaam }}</td>
-    <td>{{ persoon.geborenOp }}</td>
-    <td>{{ persoon.geborenTe }}</td>
-    <td>{{ persoon.overledenOp }}</td>
-    <td>{{ persoon.overledenTe }}</td>
-    <td> <span [routerLink]="['/personen', 'detail', persoon.id]">Detail</span> </td>
-  </tr>
+<div class="table"  *ngIf=" gevondenPersonen$ | async as gevondenPersonen">
+  <!-- Header Row -->
+  <div class="table-row header">
+    <div class="table-cell">Naam</div>
+    <div class="table-cell">Voornaam</div>
+    <div class="table-cell">Geboren Op</div>
+    <div class="table-cell">Geboren Te</div>
+    <div class="table-cell">Overleden Op</div>
+    <div class="table-cell">Overleden Te</div>
+    <div class="table-cell">Acties</div>
+  </div>
 
-</table>
+  <!-- Data Rows -->
+  <div class="table-row" *ngFor="let persoon of gevondenPersonen">
+    <div class="table-cell">{{ persoon.naam }}</div>
+    <div class="table-cell">{{ persoon.voornaam }}</div>
+    <div class="table-cell">{{ persoon.geborenOp }}</div>
+    <div class="table-cell">{{ persoon.geborenTe }}</div>
+    <div class="table-cell">{{ persoon.overledenOp }}</div>
+    <div class="table-cell">{{ persoon.overledenTe }}</div>
+    <div class="table-cell"><span [routerLink]="['/personen', 'detail', persoon.id]"><fa-icon [icon]="faInfo"></fa-icon></span></div>
+  </div>
+</div>
+

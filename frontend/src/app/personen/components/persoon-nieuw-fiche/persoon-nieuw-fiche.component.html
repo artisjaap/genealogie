@@ -1,4 +1,4 @@
-<p class="form-titel">Nieuw natuurlijk persoon toevoegen</p>
+<p class="form-titel">Nieuw natuurlijk persoon toevoegen </p>
 
 <ng-container *ngIf="formState$ | async as formState">
 
@@ -14,6 +14,12 @@
         <input matInput maxlength="256" placeholder="Voornamen"
                [ngrxFormControlState]="formState.controls.voornaam">
       </mat-form-field>
+    </div>
+    <div class="form-line">
+      <mat-radio-group aria-label="Geslacht"  [ngrxFormControlState]="formState.controls.geslacht">
+        <mat-radio-button value="MAN">Man</mat-radio-button>
+        <mat-radio-button value="VROUW">Vrouw</mat-radio-button>
+      </mat-radio-group>
     </div>
     <div class="form-line">
       <mat-form-field>
@@ -34,6 +40,6 @@
     </div>
 
 
-    <button mat-raised-button (click)="opslaan()">Opslaan</button>
+    <button type="button" mat-raised-button (click)="opslaan()">Opslaan</button>
   </form>
 </ng-container>

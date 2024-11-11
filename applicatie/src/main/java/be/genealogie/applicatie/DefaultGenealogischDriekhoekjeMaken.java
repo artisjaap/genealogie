@@ -1,5 +1,6 @@
 package be.genealogie.applicatie;
 
+import be.genealogie.domein.Geslacht;
 import be.genealogie.domein.dto.*;
 import be.genealogie.domein.entiteit.GenealogischDriekhoekje;
 import be.genealogie.domein.entiteit.Relatie;
@@ -32,7 +33,7 @@ public class DefaultGenealogischDriekhoekjeMaken implements GenealogischDriekhoe
 
     @Override
     public GenealogischDriehoekjeDTO registreerKindUitRelatie(KindUitRelatieDto kindUitRelatie) {
-        Relatie relatie = relatieRepository.getById(kindUitRelatie.getHuwelijk().getId());
+        Relatie relatie = relatieRepository.getById(kindUitRelatie.getRelatie().getId());
         NatuurlijkPersoonDTO kind = natuurlijkPersoonMaken.maak(kindUitRelatie.getKind());
         NatuurlijkPersoon kindUitDB = natuurlijkPersoonRepository.getById(kind.getId());
 
@@ -49,8 +50,12 @@ public class DefaultGenealogischDriekhoekjeMaken implements GenealogischDriekhoe
 
     @Override
     public GenealogischDriehoekjeDTO registreerdOudersVanKind(OudersVanKindDto oudersVanKind) {
-        NatuurlijkPersoonDTO moeder = natuurlijkPersoonMaken.maak(oudersVanKind.getMoeder());
-        NatuurlijkPersoonDTO vader = natuurlijkPersoonMaken.maak(oudersVanKind.getVader());
+        NieuwNatuurlijkPersoonDTO moederDto = oudersVanKind.getMoeder();
+        moederDto.setGeslacht(Geslacht.VROUW);
+        NieuwNatuurlijkPersoonDTO vaderDto = oudersVanKind.getVader();
+        vaderDto.setGeslacht(Geslacht.MAN);
+        NatuurlijkPersoonDTO moeder = natuurlijkPersoonMaken.maak(moederDto);
+        NatuurlijkPersoonDTO vader = natuurlijkPersoonMaken.maak(vaderDto);
         NatuurlijkPersoonDTO kind = oudersVanKind.getKind();
 
         natuurlijkPersoonMaken.maakHuwelijk(RelatieDto.builder()

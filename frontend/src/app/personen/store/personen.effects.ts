@@ -2,21 +2,36 @@ import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {NatuurlijkPersoonService} from "../../service/NatuurlijkPersoonService";
 import {
+  documentOpgeladen,
   documentTypesGeladen,
   laadDocumentTypes,
-  laadNatuurlijkPersoonFiche,
-  maakNieuwNatuurlijkPersoon, natuurlijkPersoonFicheGeladen,
+  laadNatuurlijkPersoonFiche, maakNatuurlijkPersoonVoorRelatie,
+  maakNieuwNatuurlijkPersoon,
+  maakOudersVanNatuurlijkPersoon,
+  natuurlijkPersoonFicheGeladen, natuurlijkPersoonVoorRelatieAangemaakt,
+  nieuwNatuurlijkPersoonAangemaakt, oudersVanNatuurlijkPersoonAangemaakt,
   personenGevonden,
   zoekPersonen
 } from "./personen.acties";
-import {catchError, EMPTY, exhaustMap, map, withLatestFrom} from "rxjs";
+import {catchError, EMPTY, exhaustMap, filter, map, pipe, switchMap, withLatestFrom} from "rxjs";
 import {Store} from "@ngrx/store";
 import {PersonenState} from "./personen.reducer";
-import {getPersonenNieuwForm} from "./personen.selector";
+import {
+  getGeladenPeroonFiche,
+  getOudersVoorPersoonForm,
+  getPersonenNieuwForm,
+  getPersoonVoorRelatieForm
+} from "./personen.selector";
 import {FormGroupState} from "ngrx-forms";
 import {NatuurlijkPersoonFormValue} from "./personen-nieuw-persoon-form.reducer";
 import {NatuurlijkPersoonDto} from "../../model/natuurlijk-persoon-dto";
 import {ReferentieDataService} from "../../service/ReferentieDataService";
+import {OudersVoorPersoonFormValue} from "./ouders-voor-persoon.reducer";
+import {NatuurlijkPersoonFicheDto} from "../../model/natuurlijk-persoon-fiche-dto";
+import {OudersVanKindDto} from "../../model/ouders-van-kind-dto";
+import {NatuurlijkPersoonVoorRelatieFormValue} from "./persoon-nieuw-voor-relatie-form.reducer";
+import {KindUitRelatieDto} from "../../model/kind-uit-relatie-dto";
+import {RelatieDto, RelatieIdDto} from "../../model/relatie-dto";
 
 @Injectable()
 export class PersonenEffects {
@@ -25,15 +40,53 @@ export class PersonenEffects {
   nieuwNatuurlijkPersoon$ = createEffect(() => this.actions$.pipe(
       ofType(maakNieuwNatuurlijkPersoon),
       withLatestFrom(this.store$.select(getPersonenNieuwForm)),
-
       exhaustMap(([data, form]:[any, FormGroupState<NatuurlijkPersoonFormValue>] ) =>
         this.natuurlijkPersoonService.natuurlijkPersoonOpslaan(this.formDataNaarDto(form.value))
         .pipe(
-          map(movies => ({ type: '[Movies API] Movies Loaded Success', payload: movies })),
+          map(natuurlijkPersoon => nieuwNatuurlijkPersoonAangemaakt({ natuurlijkPersoon })),
           catchError(() => EMPTY)
         ))
     )
   );
+
+
+
+  oudersVanNatuurlijkPersoon$ = createEffect(() => this.actions$.pipe(
+      ofType(maakOudersVanNatuurlijkPersoon),
+      withLatestFrom(this.store$.select(getOudersVoorPersoonForm),
+                     this.store$.select(getGeladenPeroonFiche)),
+      exhaustMap(([data, form, persoon]:[any, FormGroupState<OudersVoorPersoonFormValue>, NatuurlijkPersoonFicheDto|undefined] ) =>
+        this.natuurlijkPersoonService.oudersVanNatuurlijkPersoonToevoegen(this.oudersFormDataNaarDto(form.value, persoon))
+          .pipe(
+            map(genealogischDriehoekje => oudersVanNatuurlijkPersoonAangemaakt({genealogischDriehoekje})),
+            catchError(() => EMPTY)
+          ))
+    )
+  );
+
+  persoonVoorRelatie = createEffect(() => this.actions$.pipe(
+      ofType(maakNatuurlijkPersoonVoorRelatie),
+      withLatestFrom(this.store$.select(getPersoonVoorRelatieForm)),
+      exhaustMap(([data, form]:[{relatie: RelatieDto|null}, FormGroupState<NatuurlijkPersoonVoorRelatieFormValue>] ) =>
+        this.natuurlijkPersoonService.persoonAanRelatieToevoegen(this.kindRelatieFormDataNaarDto(form.value, data.relatie))
+          .pipe(
+            map(genealogischDriehoekje => natuurlijkPersoonVoorRelatieAangemaakt({genealogischDriehoekje})),
+            catchError(() => EMPTY)
+          ))
+    )
+  );
+
+  refreshPersoonFiche = createEffect(() => this.actions$.pipe(
+    ofType(natuurlijkPersoonVoorRelatieAangemaakt,
+      oudersVanNatuurlijkPersoonAangemaakt,
+      documentOpgeladen),
+    withLatestFrom(this.store$.select(getGeladenPeroonFiche)),
+    filter(([data, fiche]:[any, NatuurlijkPersoonFicheDto | undefined]) => !!fiche),
+    exhaustMap(([data, fiche]:[any, NatuurlijkPersoonFicheDto | undefined]) => this.natuurlijkPersoonService.laadFicheVoorNatuurlijkPersoon(fiche?fiche.natuurlijkPersoon.id:0)
+      .pipe(
+        map(natuurlijkPersoonFiche => natuurlijkPersoonFicheGeladen({natuurlijkPersoonFiche}))
+      ))
+  ));
 
   zoekNatuurlijkPersonen$ = createEffect(() => this.actions$.pipe(
     ofType(zoekPersonen),
@@ -60,7 +113,7 @@ export class PersonenEffects {
   ))
 
   private formDataNaarDto(formData : NatuurlijkPersoonFormValue): NatuurlijkPersoonDto{
-    return new NatuurlijkPersoonDto(0, formData.naam, formData.voornaam, new Date(formData.geborenOp), '', new Date(formData.overledenOp), '');
+    return new NatuurlijkPersoonDto(0, formData.naam, formData.voornaam, formData.geslacht, new Date(formData.geborenOp), '', new Date(formData.overledenOp), '');
   }
 
   constructor(
@@ -69,4 +122,18 @@ export class PersonenEffects {
     private natuurlijkPersoonService: NatuurlijkPersoonService,
     private referenceDataService: ReferentieDataService
   ) {}
+
+  private oudersFormDataNaarDto(value: OudersVoorPersoonFormValue, persoon: NatuurlijkPersoonFicheDto | undefined) {
+    let moeder: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.persoon1naam, value.persoon1voornaam, 'VROUW', new Date(value.persoon1geborenOp), "", new Date(value.persoon1overledenOp), "");
+    let vader: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.persoon2naam, value.persoon2voornaam, 'MAN', new Date(value.persoon2geborenOp), "", new Date(value.persoon2overledenOp), "");
+    let kind: NatuurlijkPersoonDto|undefined = persoon?.natuurlijkPersoon;
+
+    return new OudersVanKindDto(moeder, vader, kind);
+  }
+
+  private kindRelatieFormDataNaarDto(value: NatuurlijkPersoonVoorRelatieFormValue, relatieDto : RelatieDto | null) : KindUitRelatieDto{
+    let relatie: RelatieIdDto = new RelatieIdDto(relatieDto?relatieDto.id:0);
+    let natuurlijkPersoon: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.naam, value.voornaam, value.geslacht, new Date(value.geborenOp), null, new Date(value.overledenOp), null);
+    return new KindUitRelatieDto(relatie, natuurlijkPersoon);
+  }
 }

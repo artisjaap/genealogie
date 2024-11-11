@@ -6,7 +6,8 @@ export class NatuurlijkPersoonFicheDto {
                      public moeder: NatuurlijkPersoonDto | null,
                      public vader: NatuurlijkPersoonDto | null,
                      public relaties: RelatieDto[],
-                     public kinderen: NatuurlijkPersoonDto[]) {
+                     public kinderen: NatuurlijkPersoonDto[],
+                     public documenten: any[]) {
   }
 }
 

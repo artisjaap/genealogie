@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class KindUitRelatieDto {
-    private RelatieDto huwelijk;
+    private RelatieDto relatie;
     private NieuwNatuurlijkPersoonDTO kind;
 }

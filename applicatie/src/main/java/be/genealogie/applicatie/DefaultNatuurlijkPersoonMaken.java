@@ -1,5 +1,6 @@
 package be.genealogie.applicatie;
 
+import be.genealogie.applicatie.validatie.NatuurlijkPersoonValidator;
 import be.genealogie.domein.dto.*;
 import be.genealogie.domein.entiteit.Relatie;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
@@ -17,10 +18,12 @@ public class DefaultNatuurlijkPersoonMaken implements NatuurlijkPersoonMaken {
     private final ModelMapper modelMapper;
     private final NatuurlijkPersoonRepository natuurlijkPersoonRepository;
     private final RelatieRepository relatieRepository;
+    private final NatuurlijkPersoonValidator natuurlijkPersoonValidator;
 
     @Override
     public NatuurlijkPersoonDTO maak(NieuwNatuurlijkPersoonDTO natuurlijkPersoonDTO) {
         NatuurlijkPersoon natuurlijkPersoon = modelMapper.map(natuurlijkPersoonDTO, NatuurlijkPersoon.class);
+        natuurlijkPersoonValidator.valideerVoorInsert(natuurlijkPersoon);
         NatuurlijkPersoon gewijzigdNatuurlijkPersoon = natuurlijkPersoonRepository.save(natuurlijkPersoon);
         return modelMapper.map(gewijzigdNatuurlijkPersoon, NatuurlijkPersoonDTO.class);
     }

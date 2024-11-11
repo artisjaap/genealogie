@@ -20,4 +20,10 @@ public class DefaultDocumentTypeZoeken implements DocumentTypeZoeken {
                 .map(type -> modelMapper.map(type, DocumentTypeDto.class))
                 .toList();
     }
+
+    @Override
+    public DocumentTypeDto getById(Long documentTypeId) {
+        return modelMapper.map(documentTypeRepository.getById(documentTypeId), DocumentTypeDto.class);
+
+    }
 }

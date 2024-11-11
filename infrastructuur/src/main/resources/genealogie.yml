@@ -17,4 +17,4 @@ hibernate:
 
 genealogie:
   document:
-    path: /temp/genealogie
+    path: /temp/genealogie/

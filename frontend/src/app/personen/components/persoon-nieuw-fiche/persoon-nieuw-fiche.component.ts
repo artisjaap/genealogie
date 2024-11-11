@@ -17,13 +17,14 @@ import {NatuurlijkPersoonFormValue} from "../../store/personen-nieuw-persoon-for
 import {maakNieuwNatuurlijkPersoon} from "../../store/personen.acties";
 import {getPersonenNieuwForm} from "../../store/personen.selector";
 import {MatButtonModule} from "@angular/material/button";
+import {MatRadioModule} from "@angular/material/radio";
 
 @Component({
   selector: 'app-persoon-nieuw-fiche',
   standalone: true,
   providers: [provideNativeDateAdapter()],
 
-  imports: [MatFormFieldModule, MatInputModule,MatButtonModule, MatIconModule, MatDatepickerModule, MatDatepickerInput, MatDatepickerToggle, MatDatepicker, AsyncPipe, NgrxFormsModule, NgIf],
+  imports: [MatFormFieldModule, MatRadioModule, MatInputModule,MatButtonModule, MatIconModule, MatDatepickerModule, AsyncPipe, NgrxFormsModule, NgIf],
   templateUrl: './persoon-nieuw-fiche.component.html',
   styleUrl: './persoon-nieuw-fiche.component.scss'
 })

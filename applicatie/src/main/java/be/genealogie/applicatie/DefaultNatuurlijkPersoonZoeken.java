@@ -1,5 +1,6 @@
 package be.genealogie.applicatie;
 
+import be.genealogie.domein.dto.DocumentHeaderDto;
 import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
 import be.genealogie.domein.dto.NatuurlijkPersoonFicheDto;
 import be.genealogie.domein.dto.RelatieDto;
@@ -16,6 +17,7 @@ import java.util.List;
 public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
     private final GenealogischDriekhoekjeZoeken genealogischDriekhoekjeZoeken;
     private final ReleatiesZoeken releatiesZoeken;
+    private final DocumentZoeken documentZoeken;
     private final NatuurlijkPersoonRepository natuurlijkPersoonRepository;
     private final ModelMapper modelMapper;
 
@@ -38,6 +40,7 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
         NatuurlijkPersoonDTO vader = genealogischDriekhoekjeZoeken.vaderVan(persoonDto).orElse(null);
         List<RelatieDto> relaties = releatiesZoeken.relatiesMet(persoonDto);
         List<NatuurlijkPersoonDTO> kinderen = genealogischDriekhoekjeZoeken.kinderenVan(persoonDto);
+        List<DocumentHeaderDto> documenten = documentZoeken.alleDocumentenVan(persoonDto);
 
         return NatuurlijkPersoonFicheDto.builder()
                 .natuurlijkPersoon(persoonDto)
@@ -45,6 +48,7 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
                 .moeder(moeder)
                 .relaties(relaties)
                 .kinderen(kinderen)
+                .documenten(documenten)
                 .build();
     }
 

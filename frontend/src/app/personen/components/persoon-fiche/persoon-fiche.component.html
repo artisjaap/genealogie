@@ -4,12 +4,16 @@
   </div>
   <div class="infocard-body" *ngIf="persoonFiche$ | async as persoonFiche">
     <div class="infocard-sectie">
+      <div class="infocard-sectie-acties">
+        <span class="actie" (click)="documentToevoegen(persoonFiche.natuurlijkPersoon, null)"><fa-icon [icon]="faFileText"></fa-icon></span>
+        <span class="actie" (click)="oudersToevoegen(persoonFiche.natuurlijkPersoon, null)"><fa-icon [icon]="faDiagramPredecessor"></fa-icon></span>
+      </div>
       <span>naam {{persoonFiche.natuurlijkPersoon.naam}}</span>
       <span>Voornaam {{persoonFiche.natuurlijkPersoon.voornaam}}</span>
       <span>Geboren {{persoonFiche.natuurlijkPersoon.geborenOp}}</span>
       <span>Overleden {{persoonFiche.natuurlijkPersoon.overledenOp}}</span>
-      <span [routerLink]="['/personen/detail', persoonFiche.moeder?.id]">Moeder {{persoonFiche.moeder?.naam}} {{persoonFiche.moeder?.voornaam}}</span>
-      <span [routerLink]="['/personen/detail', persoonFiche.vader?.id]">Vader  {{persoonFiche.vader?.naam}} {{persoonFiche.vader?.voornaam}}</span>
+      <span>Moeder <span [routerLink]="['/personen/detail', persoonFiche.moeder?.id]" class="link-action">{{persoonFiche.moeder?.naam}} {{persoonFiche.moeder?.voornaam}}</span></span>
+      <span>Vader <span [routerLink]="['/personen/detail', persoonFiche.vader?.id]" class="link-action">{{persoonFiche.vader?.naam}} {{persoonFiche.vader?.voornaam}}</span></span>
     </div>
     <div class="infocard-sectie">
       <span class="infocard-sectie-titel">kinderen</span>
@@ -21,16 +25,37 @@
     <div class="infocard-sectie">
       <span  class="infocard-sectie-titel">relatie </span>
       <div *ngFor="let relatie of persoonFiche.relaties">
-        <span [routerLink]="['/personen/detail', relatie.persoon1.id]">{{relatie.persoon1.naam}}</span>
-        <span [routerLink]="['/personen/detail', relatie.persoon2.id]">{{relatie.persoon2.naam}}</span>
+        <div class="infocard-row">
+          <span class="link-action" [routerLink]="['/personen/detail', relatie.persoon1.id]">{{relatie.persoon1.naam}}</span>
+          <span class="link-action" [routerLink]="['/personen/detail', relatie.persoon2.id]">{{relatie.persoon2.naam}}</span>
+          <span class="row-acties">
+            <span class="actie" (click)="documentToevoegen(null, relatie)"><fa-icon [icon]="faFileText"></fa-icon></span>
+            <span class="actie"  (click)="persoonAanRelatieToevoegen(null, relatie)"><fa-icon [icon]="faDiagramSuccessor"></fa-icon></span>
+          </span>
 
-        <div *ngFor="let kind of relatie.kinderen" [routerLink]="['/personen/detail', kind.id]">
-          {{kind.naam}} {{kind.voornaam}}
+        </div>
+
+        <div *ngFor="let kind of relatie.kinderen" >
+          <fa-icon [icon]="faStar"></fa-icon> <span class="link-action" [routerLink]="['/personen/detail', kind.id]">{{kind.naam}} {{kind.voornaam}}</span>
         </div>
       </div>
     </div>
     <div class="infocard-sectie">
-      <span class="infocard-sectie-titel">Documenten <span (click)="documentToevoegen()">TOEVOEGEN</span></span>
+      <span class="infocard-sectie-titel">Documenten </span>
+      <div class="document-previews">
+        <div class="document-preview" *ngFor="let document of persoonFiche.documenten">
+          <div class="document-preview-titel">{{document.type}}</div>
+          <div class="document-preview-image" (click)="toonImage(img)">
+            <img #img [src]="'/api/document/'+document.id" >
+
+          </div>
+
+          <div class="document-preview-caps">
+            {{document.fileName}}
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

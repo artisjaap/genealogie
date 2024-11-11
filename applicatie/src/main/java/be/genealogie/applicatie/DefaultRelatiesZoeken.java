@@ -30,6 +30,7 @@ public class DefaultRelatiesZoeken implements ReleatiesZoeken{
         List<Relatie> relaties = relatieRepository.findByPersoon1OrPersoon2(persoon, persoon);
         return relaties.stream()
                 .map(relatie -> RelatieDto.builder()
+                        .id(relatie.getId())
                         .persoon1(modelMapper.map(relatie.getPersoon1(), NatuurlijkPersoonDTO.class))
                         .persoon2(modelMapper.map(relatie.getPersoon2(), NatuurlijkPersoonDTO.class))
                         .gehuwdOp(relatie.getGehuwedOp())

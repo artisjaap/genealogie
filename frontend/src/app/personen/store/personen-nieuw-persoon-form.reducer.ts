@@ -6,6 +6,7 @@ export const personenNieuwFormFeatureKey = 'personenNieuwForm';
 export interface NatuurlijkPersoonFormValue {
   naam: string;
   voornaam: string;
+  geslacht: string;
   geborenOp: string;
   overledenOp: string;
 }
@@ -13,6 +14,7 @@ const NATUURLIJK_PERSOON_FORM_ID = 'Natuurlijk persoon Form';
 const initialFormState = createFormGroupState<NatuurlijkPersoonFormValue>(NATUURLIJK_PERSOON_FORM_ID, {
   naam: '',
   voornaam: '',
+  geslacht: 'MAN',
   geborenOp: "",
   overledenOp: "",
 });

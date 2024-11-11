@@ -8,7 +8,7 @@ import lombok.Data;
 public class DocumentDto {
     private byte[] bytes;
     private String origineleFilename;
-    private DocumentTypeDto documentType;
-    private RelatieDto relatieDto;
-    private NatuurlijkPersoonDTO natuurlijkPersoonDTO;
+    private Long documentTypeId;
+    private Long relatieId;
+    private Long natuurlijkPersoonId;
 }

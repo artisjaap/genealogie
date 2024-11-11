@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {AsyncPipe, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 import {Observable, throwError} from "rxjs";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
@@ -9,6 +9,21 @@ import {Store} from "@ngrx/store";
 import {getGeladenDocumentTypes} from "../../store/personen.selector";
 import {DocumentTypeDto} from "../../../model/document-type-dto";
 import {NgrxFormsModule} from "ngrx-forms";
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle
+} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
+import {DialogData} from "../../../model/document-upload-data-dts";
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {documentOpgeladen, sluitDocumentPopup} from "../../store/personen.acties";
+
 
 @Component({
   selector: 'app-upload-document',
@@ -23,22 +38,36 @@ import {NgrxFormsModule} from "ngrx-forms";
     MatOption,
     AsyncPipe,
     NgrxFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    JsonPipe,
+    FaIconComponent,
   ],
   templateUrl: './upload-document.component.html',
   styleUrl: './upload-document.component.scss'
 })
 export class UploadDocumentComponent {
+  protected readonly faXmark = faXmark;
+
+  readonly data: DialogData = inject<DialogData>(MAT_DIALOG_DATA);
+
   status: "initial" | "uploading" | "success" | "fail" = "initial"; // Variable to store file status
   file: File | null = null; // Variable to store file
   protected documentTypes$: Observable<DocumentTypeDto[]>;
 
-  constructor(private http: HttpClient, private state:Store<PersonenState>) {
+  constructor(private http: HttpClient, private state: Store<PersonenState>) {
     this.documentTypes$ = this.state.select(getGeladenDocumentTypes);
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   // On file Select
   onChange(event: any) {
@@ -50,13 +79,17 @@ export class UploadDocumentComponent {
     }
   }
 
-  onUpload() {
+  onUpload(documentTypeId: string, transcript: string) {
     if (this.file) {
       const formData = new FormData();
+      let relatieId: string = this.data.relatie ? this.data.relatie.id.toString() : '';
+      let natuurlijkPersoonId: string = this.data.natuurlijkPersoon ? this.data.natuurlijkPersoon.id.toString() : '';
 
       formData.append('file', this.file, this.file.name);
-      formData.append('type', "een type");
-      formData.append('ref', "een ref");
+      formData.append('transcript', transcript);
+      formData.append('documentTypeId', documentTypeId);
+      formData.append('relatieId', relatieId);
+      formData.append('natuurlijkPersoonId', natuurlijkPersoonId);
 
       const upload$ = this.http.post("/api/document", formData);
 
@@ -65,6 +98,7 @@ export class UploadDocumentComponent {
       upload$.subscribe({
         next: () => {
           this.status = 'success';
+          this.state.dispatch(documentOpgeladen());
         },
         error: (error: any) => {
           this.status = 'fail';
@@ -73,4 +107,9 @@ export class UploadDocumentComponent {
       });
     }
   }
+
+  close() {
+    this.state.dispatch(sluitDocumentPopup());
+  }
+
 }

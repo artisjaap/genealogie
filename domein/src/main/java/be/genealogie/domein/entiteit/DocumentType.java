@@ -14,4 +14,7 @@ public class DocumentType {
 
     @Column(name = "OMSCHRIJVING")
     private String omschrijving;
+
+    @Column(name = "CODE")
+    private String code;
 }
