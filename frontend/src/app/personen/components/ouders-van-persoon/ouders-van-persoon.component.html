@@ -1,0 +1,71 @@
+<p class="form-titel">Ouders toevoegen aan persoon <fa-icon (click)="close()" [icon]="faXmark"></fa-icon></p>
+
+<ng-container *ngIf="formState$ | async as formState">
+
+  <form class="default-form" [ngrxFormState]="formState">
+    <p class="form sectie-titel">Vader</p>
+    <div class="form-line">
+      <mat-form-field>
+        <mat-label>Naam</mat-label>
+        <input matInput maxlength="256" placeholder="Naam"
+               [ngrxFormControlState]="formState.controls.persoon1naam">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Voornaam</mat-label>
+        <input matInput maxlength="256" placeholder="Voornamen"
+               [ngrxFormControlState]="formState.controls.persoon1voornaam">
+      </mat-form-field>
+    </div>
+    <div class="form-line">
+      <mat-form-field>
+        <mat-label>Geboren</mat-label>
+        <input matInput [matDatepicker]="pickerPersoon1Geboren" [ngrxFormControlState]="formState.controls.persoon1geborenOp"
+               [ngrxValueConverter]="dateValueConverter">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerPersoon1Geboren"></mat-datepicker-toggle>
+        <mat-datepicker #pickerPersoon1Geboren></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Overleden</mat-label>
+        <input matInput [matDatepicker]="pickerOverleden" [ngrxFormControlState]="formState.controls.persoon1overledenOp"
+               [ngrxValueConverter]="dateValueConverter">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerOverleden"></mat-datepicker-toggle>
+        <mat-datepicker #pickerOverleden></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+    <p class="form sectie-titel">Moeder</p>
+
+
+    <div class="form-line">
+      <mat-form-field>
+        <mat-label>Naam</mat-label>
+        <input matInput maxlength="256" placeholder="Naam"
+               [ngrxFormControlState]="formState.controls.persoon2naam">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Voornaam</mat-label>
+        <input matInput maxlength="256" placeholder="Voornamen"
+               [ngrxFormControlState]="formState.controls.persoon2voornaam">
+      </mat-form-field>
+    </div>
+    <div class="form-line">
+      <mat-form-field>
+        <mat-label>Geboren</mat-label>
+        <input matInput [matDatepicker]="pickerPersoon2Geboren" [ngrxFormControlState]="formState.controls.persoon2geborenOp"
+               [ngrxValueConverter]="dateValueConverter">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerPersoon2Geboren"></mat-datepicker-toggle>
+        <mat-datepicker #pickerPersoon2Geboren></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Overleden</mat-label>
+        <input matInput [matDatepicker]="pickerOverleden" [ngrxFormControlState]="formState.controls.persoon2overledenOp"
+               [ngrxValueConverter]="dateValueConverter">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerOverleden"></mat-datepicker-toggle>
+        <mat-datepicker #pickerOverleden></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <button type="button" mat-raised-button (click)="opslaan()">Opslaan</button>
+  </form>
+</ng-container>

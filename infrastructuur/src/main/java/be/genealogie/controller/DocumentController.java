@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
 import java.io.IOException;
 
 @RestController
@@ -27,6 +26,7 @@ public class DocumentController {
                     .documentTypeId(document.getDocumentTypeId())
                     .natuurlijkPersoonId(document.getNatuurlijkPersoonId())
                     .relatieId(document.getRelatieId())
+                    .transcript(document.getTranscript())
                     .build());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -37,7 +37,7 @@ public class DocumentController {
     }
 
     @GetMapping(value = "{id}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
-    public ResponseEntity<?> getDocument(@PathVariable long id)  {
+    public ResponseEntity<?> getDocument(@PathVariable long id) {
         return documentZoeken.documentMetId(id)
                 .map(doc -> ResponseEntity.ok()
                         .contentType(toMediaType(doc.getMediaType()))

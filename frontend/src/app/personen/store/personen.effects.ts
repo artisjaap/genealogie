@@ -13,7 +13,7 @@ import {
   personenGevonden,
   zoekPersonen
 } from "./personen.acties";
-import {catchError, EMPTY, exhaustMap, filter, map, pipe, switchMap, withLatestFrom} from "rxjs";
+import {catchError, EMPTY, exhaustMap, filter, map, pipe, switchMap, tap, withLatestFrom} from "rxjs";
 import {Store} from "@ngrx/store";
 import {PersonenState} from "./personen.reducer";
 import {
@@ -32,6 +32,7 @@ import {OudersVanKindDto} from "../../model/ouders-van-kind-dto";
 import {NatuurlijkPersoonVoorRelatieFormValue} from "./persoon-nieuw-voor-relatie-form.reducer";
 import {KindUitRelatieDto} from "../../model/kind-uit-relatie-dto";
 import {RelatieDto, RelatieIdDto} from "../../model/relatie-dto";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class PersonenEffects {
@@ -112,6 +113,14 @@ export class PersonenEffects {
       ))
   ))
 
+  nieuwNatuurlijkPersoonAangemaakt = createEffect(
+    () => this.actions$.pipe(
+      ofType(nieuwNatuurlijkPersoonAangemaakt),
+      tap((persoon) => this.router.navigateByUrl(`/personen/detail/${persoon.natuurlijkPersoon.id}`))
+    ), {dispatch: false}
+  );
+
+
   private formDataNaarDto(formData : NatuurlijkPersoonFormValue): NatuurlijkPersoonDto{
     return new NatuurlijkPersoonDto(0, formData.naam, formData.voornaam, formData.geslacht, new Date(formData.geborenOp), '', new Date(formData.overledenOp), '');
   }
@@ -120,7 +129,8 @@ export class PersonenEffects {
     private store$: Store<PersonenState>,
     private actions$: Actions,
     private natuurlijkPersoonService: NatuurlijkPersoonService,
-    private referenceDataService: ReferentieDataService
+    private referenceDataService: ReferentieDataService,
+    private router: Router
   ) {}
 
   private oudersFormDataNaarDto(value: OudersVoorPersoonFormValue, persoon: NatuurlijkPersoonFicheDto | undefined) {

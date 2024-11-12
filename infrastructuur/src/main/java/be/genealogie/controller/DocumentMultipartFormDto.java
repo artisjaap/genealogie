@@ -9,4 +9,5 @@ public class DocumentMultipartFormDto {
     private Long documentTypeId;
     private Long relatieId;
     private Long natuurlijkPersoonId;
+    private String transcript;
 }

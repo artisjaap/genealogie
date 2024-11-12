@@ -11,4 +11,5 @@ public class DocumentDto {
     private Long documentTypeId;
     private Long relatieId;
     private Long natuurlijkPersoonId;
+    private String transcript;
 }

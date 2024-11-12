@@ -25,6 +25,9 @@ public class Document {
     @Column(name = "PATH")
     private String pathNaarDocument;
 
+    @Column(name = "TRANSCRIPT")
+    private String transcript;
+
     @ManyToOne
     @JoinColumn(name = "PERSOON_ID")
     private NatuurlijkPersoon natuurlijkPersoon;

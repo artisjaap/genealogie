@@ -52,6 +52,7 @@ public class DefaultDocumentOpladen implements DocumentOpladen{
                             .documentType(documentTypeRepository.getById(documentDto.getDocumentTypeId()))
                             .relatie(relatie)
                             .natuurlijkPersoon(natuurlijkPersoon)
+                            .transcript(documentDto.getTranscript())
                             .pathNaarDocument(subPath + documentDto.getOrigineleFilename())
 
                     .build());

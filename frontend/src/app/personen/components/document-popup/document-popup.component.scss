@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+
+  .image {
+    display: flex;
+    flex: 2;
+
+  }
+  .transcript {
+    display: flex;
+    flex: 1;
+  }
+}

@@ -23,7 +23,7 @@ import {OudersVanPersoonComponent} from "../ouders-van-persoon/ouders-van-persoo
 import {PersoonVoorRelatieComponent} from "../persoon-voor-relatie/persoon-voor-relatie.component";
 import {toonDocumentPopup, toonOudersVanPersoon, toonPersoonVoorRelatie} from "../../store/personen.acties";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {faDiagramPredecessor, faDiagramSuccessor, faFileText,} from "@fortawesome/free-solid-svg-icons";
+import {faDiagramPredecessor, faDiagramSuccessor, faFileText, faPerson,} from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 import {DocumentPopupComponent} from "../document-popup/document-popup.component";
 
@@ -139,5 +139,7 @@ export class PersoonFicheComponent {
       data: img
     });
   }
+
+  protected readonly faPerson = faPerson;
 }
 
