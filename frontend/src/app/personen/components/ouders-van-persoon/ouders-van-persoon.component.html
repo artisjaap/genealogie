@@ -26,10 +26,10 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Overleden</mat-label>
-        <input matInput [matDatepicker]="pickerOverleden" [ngrxFormControlState]="formState.controls.persoon1overledenOp"
+        <input matInput [matDatepicker]="pickerPersoon1Overleden" [ngrxFormControlState]="formState.controls.persoon1overledenOp"
                [ngrxValueConverter]="dateValueConverter">
-        <mat-datepicker-toggle matIconSuffix [for]="pickerOverleden"></mat-datepicker-toggle>
-        <mat-datepicker #pickerOverleden></mat-datepicker>
+        <mat-datepicker-toggle matIconSuffix [for]="pickerPersoon1Overleden"></mat-datepicker-toggle>
+        <mat-datepicker #pickerPersoon1Overleden></mat-datepicker>
       </mat-form-field>
 
     </div>
@@ -58,10 +58,10 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Overleden</mat-label>
-        <input matInput [matDatepicker]="pickerOverleden" [ngrxFormControlState]="formState.controls.persoon2overledenOp"
+        <input matInput [matDatepicker]="pickerPersoon2Overleden" [ngrxFormControlState]="formState.controls.persoon2overledenOp"
                [ngrxValueConverter]="dateValueConverter">
-        <mat-datepicker-toggle matIconSuffix [for]="pickerOverleden"></mat-datepicker-toggle>
-        <mat-datepicker #pickerOverleden></mat-datepicker>
+        <mat-datepicker-toggle matIconSuffix [for]="pickerPersoon2Overleden"></mat-datepicker-toggle>
+        <mat-datepicker #pickerPersoon2Overleden></mat-datepicker>
       </mat-form-field>
 
     </div>

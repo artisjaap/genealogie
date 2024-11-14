@@ -39,6 +39,7 @@ public class DefaultNatuurlijkPersoonMaken implements NatuurlijkPersoonMaken {
     public RelatieDto maakHuwelijk(RelatieMetNieuwNatuurlijkPersoonDto huwelijk) {
         NatuurlijkPersoon bestaandNatuurlijkPersoon = natuurlijkPersoonRepository.getById(huwelijk.getPersoon1().getId());
         NatuurlijkPersoon nieuwNatuurlijkPersoon = modelMapper.map(huwelijk.getPersoon2(), NatuurlijkPersoon.class);
+        natuurlijkPersoonRepository.save(nieuwNatuurlijkPersoon);
         return registreerHuwelijk(bestaandNatuurlijkPersoon, nieuwNatuurlijkPersoon, huwelijk.getGehuwdOp(), huwelijk.getGehuwdTe());
     }
 

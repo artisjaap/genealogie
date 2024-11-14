@@ -4,6 +4,7 @@ import be.genealogie.domein.Geslacht;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class NieuwNatuurlijkPersoonDTO {

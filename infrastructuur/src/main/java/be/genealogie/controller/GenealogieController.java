@@ -1,9 +1,8 @@
 package be.genealogie.controller;
 
 import be.genealogie.applicatie.GenealogischDriekhoekjeMaken;
-import be.genealogie.domein.dto.GenealogischDriehoekjeDTO;
-import be.genealogie.domein.dto.KindUitRelatieDto;
-import be.genealogie.domein.dto.OudersVanKindDto;
+import be.genealogie.applicatie.NatuurlijkPersoonMaken;
+import be.genealogie.domein.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GenealogieController {
 
     private final GenealogischDriekhoekjeMaken genealogischDriekhoekje;
+    private final NatuurlijkPersoonMaken relatieRegistratie;
 
     @PostMapping
     public ResponseEntity<GenealogischDriehoekjeDTO> maakGenealogischDriehoekje(@RequestBody GenealogischDriehoekjeDTO genealogischDriehoekjeDTO){
@@ -24,12 +24,19 @@ public class GenealogieController {
     }
 
     @PostMapping("/kind-uit-relatie")
-    public ResponseEntity<GenealogischDriehoekjeDTO> maakHuwelijkTussenMetNieuwNatuurlijkePersoon(@RequestBody KindUitRelatieDto kindUitRelatie){
+    public ResponseEntity<GenealogischDriehoekjeDTO> registreerKindUitRelatie(@RequestBody KindUitRelatieDto kindUitRelatie){
         return ResponseEntity.ok(genealogischDriekhoekje.registreerKindUitRelatie(kindUitRelatie));
     }
 
     @PostMapping("/registreerd-ouders")
-    public ResponseEntity<GenealogischDriehoekjeDTO> maakHuwelijkTussenMetNieuwNatuurlijkePersoon(@RequestBody OudersVanKindDto oudersVanKind){
+    public ResponseEntity<GenealogischDriehoekjeDTO> registreerOudersVanPersoon(@RequestBody OudersVanKindDto oudersVanKind){
         return ResponseEntity.ok(genealogischDriekhoekje.registreerdOudersVanKind(oudersVanKind));
     }
+
+    @PostMapping("/registreerd-relatie-met")
+    public ResponseEntity<RelatieDto> registreerRelatieMet(@RequestBody RelatieMetNieuwNatuurlijkPersoonDto relatieMet){
+        return ResponseEntity.ok(relatieRegistratie.maakHuwelijk(relatieMet));
+    }
+
+
 }

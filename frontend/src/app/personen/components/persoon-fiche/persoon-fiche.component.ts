@@ -8,7 +8,7 @@ import {
   getPersoonVoorRelatie,
   getPersoonVoorRelatieData,
   getToonDocumenten,
-  getToonDocumentenData
+  getToonDocumentenData, getVoegRelatieToeMet
 } from "../../store/personen.selector";
 import {NatuurlijkPersoonFicheDto} from "../../../model/natuurlijk-persoon-fiche-dto";
 import {Observable, take} from "rxjs";
@@ -21,12 +21,17 @@ import {RelatieDto} from "../../../model/relatie-dto";
 import {DialogData} from "../../../model/document-upload-data-dts";
 import {OudersVanPersoonComponent} from "../ouders-van-persoon/ouders-van-persoon.component";
 import {PersoonVoorRelatieComponent} from "../persoon-voor-relatie/persoon-voor-relatie.component";
-import {toonDocumentPopup, toonOudersVanPersoon, toonPersoonVoorRelatie} from "../../store/personen.acties";
+import {
+  toonDocumentPopup,
+  toonOudersVanPersoon,
+  toonPersoonVoorRelatie,
+  toonVoegRelatieToeMet
+} from "../../store/personen.acties";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {faDiagramPredecessor, faDiagramSuccessor, faFileText, faPerson,} from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 import {DocumentPopupComponent} from "../document-popup/document-popup.component";
-
+import {VoegRelatieToeMetComponent} from "../voeg-relatie-toe-met/voeg-relatie-toe-met.component";
 @Component({
   selector: 'app-persoon-fiche',
   standalone: true,
@@ -48,6 +53,7 @@ export class PersoonFicheComponent {
 
   public persoonFiche$: Observable<NatuurlijkPersoonFicheDto | undefined>;
   private documentDialogRef: MatDialogRef<UploadDocumentComponent, any> | undefined;
+  private persoonVoegRelatieToeMetDialogRef: MatDialogRef<VoegRelatieToeMetComponent, any> | undefined;
   private persoonVoorRelatieDialogRef: MatDialogRef<PersoonVoorRelatieComponent, any> | undefined;
   private oudersVoorPersoonDialogRef: MatDialogRef<OudersVanPersoonComponent, any> | undefined;
 
@@ -70,6 +76,26 @@ export class PersoonFicheComponent {
         }
       }
     });
+
+    store.select(getVoegRelatieToeMet).subscribe(
+      toon => {
+        if (toon) {
+          store.select(getVoegRelatieToeMet).pipe(take(1)).subscribe(data => {
+            this.persoonVoegRelatieToeMetDialogRef = this.dialog.open(VoegRelatieToeMetComponent, {
+              height: '600px',
+              width: '1000px',
+              disableClose: true,
+              data: data
+            });
+          })
+        } else {
+          if (this.persoonVoegRelatieToeMetDialogRef) {
+            this.persoonVoegRelatieToeMetDialogRef.close();
+          }
+        }
+      });
+
+
     store.select(getPersoonVoorRelatie).subscribe(
       toon => {
         if (toon) {
@@ -120,6 +146,11 @@ export class PersoonFicheComponent {
   persoonAanRelatieToevoegen(natuurlijkPersoonDto: NatuurlijkPersoonDto | null, relatieDto: RelatieDto | null) {
     let dialogData = new DialogData(natuurlijkPersoonDto, relatieDto);
     this.store.dispatch(toonPersoonVoorRelatie({dialogData}));
+  }
+
+  voegRelatieToeMet(natuurlijkPersoonDto: NatuurlijkPersoonDto | null) {
+    let dialogData = new DialogData(natuurlijkPersoonDto, null);
+    this.store.dispatch(toonVoegRelatieToeMet({dialogData}));
   }
 
 

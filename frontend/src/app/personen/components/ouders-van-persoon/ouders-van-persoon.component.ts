@@ -17,7 +17,7 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 @Component({
   selector: 'app-ouders-van-persoon',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [],
 
   imports: [
     AsyncPipe,

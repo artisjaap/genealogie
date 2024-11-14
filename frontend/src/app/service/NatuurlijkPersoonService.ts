@@ -6,6 +6,8 @@ import {NatuurlijkPersoonFicheDto} from "../model/natuurlijk-persoon-fiche-dto";
 import {OudersVanKindDto} from "../model/ouders-van-kind-dto";
 import {KindUitRelatieDto} from "../model/kind-uit-relatie-dto";
 import {GenealogischDriehoekjeDto} from "../model/genealogisch-driehoekje-dto";
+import {RelatieDto} from "../model/relatie-dto";
+import {RelatieMetNieuwNatuurlijkPersoonDto} from "../model/relatie-met-nieuw-natuurlijk-persoon-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,10 @@ export class NatuurlijkPersoonService {
 
   persoonAanRelatieToevoegen(kindUitRelatieDto: KindUitRelatieDto): Observable<GenealogischDriehoekjeDto>{
     return this.http.post<GenealogischDriehoekjeDto>("api/genealogie/kind-uit-relatie", kindUitRelatieDto)
+  }
+
+  maakRelatieMet(relatieMet: RelatieMetNieuwNatuurlijkPersoonDto) : Observable<RelatieDto> {
+    return this.http.post<RelatieDto>("api/genealogie/registreerd-relatie-met", relatieMet);
   }
 
   zoekPersonen(zoekString: string):Observable<NatuurlijkPersoonDto[]> {

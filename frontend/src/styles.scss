@@ -81,12 +81,17 @@ body {
       display: flex;
       flex-flow: row nowrap;
     }
+    .infocard-row-flow {
+      display: flex;
+      flex-flow: row wrap;
+    }
+
     .infocard-sectie-acties {
       display: flex;
       flex-flow: row nowrap;
 
       .actie {
-        padding: 1px 5px;
+
       }
     }
 
@@ -95,7 +100,7 @@ body {
       flex-flow: row nowrap;
 
       .actie {
-        padding: 1px 5px;
+
       }
     }
 
@@ -135,6 +140,7 @@ body {
 
 .actie {
   cursor: pointer;
+  margin: 1px 5px;
 }
 
 .link-action {

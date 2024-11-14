@@ -3,9 +3,19 @@ import {NatuurlijkPersoonDto} from "../../model/natuurlijk-persoon-dto";
 import {
   documentOpgeladen,
   documentTypesGeladen,
-  natuurlijkPersoonFicheGeladen, natuurlijkPersoonVoorRelatieAangemaakt, oudersVanNatuurlijkPersoonAangemaakt,
-  personenGevonden, sluitDocumentPopup, sluitOudersVanPersoon, sluitPersoonVoorRelatie,
-  toonDocumentPopup, toonOudersVanPersoon, toonPersoonVoorRelatie
+  natuurlijkPersoonFicheGeladen,
+  natuurlijkPersoonVoorRelatieAangemaakt,
+  oudersVanNatuurlijkPersoonAangemaakt,
+  personenGevonden,
+  relatieMetNatuurlijkPersoonAangemaakt,
+  sluitDocumentPopup,
+  sluitOudersVanPersoon,
+  sluitPersoonVoorRelatie,
+  sluitVoegRelatieToeMet,
+  toonDocumentPopup,
+  toonOudersVanPersoon,
+  toonPersoonVoorRelatie,
+  toonVoegRelatieToeMet
 } from "./personen.acties";
 import {NatuurlijkPersoonFicheDto} from "../../model/natuurlijk-persoon-fiche-dto";
 import {DocumentTypeDto} from "../../model/document-type-dto";
@@ -21,16 +31,20 @@ export interface PersoonDataState {
   popups : {
     toonDocumentPopup: {
       state: boolean,
-      dialogData: DialogData | null,
+      dialogData: DialogData | null
     },
     toonPersoonVoorRelatie: {
       state: boolean,
-      dialogData: DialogData | null,
+      dialogData: DialogData | null
     },
     toonOudersVoorPersoon: {
       state: boolean,
-      dialogData: DialogData | null,
+      dialogData: DialogData | null
     },
+    toonVoegRelatieToeMet: {
+      state: boolean,
+      dialogData: DialogData | null
+    }
   }
 
 }
@@ -49,6 +63,10 @@ export const personenInitialState: PersoonDataState = {
       dialogData: null
     },
     toonOudersVoorPersoon: {
+      state: false,
+      dialogData: null
+    },
+    toonVoegRelatieToeMet: {
       state: false,
       dialogData: null
     },
@@ -103,11 +121,31 @@ const createThePersonenReducer = createReducer(
       }
     }
   })),
+  on(toonVoegRelatieToeMet, (state: PersoonDataState, {dialogData}) => ({
+    ...state,
+    popups: {
+      ...state.popups,
+      toonVoegRelatieToeMet: {
+        state: true,
+        dialogData: dialogData
+      }
+    }
+  })),
   on(natuurlijkPersoonVoorRelatieAangemaakt, (state: PersoonDataState) => ({
     ...state,
     popups: {
       ...state.popups,
       toonPersoonVoorRelatie: {
+        state: false,
+        dialogData: null
+      }
+    }
+  })),
+  on(relatieMetNatuurlijkPersoonAangemaakt, (state: PersoonDataState) => ({
+    ...state,
+    popups: {
+      ...state.popups,
+      toonVoegRelatieToeMet: {
         state: false,
         dialogData: null
       }
@@ -158,6 +196,16 @@ const createThePersonenReducer = createReducer(
     popups: {
       ...state.popups,
       toonPersoonVoorRelatie: {
+        state: false,
+        dialogData: null
+      }
+    }
+  })),
+  on(sluitVoegRelatieToeMet, (state: PersoonDataState) => ({
+    ...state,
+    popups: {
+      ...state.popups,
+      toonVoegRelatieToeMet: {
         state: false,
         dialogData: null
       }

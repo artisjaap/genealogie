@@ -12,6 +12,8 @@ export const maakOudersVanNatuurlijkPersoon = createAction('[NATUURLIJK PERSOON 
 export const oudersVanNatuurlijkPersoonAangemaakt = createAction('[NATUURLIJK PERSOON - Ouders van natuurlijk persoon aangemaakt]', props<{genealogischDriehoekje: GenealogischDriehoekjeDto}>());
 export const maakNatuurlijkPersoonVoorRelatie = createAction('[NATUURLIJK PERSOON - Maak natuurlijk persoon voor relatie]', props<{relatie: RelatieDto|null}>());
 export const natuurlijkPersoonVoorRelatieAangemaakt = createAction('[NATUURLIJK PERSOON - natuurlijk persoon voor relatie aangemaakt]', props<{genealogischDriehoekje: GenealogischDriehoekjeDto}>());
+export const maakRelatieMet = createAction('[NATUURLIJK PERSOON - maak relatie met]');
+export const relatieMetNatuurlijkPersoonAangemaakt = createAction('[NATUURLIJK PERSOON - natuurlijk persoon met relatie aangemaakt]', props<{relatie: RelatieDto}>());
 
 export const toonDocumentPopup = createAction('[NATUURLIJK PERSOON - toon document popup]', props<{dialogData: DialogData}>());
 export const sluitDocumentPopup = createAction('[NATUURLIJK PERSOON - sluit document popup]');
@@ -19,6 +21,8 @@ export const toonPersoonVoorRelatie = createAction('[NATUURLIJK PERSOON - toon p
 export const sluitPersoonVoorRelatie = createAction('[NATUURLIJK PERSOON - sluit persoon voor relatie popup]');
 export const toonOudersVanPersoon = createAction('[NATUURLIJK PERSOON - toon ouders voor persoon popup]', props<{dialogData: DialogData}>());
 export const sluitOudersVanPersoon = createAction('[NATUURLIJK PERSOON - sluit ouders voor persoon popup]');
+export const toonVoegRelatieToeMet = createAction('[NATUURLIJK PERSOON - toon vroeg relatie toe met]', props<{dialogData: DialogData}>());
+export const sluitVoegRelatieToeMet = createAction('[NATUURLIJK PERSOON - sluit voeg relatie toe moet]');
 
 export const zoekPersonen = createAction('[NATUURLIJK PERSOON - zoeken]', props<{zoekString: string}>());
 export const personenGevonden = createAction('[NATUURLIJK PERSOON - gevonden]', props<{personen: NatuurlijkPersoonDto[]}>());

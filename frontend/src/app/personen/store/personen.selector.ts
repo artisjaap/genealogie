@@ -4,6 +4,7 @@ import {personenInfoFeatureKey} from "./personen-persoon.reducer";
 import {personenFeatureKey, PersonenState} from "./personen.reducer";
 import {personenNieuwVoorRelatieFormFeatureKey} from "./persoon-nieuw-voor-relatie-form.reducer";
 import {oudersVoorPersoonFormFeatureKey} from "./ouders-voor-persoon.reducer";
+import {persoonMaakRelatieMetFeatureKey} from "./persoon-maak-relatie-met.reducer";
 
 export const getPersonenFeatureState = createFeatureSelector<PersonenState>(personenFeatureKey);
 
@@ -16,6 +17,9 @@ export const getPersoonVoorRelatieForm = createSelector(getPersoonVoorRelatieFor
 export const getOudersVoorPersoonFormState = createSelector(getPersonenFeatureState, state => state[oudersVoorPersoonFormFeatureKey]);
 export const getOudersVoorPersoonForm = createSelector(getOudersVoorPersoonFormState, state => state.oudersVoorPersoon);
 
+export const getPersoonVoorRelatieMetFormState = createSelector(getPersonenFeatureState, state => state[persoonMaakRelatieMetFeatureKey]);
+export const getPersoonVoorRelatieMetForm = createSelector(getPersoonVoorRelatieMetFormState, state => state.nieuwNatuurlijkPersoon);
+
 
 export const getPersonenState = createSelector(getPersonenFeatureState, state => state[personenInfoFeatureKey]);
 export const getGevondenPersonen = createSelector(getPersonenState, state => state.gevondenPersonen);
@@ -24,6 +28,8 @@ export const getGeladenDocumentTypes = createSelector(getPersonenState, state =>
 export const getPopupInfo = createSelector(getPersonenState, state => state.popups);
 export const getToonDocumenten = createSelector(getPopupInfo, state => state.toonDocumentPopup.state);
 export const getToonDocumentenData = createSelector(getPopupInfo, state => state.toonDocumentPopup.dialogData);
+export const getVoegRelatieToeMet = createSelector(getPopupInfo, state => state.toonVoegRelatieToeMet.state);
+export const getVoegRelatieToeMetData = createSelector(getPopupInfo, state => state.toonVoegRelatieToeMet.dialogData);
 
 
 export const getPersoonVoorRelatie = createSelector(getPopupInfo, state => state.toonPersoonVoorRelatie.state);

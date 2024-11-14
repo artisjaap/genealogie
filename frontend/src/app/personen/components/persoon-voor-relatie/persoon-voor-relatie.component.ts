@@ -20,7 +20,7 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 @Component({
   selector: 'app-persoon-voor-relatie',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [],
 
   imports: [
     AsyncPipe,

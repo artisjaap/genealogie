@@ -15,6 +15,7 @@ import {PersonenModule} from "./personen/personen.module";
 import {AdminModule} from "./admin/admin.module";
 import {NavigatieComponent} from "./components/navigatie/navigatie.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {provideMomentDateAdapter} from "@angular/material-moment-adapter";
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +35,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
-    {provide: MAT_DATE_LOCALE, useValue: 'nl-BE'},
+    provideMomentDateAdapter({
+      parse: {
+        dateInput: "DD/MM/YYYY"
+      },
+      display: {
+        dateInput: "DD/MM/YYYY",
+        monthYearLabel: 'MMM YYYY',
+        dateA11yLabel:'LL',
+        monthYearA11yLabel: 'MMM YYYY'
+      }}, {useUtc: true}),
     provideAnimationsAsync(),
     provideHttpClient()
 ],

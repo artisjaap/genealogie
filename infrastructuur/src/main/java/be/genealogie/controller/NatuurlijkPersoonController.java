@@ -27,15 +27,15 @@ public class NatuurlijkPersoonController {
         return ResponseEntity.ok(natuurlijkPersoonZoeken.ficheVoor(id));
     }
 
-    @PostMapping("/huwelijk")
-    public ResponseEntity<RelatieDto> maakHuwelijkTussenTweeBestaandeNatuurlijkePersonen(@RequestBody RelatieDto huwelijk){
-        return ResponseEntity.ok(natuurlijkPersoonMaken.maakHuwelijk(huwelijk));
-    }
-
-    @PostMapping("/huwelijk-nieuw")
-    public ResponseEntity<RelatieDto> maakHuwelijkTussenMetNieuwNatuurlijkePersoon(@RequestBody RelatieMetNieuwNatuurlijkPersoonDto huwelijk){
-        return ResponseEntity.ok(natuurlijkPersoonMaken.maakHuwelijk(huwelijk));
-    }
+//    @PostMapping("/huwelijk")
+//    public ResponseEntity<RelatieDto> maakHuwelijkTussenTweeBestaandeNatuurlijkePersonen(@RequestBody RelatieDto huwelijk){
+//        return ResponseEntity.ok(natuurlijkPersoonMaken.maakHuwelijk(huwelijk));
+//    }
+//
+//    @PostMapping("/huwelijk-nieuw")
+//    public ResponseEntity<RelatieDto> maakHuwelijkTussenMetNieuwNatuurlijkePersoon(@RequestBody RelatieMetNieuwNatuurlijkPersoonDto huwelijk){
+//        return ResponseEntity.ok(natuurlijkPersoonMaken.maakHuwelijk(huwelijk));
+//    }
 
 
     @GetMapping

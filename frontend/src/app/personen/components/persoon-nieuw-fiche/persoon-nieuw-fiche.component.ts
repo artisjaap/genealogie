@@ -8,9 +8,9 @@ import {
   MatDatepickerModule,
   MatDatepickerToggle
 } from "@angular/material/datepicker";
-import {provideNativeDateAdapter} from "@angular/material/core";
+import {MAT_DATE_FORMATS, provideNativeDateAdapter} from "@angular/material/core";
 import {Store} from "@ngrx/store";
-import {FormGroupState, NgrxFormsModule, NgrxValueConverters} from "ngrx-forms";
+import {FormGroupState, NgrxFormsModule, NgrxValueConverter, NgrxValueConverters} from "ngrx-forms";
 import {Observable} from "rxjs";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {NatuurlijkPersoonFormValue} from "../../store/personen-nieuw-persoon-form.reducer";
@@ -18,11 +18,13 @@ import {maakNieuwNatuurlijkPersoon} from "../../store/personen.acties";
 import {getPersonenNieuwForm} from "../../store/personen.selector";
 import {MatButtonModule} from "@angular/material/button";
 import {MatRadioModule} from "@angular/material/radio";
+import {DateToUtcConverter} from "../../../model/date-to-utc-converter";
+import {provideMomentDateAdapter} from "@angular/material-moment-adapter";
 
 @Component({
   selector: 'app-persoon-nieuw-fiche',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [],
 
   imports: [MatFormFieldModule, MatRadioModule, MatInputModule,MatButtonModule, MatIconModule, MatDatepickerModule, AsyncPipe, NgrxFormsModule, NgIf],
   templateUrl: './persoon-nieuw-fiche.component.html',
@@ -35,6 +37,7 @@ export class PersoonNieuwFicheComponent {
     this.formState$ = store.select(getPersonenNieuwForm);
   }
 
+  // dateValueConverter = new DateToUtcConverter();
   dateValueConverter = NgrxValueConverters.dateToISOString;
 
   opslaan() {

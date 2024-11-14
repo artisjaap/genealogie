@@ -7,10 +7,10 @@ import {
   laadDocumentTypes,
   laadNatuurlijkPersoonFiche, maakNatuurlijkPersoonVoorRelatie,
   maakNieuwNatuurlijkPersoon,
-  maakOudersVanNatuurlijkPersoon,
+  maakOudersVanNatuurlijkPersoon, maakRelatieMet,
   natuurlijkPersoonFicheGeladen, natuurlijkPersoonVoorRelatieAangemaakt,
   nieuwNatuurlijkPersoonAangemaakt, oudersVanNatuurlijkPersoonAangemaakt,
-  personenGevonden,
+  personenGevonden, relatieMetNatuurlijkPersoonAangemaakt,
   zoekPersonen
 } from "./personen.acties";
 import {catchError, EMPTY, exhaustMap, filter, map, pipe, switchMap, tap, withLatestFrom} from "rxjs";
@@ -20,7 +20,7 @@ import {
   getGeladenPeroonFiche,
   getOudersVoorPersoonForm,
   getPersonenNieuwForm,
-  getPersoonVoorRelatieForm
+  getPersoonVoorRelatieForm, getPersoonVoorRelatieMetForm, getVoegRelatieToeMetData
 } from "./personen.selector";
 import {FormGroupState} from "ngrx-forms";
 import {NatuurlijkPersoonFormValue} from "./personen-nieuw-persoon-form.reducer";
@@ -33,6 +33,9 @@ import {NatuurlijkPersoonVoorRelatieFormValue} from "./persoon-nieuw-voor-relati
 import {KindUitRelatieDto} from "../../model/kind-uit-relatie-dto";
 import {RelatieDto, RelatieIdDto} from "../../model/relatie-dto";
 import {Router} from "@angular/router";
+import {PersoonRelatieMetFormValue} from "./persoon-maak-relatie-met.reducer";
+import {RelatieMetNieuwNatuurlijkPersoonDto} from "../../model/relatie-met-nieuw-natuurlijk-persoon-dto";
+import {DialogData} from "../../model/document-upload-data-dts";
 
 @Injectable()
 export class PersonenEffects {
@@ -77,9 +80,23 @@ export class PersonenEffects {
     )
   );
 
+  persoonMaakRelatieMiet$ = createEffect(() => this.actions$.pipe(
+      ofType(maakRelatieMet),
+      withLatestFrom(this.store$.select(getPersoonVoorRelatieMetForm),
+        this.store$.select(getVoegRelatieToeMetData)),
+      exhaustMap(([data, form, dialogData]:[any, FormGroupState<PersoonRelatieMetFormValue>, DialogData | null] ) =>
+        this.natuurlijkPersoonService.maakRelatieMet(this.relatieMetNaarDto(form.value, dialogData?.natuurlijkPersoon))
+          .pipe(
+            map(relatie => relatieMetNatuurlijkPersoonAangemaakt({relatie})),
+            catchError(() => EMPTY)
+          ))
+    )
+  );
+
   refreshPersoonFiche = createEffect(() => this.actions$.pipe(
     ofType(natuurlijkPersoonVoorRelatieAangemaakt,
       oudersVanNatuurlijkPersoonAangemaakt,
+      relatieMetNatuurlijkPersoonAangemaakt,
       documentOpgeladen),
     withLatestFrom(this.store$.select(getGeladenPeroonFiche)),
     filter(([data, fiche]:[any, NatuurlijkPersoonFicheDto | undefined]) => !!fiche),
@@ -145,5 +162,16 @@ export class PersonenEffects {
     let relatie: RelatieIdDto = new RelatieIdDto(relatieDto?relatieDto.id:0);
     let natuurlijkPersoon: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.naam, value.voornaam, value.geslacht, new Date(value.geborenOp), null, new Date(value.overledenOp), null);
     return new KindUitRelatieDto(relatie, natuurlijkPersoon);
+  }
+
+  private relatieMetNaarDto(value: PersoonRelatieMetFormValue, bestaandPersoon: NatuurlijkPersoonDto | null | undefined): RelatieMetNieuwNatuurlijkPersoonDto{
+    debugger
+    return new RelatieMetNieuwNatuurlijkPersoonDto(
+      bestaandPersoon,
+      new NatuurlijkPersoonDto(0, value.naam, value.voornaam, value.geslacht, new Date(value.geborenOp), "", new Date(value.overledenOp), ""),
+      null,
+      null
+    );
+
   }
 }
