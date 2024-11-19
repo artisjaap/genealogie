@@ -24,6 +24,7 @@
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@ngneat/helipopper": "^9.2.1",
     "@ngrx/effects": "^18.1.1",
     "@ngrx/router-store": "^18.1.1",
     "@ngrx/store": "^18.1.1",

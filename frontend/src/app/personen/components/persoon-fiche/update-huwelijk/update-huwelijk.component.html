@@ -1,0 +1,15 @@
+<div class="infocard">
+  <p class="infocard-titel">Wijzig huwelijk</p>
+  <mat-form-field>
+    <mat-label>Huwelijk</mat-label>
+    <input #huwelijkOp matInput [matDatepicker]="pickerHuwelijk" [formControl]="date">
+    <mat-datepicker-toggle matIconSuffix [for]="pickerHuwelijk"></mat-datepicker-toggle>
+    <mat-datepicker #pickerHuwelijk></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Gemeente</mat-label>
+    <input #huwelijkTe matInput maxlength="256" >
+  </mat-form-field>
+  <button type="button" mat-raised-button (click)="opslaan(huwelijkTe)">Wijzigen</button>
+</div>
+

@@ -1,6 +1,7 @@
 package be.genealogie.controller;
 
 import be.genealogie.applicatie.NatuurlijkPersoonMaken;
+import be.genealogie.applicatie.NatuurlijkPersoonWijzigen;
 import be.genealogie.applicatie.NatuurlijkPersoonZoeken;
 import be.genealogie.domein.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ public class NatuurlijkPersoonController {
 
     private final NatuurlijkPersoonMaken natuurlijkPersoonMaken;
     private final NatuurlijkPersoonZoeken natuurlijkPersoonZoeken;
+    private final NatuurlijkPersoonWijzigen natuurlijkPersoonWijzigen;
 
     @PostMapping
     public ResponseEntity<NatuurlijkPersoonDTO> maakNatuurlijkPersoon(@RequestBody NieuwNatuurlijkPersoonDTO nieuwNatuurlijkPersoonDTO){
@@ -27,16 +29,10 @@ public class NatuurlijkPersoonController {
         return ResponseEntity.ok(natuurlijkPersoonZoeken.ficheVoor(id));
     }
 
-//    @PostMapping("/huwelijk")
-//    public ResponseEntity<RelatieDto> maakHuwelijkTussenTweeBestaandeNatuurlijkePersonen(@RequestBody RelatieDto huwelijk){
-//        return ResponseEntity.ok(natuurlijkPersoonMaken.maakHuwelijk(huwelijk));
-//    }
-//
-//    @PostMapping("/huwelijk-nieuw")
-//    public ResponseEntity<RelatieDto> maakHuwelijkTussenMetNieuwNatuurlijkePersoon(@RequestBody RelatieMetNieuwNatuurlijkPersoonDto huwelijk){
-//        return ResponseEntity.ok(natuurlijkPersoonMaken.maakHuwelijk(huwelijk));
-//    }
-
+    @PutMapping
+    public ResponseEntity<NatuurlijkPersoonDTO> updateNatuurlijkPersoon(@RequestBody NatuurlijkPersoonDTO natuurlijkPersoonDTO){
+        return ResponseEntity.ok(natuurlijkPersoonWijzigen.wijzig(natuurlijkPersoonDTO));
+    }
 
     @GetMapping
     public ResponseEntity<List<NatuurlijkPersoonDTO>> alleNatuurlijkePersonen() {

@@ -18,7 +18,6 @@ export class DateToUtcConverter implements NgrxValueConverter<Date | null, strin
       console.log("Date + 1 day: " + date.toString() + " - " + date.getTime());
       console.log("FinalDate : " + newTimestamp.toISOString() + " - " + date.getTime());
 
-      debugger;
       var timezoneOffset = date.getMinutes() + date.getTimezoneOffset();
       var timestamp = date.getTime() - timezoneOffset * 1000 *3600;
       var correctDate = new Date(timestamp);

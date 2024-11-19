@@ -28,10 +28,18 @@ import {
   toonVoegRelatieToeMet
 } from "../../store/personen.acties";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {faDiagramPredecessor, faDiagramSuccessor, faFileText, faPerson,} from "@fortawesome/free-solid-svg-icons";
+import {
+  faDiagramPredecessor,
+  faDiagramSuccessor,
+  faEdit,
+  faFileText,
+  faPerson,
+} from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 import {DocumentPopupComponent} from "../document-popup/document-popup.component";
 import {VoegRelatieToeMetComponent} from "../voeg-relatie-toe-met/voeg-relatie-toe-met.component";
+import {TippyDirective} from "@ngneat/helipopper";
+import {UpdateHuwelijkComponent} from "./update-huwelijk/update-huwelijk.component";
 @Component({
   selector: 'app-persoon-fiche',
   standalone: true,
@@ -42,7 +50,8 @@ import {VoegRelatieToeMetComponent} from "../voeg-relatie-toe-met/voeg-relatie-t
     JsonPipe,
     RouterLink,
     FontAwesomeModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    TippyDirective
   ],
   templateUrl: './persoon-fiche.component.html',
   styleUrl: './persoon-fiche.component.scss'
@@ -172,5 +181,8 @@ export class PersoonFicheComponent {
   }
 
   protected readonly faPerson = faPerson;
+  protected readonly faEdit = faEdit;
+
+  protected readonly UpdateHuwelijkComponent = UpdateHuwelijkComponent;
 }
 

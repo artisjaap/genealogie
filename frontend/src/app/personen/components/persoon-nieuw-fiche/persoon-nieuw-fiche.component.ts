@@ -18,8 +18,7 @@ import {maakNieuwNatuurlijkPersoon} from "../../store/personen.acties";
 import {getPersonenNieuwForm} from "../../store/personen.selector";
 import {MatButtonModule} from "@angular/material/button";
 import {MatRadioModule} from "@angular/material/radio";
-import {DateToUtcConverter} from "../../../model/date-to-utc-converter";
-import {provideMomentDateAdapter} from "@angular/material-moment-adapter";
+
 
 @Component({
   selector: 'app-persoon-nieuw-fiche',

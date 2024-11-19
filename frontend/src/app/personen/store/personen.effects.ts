@@ -3,14 +3,14 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {NatuurlijkPersoonService} from "../../service/NatuurlijkPersoonService";
 import {
   documentOpgeladen,
-  documentTypesGeladen,
+  documentTypesGeladen, huwelijkGewijzigd,
   laadDocumentTypes,
   laadNatuurlijkPersoonFiche, maakNatuurlijkPersoonVoorRelatie,
   maakNieuwNatuurlijkPersoon,
   maakOudersVanNatuurlijkPersoon, maakRelatieMet,
   natuurlijkPersoonFicheGeladen, natuurlijkPersoonVoorRelatieAangemaakt,
   nieuwNatuurlijkPersoonAangemaakt, oudersVanNatuurlijkPersoonAangemaakt,
-  personenGevonden, relatieMetNatuurlijkPersoonAangemaakt,
+  personenGevonden, relatieMetNatuurlijkPersoonAangemaakt, wijzigHuwelijk,
   zoekPersonen
 } from "./personen.acties";
 import {catchError, EMPTY, exhaustMap, filter, map, pipe, switchMap, tap, withLatestFrom} from "rxjs";
@@ -97,7 +97,8 @@ export class PersonenEffects {
     ofType(natuurlijkPersoonVoorRelatieAangemaakt,
       oudersVanNatuurlijkPersoonAangemaakt,
       relatieMetNatuurlijkPersoonAangemaakt,
-      documentOpgeladen),
+      documentOpgeladen,
+      huwelijkGewijzigd),
     withLatestFrom(this.store$.select(getGeladenPeroonFiche)),
     filter(([data, fiche]:[any, NatuurlijkPersoonFicheDto | undefined]) => !!fiche),
     exhaustMap(([data, fiche]:[any, NatuurlijkPersoonFicheDto | undefined]) => this.natuurlijkPersoonService.laadFicheVoorNatuurlijkPersoon(fiche?fiche.natuurlijkPersoon.id:0)
@@ -128,7 +129,7 @@ export class PersonenEffects {
       .pipe(
         map(documentTypes => documentTypesGeladen({documentTypes}))
       ))
-  ))
+  ));
 
   nieuwNatuurlijkPersoonAangemaakt = createEffect(
     () => this.actions$.pipe(
@@ -136,6 +137,15 @@ export class PersonenEffects {
       tap((persoon) => this.router.navigateByUrl(`/personen/detail/${persoon.natuurlijkPersoon.id}`))
     ), {dispatch: false}
   );
+
+  wijzigHuwelijk$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(wijzigHuwelijk),
+      exhaustMap(data => this.natuurlijkPersoonService.wijzigHuwelijk(data.huwelijk)
+        .pipe(
+          map(documentTypes => huwelijkGewijzigd())
+        ))
+  ));
 
 
   private formDataNaarDto(formData : NatuurlijkPersoonFormValue): NatuurlijkPersoonDto{
@@ -165,7 +175,7 @@ export class PersonenEffects {
   }
 
   private relatieMetNaarDto(value: PersoonRelatieMetFormValue, bestaandPersoon: NatuurlijkPersoonDto | null | undefined): RelatieMetNieuwNatuurlijkPersoonDto{
-    debugger
+
     return new RelatieMetNieuwNatuurlijkPersoonDto(
       bestaandPersoon,
       new NatuurlijkPersoonDto(0, value.naam, value.voornaam, value.geslacht, new Date(value.geborenOp), "", new Date(value.overledenOp), ""),

@@ -5,6 +5,7 @@ import {DocumentTypeDto} from "../../model/document-type-dto";
 import {RelatieDto} from "../../model/relatie-dto";
 import {GenealogischDriehoekjeDto} from "../../model/genealogisch-driehoekje-dto";
 import {DialogData} from "../../model/document-upload-data-dts";
+import {HuwelijkDto} from "../../model/huwelijk-dto";
 
 export const maakNieuwNatuurlijkPersoon = createAction('[NATUURLIJK PERSOON - Nieuw natuurlijk persoon]');
 export const nieuwNatuurlijkPersoonAangemaakt = createAction('[NATUURLIJK PERSOON - Nieuw natuurlijk persoon aangemaakt]', props<{natuurlijkPersoon: NatuurlijkPersoonDto}>());
@@ -34,3 +35,6 @@ export const laadDocumentTypes = createAction('[NATUURLIJK PERSOON - Laad docume
 export const documentTypesGeladen = createAction('[NATUURLIJK PERSOON - Document types geladen]', props<{documentTypes: DocumentTypeDto[]}>());
 
 export const documentOpgeladen = createAction('[NATUURLIJK PERSOON] document opgeladen');
+
+export const wijzigHuwelijk = createAction('[NATUURLIJK PERSOON] wijzig huwelijk', props<{huwelijk: HuwelijkDto}>());
+export const huwelijkGewijzigd = createAction('[NATUURLIJK PERSOON] huwelijk gewijzigd');

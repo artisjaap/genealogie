@@ -8,6 +8,8 @@ import {KindUitRelatieDto} from "../model/kind-uit-relatie-dto";
 import {GenealogischDriehoekjeDto} from "../model/genealogisch-driehoekje-dto";
 import {RelatieDto} from "../model/relatie-dto";
 import {RelatieMetNieuwNatuurlijkPersoonDto} from "../model/relatie-met-nieuw-natuurlijk-persoon-dto";
+import {HuwelijkDto} from "../model/huwelijk-dto";
+import {ScheidingDto} from "../model/scheiding-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -45,4 +47,16 @@ export class NatuurlijkPersoonService {
     return this.http.get<NatuurlijkPersoonFicheDto>(`api/natuurlijk-persoon/${id}`)
 
   }
+
+  wijzigHuwelijk(wijzigHuwelijk: HuwelijkDto): Observable<RelatieDto> {
+    return this.http.put<RelatieDto>(`api/genealogie/relatie/${wijzigHuwelijk.id}/huwelijk`, wijzigHuwelijk);
+  }
+
+  scheidingToevoegen(scheiding: ScheidingDto): Observable<RelatieDto> {
+    return this.http.put<RelatieDto>(`api/genealogie/relatie/${scheiding.id}/scheiding`, scheiding);
+  }
+
+
+
+
 }

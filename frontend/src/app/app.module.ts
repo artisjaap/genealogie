@@ -16,6 +16,7 @@ import {AdminModule} from "./admin/admin.module";
 import {NavigatieComponent} from "./components/navigatie/navigatie.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {provideMomentDateAdapter} from "@angular/material-moment-adapter";
+import {popperVariation, provideTippyConfig, tooltipVariation} from "@ngneat/helipopper";
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,6 +46,13 @@ import {provideMomentDateAdapter} from "@angular/material-moment-adapter";
         dateA11yLabel:'LL',
         monthYearA11yLabel: 'MMM YYYY'
       }}, {useUtc: true}),
+    provideTippyConfig({
+      defaultVariation: 'tooltip',
+      variations: {
+        tooltip: tooltipVariation,
+        popper: popperVariation,
+      },
+    }),
     provideAnimationsAsync(),
     provideHttpClient()
 ],

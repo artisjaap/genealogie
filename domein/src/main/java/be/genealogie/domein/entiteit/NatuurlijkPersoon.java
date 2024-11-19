@@ -2,7 +2,10 @@ package be.genealogie.domein.entiteit;
 
 import be.genealogie.domein.Geslacht;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDate;
@@ -10,6 +13,9 @@ import java.time.LocalDate;
 @Data
 @Table(name = "NATUURLIJK_PERSOON")
 @Entity
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class NatuurlijkPersoon {
     @Id
     @Column(name = "ID")
