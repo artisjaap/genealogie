@@ -7,14 +7,13 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
-import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {NgrxFormsModule} from "ngrx-forms";
 import {EffectsModule} from "@ngrx/effects";
 import {provideHttpClient} from "@angular/common/http";
 import {PersonenModule} from "./personen/personen.module";
 import {AdminModule} from "./admin/admin.module";
 import {NavigatieComponent} from "./components/navigatie/navigatie.component";
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {provideMomentDateAdapter} from "@angular/material-moment-adapter";
 import {popperVariation, provideTippyConfig, tooltipVariation} from "@ngneat/helipopper";
 

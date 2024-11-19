@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {NatuurlijkPersoonDto} from "../model/natuurlijk-persoon-dto";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {NatuurlijkPersoonFicheDto} from "../model/natuurlijk-persoon-fiche-dto";
 import {OudersVanKindDto} from "../model/ouders-van-kind-dto";
 import {KindUitRelatieDto} from "../model/kind-uit-relatie-dto";

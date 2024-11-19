@@ -3,24 +3,33 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {NatuurlijkPersoonService} from "../../service/NatuurlijkPersoonService";
 import {
   documentOpgeladen,
-  documentTypesGeladen, huwelijkGewijzigd,
+  documentTypesGeladen,
+  huwelijkGewijzigd,
   laadDocumentTypes,
-  laadNatuurlijkPersoonFiche, maakNatuurlijkPersoonVoorRelatie,
+  laadNatuurlijkPersoonFiche,
+  maakNatuurlijkPersoonVoorRelatie,
   maakNieuwNatuurlijkPersoon,
-  maakOudersVanNatuurlijkPersoon, maakRelatieMet,
-  natuurlijkPersoonFicheGeladen, natuurlijkPersoonVoorRelatieAangemaakt,
-  nieuwNatuurlijkPersoonAangemaakt, oudersVanNatuurlijkPersoonAangemaakt,
-  personenGevonden, relatieMetNatuurlijkPersoonAangemaakt, wijzigHuwelijk,
+  maakOudersVanNatuurlijkPersoon,
+  maakRelatieMet,
+  natuurlijkPersoonFicheGeladen,
+  natuurlijkPersoonVoorRelatieAangemaakt,
+  nieuwNatuurlijkPersoonAangemaakt,
+  oudersVanNatuurlijkPersoonAangemaakt,
+  personenGevonden,
+  relatieMetNatuurlijkPersoonAangemaakt,
+  wijzigHuwelijk,
   zoekPersonen
 } from "./personen.acties";
-import {catchError, EMPTY, exhaustMap, filter, map, pipe, switchMap, tap, withLatestFrom} from "rxjs";
+import {catchError, EMPTY, exhaustMap, filter, map, tap, withLatestFrom} from "rxjs";
 import {Store} from "@ngrx/store";
 import {PersonenState} from "./personen.reducer";
 import {
   getGeladenPeroonFiche,
   getOudersVoorPersoonForm,
   getPersonenNieuwForm,
-  getPersoonVoorRelatieForm, getPersoonVoorRelatieMetForm, getVoegRelatieToeMetData
+  getPersoonVoorRelatieForm,
+  getPersoonVoorRelatieMetForm,
+  getVoegRelatieToeMetData
 } from "./personen.selector";
 import {FormGroupState} from "ngrx-forms";
 import {NatuurlijkPersoonFormValue} from "./personen-nieuw-persoon-form.reducer";
