@@ -44,4 +44,7 @@ public class NatuurlijkPersoon {
     @Enumerated(EnumType.STRING)
     private Geslacht geslacht;
 
+    public String volledigeNaam() {
+        return voornaam + " " + naam;
+    }
 }

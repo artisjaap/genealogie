@@ -10,6 +10,7 @@
             <img  src="/assets/person.png">
           </div>
           <div class="infocard-sectie-acties">
+            <span><fa-icon [icon]="faEdit" tpTrigger="click" [tpData]="persoonFiche" [tp]="UpdatePersoonsgegevensComponent"></fa-icon></span>
             <span class="actie" (click)="documentToevoegen(persoonFiche.natuurlijkPersoon, null)"><fa-icon
               [icon]="faFileText"></fa-icon></span>
             <span class="actie" (click)="oudersToevoegen(persoonFiche.natuurlijkPersoon, null)"><fa-icon
@@ -116,8 +117,12 @@
             {{ document.fileName }}
           </div>
         </div>
-
       </div>
     </div>
+
+    <div class="infocard-sectie">
+      <app-familie-tree></app-familie-tree>
+    </div>
+
   </div>
 </div>

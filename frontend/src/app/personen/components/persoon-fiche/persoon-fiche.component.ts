@@ -40,6 +40,8 @@ import {DocumentPopupComponent} from "../document-popup/document-popup.component
 import {VoegRelatieToeMetComponent} from "../voeg-relatie-toe-met/voeg-relatie-toe-met.component";
 import {TippyDirective} from "@ngneat/helipopper";
 import {UpdateHuwelijkComponent} from "./update-huwelijk/update-huwelijk.component";
+import {UpdatePersoonsgegevensComponent} from "../update-persoonsgegevens/update-persoonsgegevens.component";
+import {FamilieTreeComponent} from "../familie-tree/familie-tree.component";
 @Component({
   selector: 'app-persoon-fiche',
   standalone: true,
@@ -51,7 +53,8 @@ import {UpdateHuwelijkComponent} from "./update-huwelijk/update-huwelijk.compone
     RouterLink,
     FontAwesomeModule,
     NgOptimizedImage,
-    TippyDirective
+    TippyDirective,
+    FamilieTreeComponent
   ],
   templateUrl: './persoon-fiche.component.html',
   styleUrl: './persoon-fiche.component.scss'
@@ -184,5 +187,6 @@ export class PersoonFicheComponent {
   protected readonly faEdit = faEdit;
 
   protected readonly UpdateHuwelijkComponent = UpdateHuwelijkComponent;
+  protected readonly UpdatePersoonsgegevensComponent = UpdatePersoonsgegevensComponent;
 }
 

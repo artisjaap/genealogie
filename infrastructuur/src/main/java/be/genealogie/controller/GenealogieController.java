@@ -3,6 +3,7 @@ package be.genealogie.controller;
 import be.genealogie.applicatie.GenealogischDriekhoekjeMaken;
 import be.genealogie.applicatie.NatuurlijkPersoonMaken;
 import be.genealogie.applicatie.RelatieWijzigen;
+import be.genealogie.applicatie.StamboomMaken;
 import be.genealogie.domein.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ public class GenealogieController {
     private final GenealogischDriekhoekjeMaken genealogischDriekhoekje;
     private final NatuurlijkPersoonMaken relatieRegistratie;
     private final RelatieWijzigen relatieWijzigen;
+    private final StamboomMaken stamboomMaken;
 
     @PostMapping
     public ResponseEntity<GenealogischDriehoekjeDTO> maakGenealogischDriehoekje(@RequestBody GenealogischDriehoekjeDTO genealogischDriehoekjeDTO){
@@ -45,6 +47,16 @@ public class GenealogieController {
     @PutMapping("/relatie/{id}/scheiding")
     public ResponseEntity<RelatieDto> scheidingToevoegen(@PathVariable Long id, @RequestBody ScheidingDto scheiding){
         return ResponseEntity.ok(relatieWijzigen.voegScheidingToe(id, scheiding));
+    }
+
+    @GetMapping("/nakomelingen/{persoonId}")
+    public ResponseEntity<StamboomDto> nakomelingenVanPersoon(@PathVariable Long persoonId){
+        return ResponseEntity.ok(stamboomMaken.nakomelingenVan(persoonId));
+    }
+
+    @GetMapping("/voorouders/{persoonId}")
+    public ResponseEntity<StamboomDto> vooroudersVanPersoon(@PathVariable Long persoonId){
+        return ResponseEntity.ok(stamboomMaken.vooroudersVan(persoonId));
     }
 
 }
