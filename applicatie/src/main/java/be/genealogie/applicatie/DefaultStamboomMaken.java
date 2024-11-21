@@ -1,6 +1,5 @@
 package be.genealogie.applicatie;
 
-import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
 import be.genealogie.domein.dto.StamboomDto;
 import be.genealogie.domein.entiteit.GenealogischDriekhoekje;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
