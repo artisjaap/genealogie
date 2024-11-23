@@ -1,0 +1,52 @@
+  <form [formGroup]="persoonsgegevensForm">
+<div class="infocard">
+    <p class="infocard-titel">Wijzig persoonsgegevens</p>
+  <div class="infocard-body">
+    <div class="infocard-sectie">
+      <div class="infocard-row" style="display: flex">
+        <mat-form-field>
+          <mat-label>Naam</mat-label>
+          <input formControlName="naam" matInput maxlength="256">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Voornaam</mat-label>
+          <input formControlName="voornaam" matInput maxlength="256">
+        </mat-form-field>
+      </div>
+      <div class="form-line">
+        <mat-radio-group aria-label="Geslacht" formControlName="geslacht" >
+          <mat-radio-button value="MAN">Man</mat-radio-button>
+          <mat-radio-button value="VROUW">Vrouw</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="infocard-row">
+        <mat-form-field>
+          <mat-label>Geboren Op</mat-label>
+          <input matInput [matDatepicker]="pickerGeboren" formControlName="geborenOp">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerGeboren"></mat-datepicker-toggle>
+          <mat-datepicker #pickerGeboren></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Geboren Te</mat-label>
+          <input formControlName="geborenTe" matInput maxlength="256">
+        </mat-form-field>
+      </div>
+      <div class="infocard-row">
+        <mat-form-field>
+          <mat-label>Overleden Op</mat-label>
+          <input matInput [matDatepicker]="pickerOverleden" formControlName="overledenOp">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerOverleden"></mat-datepicker-toggle>
+          <mat-datepicker #pickerOverleden></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Overleden Te</mat-label>
+          <input formControlName="overledenTe" matInput maxlength="256">
+        </mat-form-field>
+      </div>
+
+      <button type="button" mat-raised-button (click)="opslaan()">Wijzigen</button>
+    </div>
+  </div>
+
+</div>
+  </form>
