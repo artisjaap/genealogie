@@ -8,6 +8,9 @@ import java.util.List;
 @Data
 @Builder
 public class StamboomDto {
-    String naam;
-    List<StamboomDto> kinderen;
+    //echart verwacht deze property namen,
+    //TODO map naar echart tree dto
+    String name;
+    List<StamboomDto> children;
+    List<String> value;
 }

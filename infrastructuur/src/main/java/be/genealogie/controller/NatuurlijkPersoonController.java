@@ -29,7 +29,7 @@ public class NatuurlijkPersoonController {
         return ResponseEntity.ok(natuurlijkPersoonZoeken.ficheVoor(id));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<NatuurlijkPersoonDTO> updateNatuurlijkPersoon(@RequestBody NatuurlijkPersoonDTO natuurlijkPersoonDTO){
         return ResponseEntity.ok(natuurlijkPersoonWijzigen.wijzig(natuurlijkPersoonDTO));
     }

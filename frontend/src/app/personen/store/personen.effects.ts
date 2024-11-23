@@ -5,19 +5,19 @@ import {
   documentOpgeladen,
   documentTypesGeladen,
   huwelijkGewijzigd,
-  laadDocumentTypes,
-  laadNatuurlijkPersoonFiche,
+  laadDocumentTypes, laadNakomelingenVan,
+  laadNatuurlijkPersoonFiche, laadVooroudersVan,
   maakNatuurlijkPersoonVoorRelatie,
   maakNieuwNatuurlijkPersoon,
   maakOudersVanNatuurlijkPersoon,
-  maakRelatieMet,
+  maakRelatieMet, nakomelingenVanGeladen,
   natuurlijkPersoonFicheGeladen,
   natuurlijkPersoonVoorRelatieAangemaakt,
   nieuwNatuurlijkPersoonAangemaakt,
   oudersVanNatuurlijkPersoonAangemaakt,
   personenGevonden,
-  relatieMetNatuurlijkPersoonAangemaakt,
-  wijzigHuwelijk,
+  relatieMetNatuurlijkPersoonAangemaakt, vooroudersVanGeladen,
+  wijzigHuwelijk, wijzigPersoonsgegevens,
   zoekPersonen
 } from "./personen.acties";
 import {catchError, EMPTY, exhaustMap, filter, map, tap, withLatestFrom} from "rxjs";
@@ -155,6 +155,34 @@ export class PersonenEffects {
           map(documentTypes => huwelijkGewijzigd())
         ))
   ));
+
+  wijzigPersoonsgegevens$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(wijzigPersoonsgegevens),
+      exhaustMap(data => this.natuurlijkPersoonService.wijzigPersoonsgegevens(data.persoonsgegevens)
+        .pipe(
+          map(documentTypes => huwelijkGewijzigd())
+        ))
+    ));
+
+
+  laadVooroudersVan$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(natuurlijkPersoonFicheGeladen),
+      exhaustMap(data => this.natuurlijkPersoonService.vooroudersVan(data.natuurlijkPersoonFiche.natuurlijkPersoon.id)
+        .pipe(
+          map(stamboom => vooroudersVanGeladen({stamboom}))
+        ))
+    ));
+
+  laadNakomelingenVan$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(natuurlijkPersoonFicheGeladen),
+      exhaustMap(data => this.natuurlijkPersoonService.nakomelingenVan(data.natuurlijkPersoonFiche.natuurlijkPersoon.id)
+        .pipe(
+          map(stamboom => nakomelingenVanGeladen({stamboom}))
+        ))
+    ));
 
 
   private formDataNaarDto(formData : NatuurlijkPersoonFormValue): NatuurlijkPersoonDto{

@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {NgxEchartsDirective, provideEcharts} from "ngx-echarts";
 import {CommonModule} from "@angular/common";
 import {EChartsOption} from "echarts";
+import {Store} from "@ngrx/store";
+import {PersonenState} from "../../store/personen.reducer";
+import {getNakomelingenVan, getVooroudersVan} from "../../store/personen.selector";
+import {laadNatuurlijkPersoonFiche} from "../../store/personen.acties";
 
 @Component({
   selector: 'app-familie-tree',
@@ -15,107 +19,106 @@ import {EChartsOption} from "echarts";
 })
 export class FamilieTreeComponent implements OnInit {
 
-  options: EChartsOption | null = null;
+  optionsVoorouders: EChartsOption | null = null;
+  optionsNakomelingen: EChartsOption | null = null;
 
+  constructor(private store: Store<PersonenState>) {
+    this.store.select(getVooroudersVan).subscribe(voorouder => {
+      let data : any[] = [voorouder];
+
+      this.optionsVoorouders =  {
+        tooltip: {
+          trigger: 'item',
+          triggerOn: 'mousemove'
+        },
+        series: [
+          {
+            type: 'tree',
+            data: data,
+            top: '1%',
+            left: '15%',
+            bottom: '1%',
+            right: '7%',
+            symbolSize: 7,
+            orient: 'RL',
+            label: {
+              position: 'right',
+              verticalAlign: 'middle',
+              align: 'left'
+            },
+            leaves: {
+              label: {
+                position: 'left',
+                verticalAlign: 'middle',
+                align: 'right'
+              }
+            },
+            emphasis: {
+              focus: 'descendant'
+            },
+            expandAndCollapse: false,
+            animationDuration: 550,
+            animationDurationUpdate: 750
+          }
+        ]
+      }
+
+    });
+
+
+    this.store.select(getNakomelingenVan).subscribe(nakomelingen => {
+      let data : any[] = [nakomelingen];
+
+      this.optionsNakomelingen =  {
+        tooltip: {
+          trigger: 'item',
+          triggerOn: 'mousemove'
+        },
+        series: [
+          {
+            type: 'tree',
+            data: data,
+            top: '1%',
+            left: '7%',
+            bottom: '1%',
+            right: '20%',
+            symbolSize: 7,
+            label: {
+              position: 'left',
+              verticalAlign: 'middle',
+              align: 'right',
+              fontSize: 9
+            },
+            leaves: {
+              label: {
+                position: 'right',
+                verticalAlign: 'middle',
+                align: 'left'
+              }
+            },
+            emphasis: {
+              focus: 'descendant'
+            },
+            expandAndCollapse: false,
+            animationDuration: 550,
+            animationDurationUpdate: 750
+          }
+        ]
+      }
+
+    })
+  }
 
 
   ngOnInit(): void {
-    this.options =  {
-      tooltip: {
-        trigger: 'item',
-        triggerOn: 'mousemove'
-      },
-      series: [
-        {
-          type: 'tree',
-          data: [{
-            "name": "Stijn ",
-            "children": [
-              {
-                "name": "Jana Coene",
-
-              },
-              {
-                "name": "Emma Coene",
-
-              },
-              {
-                "name": "Tibo Coene",
-
-              },
-             ]
-          }
-          ],
-          left: '2%',
-          right: '2%',
-          top: '8%',
-          bottom: '20%',
-          symbol: 'emptyCircle',
-          orient: 'vertical',
-          expandAndCollapse: true,
-          label: {
-            position: 'top',
-            rotate: -90,
-            verticalAlign: 'middle',
-            align: 'right',
-            fontSize: 12
-          },
-          leaves: {
-            label: {
-              position: 'bottom',
-              rotate: -90,
-              verticalAlign: 'middle',
-              align: 'left'
-            }
-          },
-          animationDurationUpdate: 750
-        }
-      ]
-    }
 
 
 
-    /*const xAxisData = [];
-    const data1 = [];
-    const data2 = [];
 
-    for (let i = 0; i < 100; i++) {
-      xAxisData.push('category' + i);
-      data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
-      data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
-    }
-
-    this.options = {
-      legend: {
-        data: ['bar', 'bar2'],
-        align: 'left',
-      },
-      tooltip: {},
-      xAxis: {
-        data: xAxisData,
-        silent: false,
-        splitLine: {
-          show: false,
-        },
-      },
-      yAxis: {},
-      series: [
-        {
-          name: 'bar',
-          type: 'bar',
-          data: data1,
-          animationDelay: idx => idx * 10,
-        },
-        {
-          name: 'bar2',
-          type: 'bar',
-          data: data2,
-          animationDelay: idx => idx * 10 + 100,
-        },
-      ],
-      animationEasing: 'elasticOut',
-      animationDelayUpdate: idx => idx * 5,
-    };*/
   }
 
+  clickNode($event: any) {
+    let id: number = $event.value[0];
+    this.store.dispatch(laadNatuurlijkPersoonFiche({natuurlijkPersoonId:id}));
+  }
 }

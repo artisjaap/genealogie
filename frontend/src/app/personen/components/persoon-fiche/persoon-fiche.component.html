@@ -7,20 +7,24 @@
       <div class="infocard-row">
         <div class="portret">
           <div class="foto">
-            <img  src="/assets/person.png">
+            <img src="/assets/person.png">
+            <fa-icon class="geslacht"  [ngClass]="{'man':persoonFiche.natuurlijkPersoon.geslacht==='MAN', 'vrouw':persoonFiche.natuurlijkPersoon.geslacht==='VROUW'}"
+                     [icon]="persoonFiche.natuurlijkPersoon.geslacht==='MAN'?faMars:faVenus"></fa-icon>
           </div>
           <div class="infocard-sectie-acties">
-            <span><fa-icon [icon]="faEdit" tpTrigger="click" [tpData]="persoonFiche" [tp]="UpdatePersoonsgegevensComponent"></fa-icon></span>
+            <span><fa-icon [icon]="faEdit" tpTrigger="click" [tpData]="persoonFiche"
+                           [tp]="UpdatePersoonsgegevensComponent"></fa-icon></span>
             <span class="actie" (click)="documentToevoegen(persoonFiche.natuurlijkPersoon, null)"><fa-icon
               [icon]="faFileText"></fa-icon></span>
             <span class="actie" (click)="oudersToevoegen(persoonFiche.natuurlijkPersoon, null)"><fa-icon
               [icon]="faDiagramPredecessor"></fa-icon></span>
+
           </div>
         </div>
         <div class="eigenschappen">
           <div class="eigenschap">
-              <span class="label">Naam </span>
-              <span class="value">{{ persoonFiche.natuurlijkPersoon.naam }}</span>
+            <span class="label">Naam </span>
+            <span class="value">{{ persoonFiche.natuurlijkPersoon.naam }}</span>
           </div>
 
           <div class="eigenschap">
@@ -30,22 +34,24 @@
 
           <div class="eigenschap">
             <span class="label">Geboren </span>
-            <span class="value">{{ persoonFiche.natuurlijkPersoon.geborenOp }}</span>
+            <span class="value">{{ persoonFiche.natuurlijkPersoon.geborenOp }}  <span *ngIf="persoonFiche.natuurlijkPersoon.geborenTe"> ({{ persoonFiche.natuurlijkPersoon.geborenTe }}) </span></span>
           </div>
 
           <div class="eigenschap">
             <span class="label">Overleden </span>
-            <span class="value">{{ persoonFiche.natuurlijkPersoon.overledenOp }}</span>
+            <span class="value">{{ persoonFiche.natuurlijkPersoon.overledenOp }} <span *ngIf="persoonFiche.natuurlijkPersoon.overledenTe"> ({{ persoonFiche.natuurlijkPersoon.overledenTe }}) </span></span>
           </div>
 
           <div class="eigenschap">
             <span class="label">Moeder </span>
-            <span class="value link-action" [routerLink]="['/personen/detail', persoonFiche.moeder?.id]">{{ persoonFiche.moeder?.naam }} {{ persoonFiche.moeder?.voornaam }}</span>
+            <span class="value link-action"
+                  [routerLink]="['/personen/detail', persoonFiche.moeder?.id]">{{ persoonFiche.moeder?.naam }} {{ persoonFiche.moeder?.voornaam }}</span>
           </div>
 
           <div class="eigenschap">
             <span class="label">Vader </span>
-            <span class="value link-action" [routerLink]="['/personen/detail', persoonFiche.vader?.id]">{{ persoonFiche.vader?.naam }} {{ persoonFiche.vader?.voornaam }}</span>
+            <span class="value link-action"
+                  [routerLink]="['/personen/detail', persoonFiche.vader?.id]">{{ persoonFiche.vader?.naam }} {{ persoonFiche.vader?.voornaam }}</span>
           </div>
 
 
@@ -54,29 +60,90 @@
 
     </div>
     <div class="infocard-sectie">
-      <span class="infocard-sectie-titel">kinderen</span>
+      <span class="infocard-sectie-titel">Familie</span>
+      <div class="infocard-row-flow full-width">
 
-      <div *ngFor="let kind of persoonFiche.kinderen" [routerLink]="['/personen/detail', kind.id]">
-        {{ kind.naam }} {{ kind.voornaam }}
+        <div class="familie-box">
+          <div class="familie-box-titel">
+            <div class="familie">
+              <span>Kinderen</span>
+            </div>
+          </div>
+          <div class="familie-box-content">
+            <div *ngFor="let kind of persoonFiche.kinderen" class="link-action" [routerLink]="['/personen/detail', kind.id]">
+              <fa-icon class="geslacht" [icon]="kind.geslacht==='MAN'?faMars:faVenus"></fa-icon>
+              {{ kind.naam }} {{ kind.voornaam }}
+            </div>
+          </div>
+        </div>
+
+        <div class="familie-box">
+          <div class="familie-box-titel">
+            <div class="familie">
+              <span>Broers en Zussen</span>
+            </div>
+          </div>
+          <div class="familie-box-content">
+            <div *ngFor="let kind of persoonFiche.broersEnZussen" class="link-action" [routerLink]="['/personen/detail', kind.id]">
+              <fa-icon class="geslacht" [icon]="kind.geslacht==='MAN'?faMars:faVenus"></fa-icon>
+              {{ kind.naam }} {{ kind.voornaam }}
+            </div>
+          </div>
+        </div>
+
+        <div class="familie-box">
+          <div class="familie-box-titel">
+            <div class="familie">
+              <span>Nonkels en Tantes</span>
+            </div>
+          </div>
+          <div class="familie-box-content">
+            <div *ngFor="let kind of persoonFiche.oomsEnTantes" class="link-action" [routerLink]="['/personen/detail', kind.id]">
+              <fa-icon class="geslacht" [icon]="kind.geslacht==='MAN'?faMars:faVenus"></fa-icon>
+              {{ kind.naam }} {{ kind.voornaam }}
+            </div>
+          </div>
+        </div>
+
+        <div class="familie-box">
+          <div class="familie-box-titel">
+            <div class="familie">
+              <span>Neven en Nichten</span>
+            </div>
+          </div>
+          <div class="familie-box-content">
+            <div *ngFor="let kind of persoonFiche.nevenEnNichten" class="link-action" [routerLink]="['/personen/detail', kind.id]">
+              <fa-icon class="geslacht" [icon]="kind.geslacht==='MAN'?faMars:faVenus"></fa-icon>
+              {{ kind.naam }} {{ kind.voornaam }}
+            </div>
+          </div>
+        </div>
+
+
       </div>
+
+
+
+
     </div>
     <div class="infocard-sectie">
       <span class="infocard-sectie-titel">relatie </span>
-
       <span class="actie" (click)="voegRelatieToeMet(persoonFiche.natuurlijkPersoon)"><fa-icon
         [icon]="faDiagramPredecessor"></fa-icon></span>
-
       <div class="infocard-row-flow">
-
         <div class="relatie-box" *ngFor="let relatie of persoonFiche.relaties">
           <div class="relatie-titel">
             <div class="relatie">
-               <span class="link-action" [routerLink]="['/personen/detail', relatie.persoon1.id]">{{ relatie.persoon1.naam }} {{ relatie.persoon1.voornaam }}</span> X
-               <span class="link-action"  [routerLink]="['/personen/detail', relatie.persoon2.id]">{{ relatie.persoon2.naam }} {{ relatie.persoon2.voornaam }}</span>
+              <span class="link-action"
+                    [routerLink]="['/personen/detail', relatie.persoon1.id]">{{ relatie.persoon1.naam }} {{ relatie.persoon1.voornaam }}</span>
+              X
+              <span class="link-action"
+                    [routerLink]="['/personen/detail', relatie.persoon2.id]">{{ relatie.persoon2.naam }} {{ relatie.persoon2.voornaam }}</span>
             </div>
             <div class="spacer"></div>
             <div class="acties">
-              <span><fa-icon [icon]="faEdit" tpTrigger="click" [tpData]="relatie" [tp]="UpdateHuwelijkComponent"></fa-icon></span>
+              <span><fa-icon [icon]="faEdit" tpTrigger="click" [tpData]="relatie"
+                             [tp]="UpdateHuwelijkComponent"></fa-icon></span>
               <span class="actie" (click)="documentToevoegen(null, relatie)"><fa-icon
                 [icon]="faFileText"></fa-icon></span>
               <span class="actie" (click)="persoonAanRelatieToevoegen(null, relatie)"><fa-icon
@@ -84,11 +151,12 @@
             </div>
           </div>
           <div class="relatie-subtitel">
-            <span *ngIf="relatie.gehuwdOp">() {{relatie.gehuwdOp}}</span>
-            <span *ngIf="relatie.gehuwdTe">- {{relatie.gehuwdTe}}</span>
+            <span *ngIf="relatie.gehuwdOp">() {{ relatie.gehuwdOp }}</span>
+            <span *ngIf="relatie.gehuwdTe">- {{ relatie.gehuwdTe }}</span>
           </div>
           <div class="relatie-kinderen">
             <div class="relatie-kind" *ngFor="let kind of relatie.kinderen">
+              <fa-icon class="geslacht" [icon]="kind.geslacht==='MAN'?faMars:faVenus"></fa-icon>
                <span class="link-action"
                      [routerLink]="['/personen/detail', kind.id]">{{ kind.naam }} {{ kind.voornaam }}</span>
             </div>
@@ -96,11 +164,6 @@
         </div>
       </div>
     </div>
-
-
-
-
-
 
 
     <div class="infocard-sectie">

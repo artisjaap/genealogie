@@ -19,6 +19,7 @@ public class DefaultNatuurlijkPersoonWijzigen implements NatuurlijkPersoonWijzig
                 .toBuilder()
                 .naam(persoon.getNaam())
                 .voornaam(persoon.getVoornaam())
+                .geslacht(persoon.getGeslacht())
                 .geborenOp(persoon.getGeborenOp())
                 .geborenTe(persoon.getGeborenTe())
                 .overledenOp(persoon.getOverledenOp())

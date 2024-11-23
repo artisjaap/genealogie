@@ -10,6 +10,8 @@ import {RelatieDto} from "../model/relatie-dto";
 import {RelatieMetNieuwNatuurlijkPersoonDto} from "../model/relatie-met-nieuw-natuurlijk-persoon-dto";
 import {HuwelijkDto} from "../model/huwelijk-dto";
 import {ScheidingDto} from "../model/scheiding-dto";
+import {StamboomEchartDto} from "../model/stamboom-echart-dto";
+import {PersoonsgegevensDto} from "../model/persoonsgegevens-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -52,10 +54,23 @@ export class NatuurlijkPersoonService {
     return this.http.put<RelatieDto>(`api/genealogie/relatie/${wijzigHuwelijk.id}/huwelijk`, wijzigHuwelijk);
   }
 
+  wijzigPersoonsgegevens(wijzigPersoonsgegevens: PersoonsgegevensDto): Observable<NatuurlijkPersoonFicheDto> {
+    return this.http.put<NatuurlijkPersoonFicheDto>(`api/natuurlijk-persoon/${wijzigPersoonsgegevens.id}`, wijzigPersoonsgegevens);
+  }
+
   scheidingToevoegen(scheiding: ScheidingDto): Observable<RelatieDto> {
     return this.http.put<RelatieDto>(`api/genealogie/relatie/${scheiding.id}/scheiding`, scheiding);
   }
 
+
+  nakomelingenVan(natuurlijkPersoonId: number): Observable<StamboomEchartDto> {
+    return this.http.get<StamboomEchartDto>(`api/genealogie/nakomelingen/${natuurlijkPersoonId}`);
+  }
+
+
+  vooroudersVan(natuurlijkPersoonId: number): Observable<StamboomEchartDto> {
+    return this.http.get<StamboomEchartDto>(`api/genealogie/voorouders/${natuurlijkPersoonId}`);
+  }
 
 
 

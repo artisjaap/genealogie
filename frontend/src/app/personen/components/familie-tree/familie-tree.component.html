@@ -1,2 +1,5 @@
-<p>familie-tree works!</p>
-<div echarts [options]="options" class="demo-chart" ></div>
+
+<span class="infocard-sectie-titel">Voorouders Van </span>
+<div echarts [options]="optionsVoorouders" class="demo-chart" (chartClick)="clickNode($event)"></div>
+<span class="infocard-sectie-titel">Nakomelingen Van </span>
+<div echarts [options]="optionsNakomelingen" class="demo-chart" (chartClick)="clickNode($event)" ></div>

@@ -2,7 +2,7 @@ import {Action, createReducer, on} from '@ngrx/store';
 import {NatuurlijkPersoonDto} from "../../model/natuurlijk-persoon-dto";
 import {
   documentOpgeladen,
-  documentTypesGeladen,
+  documentTypesGeladen, nakomelingenVanGeladen,
   natuurlijkPersoonFicheGeladen,
   natuurlijkPersoonVoorRelatieAangemaakt,
   oudersVanNatuurlijkPersoonAangemaakt,
@@ -15,11 +15,12 @@ import {
   toonDocumentPopup,
   toonOudersVanPersoon,
   toonPersoonVoorRelatie,
-  toonVoegRelatieToeMet
+  toonVoegRelatieToeMet, vooroudersVanGeladen
 } from "./personen.acties";
 import {NatuurlijkPersoonFicheDto} from "../../model/natuurlijk-persoon-fiche-dto";
 import {DocumentTypeDto} from "../../model/document-type-dto";
 import {DialogData} from "../../model/document-upload-data-dts";
+import {StamboomEchartDto} from "../../model/stamboom-echart-dto";
 
 export const personenInfoFeatureKey = 'personenInfo';
 
@@ -27,6 +28,8 @@ export const personenInfoFeatureKey = 'personenInfo';
 export interface PersoonDataState {
   gevondenPersonen: NatuurlijkPersoonDto[],
   geladenPersoonFiche: NatuurlijkPersoonFicheDto | undefined,
+  vooroudersVan: StamboomEchartDto | undefined,
+  nakomelingenVan: StamboomEchartDto | undefined,
   documentTypes: DocumentTypeDto[],
   popups : {
     toonDocumentPopup: {
@@ -52,6 +55,8 @@ export interface PersoonDataState {
 export const personenInitialState: PersoonDataState = {
   gevondenPersonen: [],
   geladenPersoonFiche: undefined,
+  vooroudersVan: undefined,
+  nakomelingenVan:  undefined,
   documentTypes: [],
   popups : {
     toonDocumentPopup: {
@@ -210,6 +215,14 @@ const createThePersonenReducer = createReducer(
         dialogData: null
       }
     }
+  })),
+  on(nakomelingenVanGeladen, (state: PersoonDataState, {stamboom}) => ({
+    ...state,
+    nakomelingenVan: stamboom
+  })),
+  on(vooroudersVanGeladen, (state: PersoonDataState, {stamboom}) => ({
+    ...state,
+    vooroudersVan: stamboom
   }))
 );
 

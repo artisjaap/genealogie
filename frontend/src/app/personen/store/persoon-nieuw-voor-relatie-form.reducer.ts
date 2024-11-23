@@ -1,6 +1,7 @@
-import {Action, createReducer} from '@ngrx/store';
+import {Action, createReducer, on} from '@ngrx/store';
 import {createFormGroupState, FormGroupState, onNgrxForms} from "ngrx-forms";
 import {PersonenNieuwFormState} from "./personen-nieuw-persoon-form.reducer";
+import {natuurlijkPersoonVoorRelatieAangemaakt, relatieMetNatuurlijkPersoonAangemaakt} from "./personen.acties";
 
 export const personenNieuwVoorRelatieFormFeatureKey = 'personenNieuwVoorRelatieForm';
 
@@ -34,7 +35,10 @@ export const thePersonenNieuwVoorRelatieFormInitialState: PersonenNieuwVoorRelat
 const createThePersonenNieuwVoorRelatieFormReducer = createReducer(
   thePersonenNieuwVoorRelatieFormInitialState,
   onNgrxForms(),
-
+  on(natuurlijkPersoonVoorRelatieAangemaakt, (state: PersonenNieuwVoorRelatieFormState, {genealogischDriehoekje}) => ({
+    ...state,
+    persoonVoorRelatie: initialFormState
+  })),
 
 );
 

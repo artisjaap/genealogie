@@ -12,4 +12,10 @@ public interface GenealogischDriekhoekjeZoeken {
     Optional<NatuurlijkPersoonDTO> vaderVan(NatuurlijkPersoonDTO persoon);
 
     List<NatuurlijkPersoonDTO> kinderenVan(NatuurlijkPersoonDTO persoonDto);
+
+    List<NatuurlijkPersoonDTO> broersEnZussenVan(NatuurlijkPersoonDTO persoonDto);
+
+    List<NatuurlijkPersoonDTO> nevenEnNichtenVan(NatuurlijkPersoonDTO persoonDto);
+
+    List<NatuurlijkPersoonDTO> oomsEnTantesVan(NatuurlijkPersoonDTO persoonDto);
 }

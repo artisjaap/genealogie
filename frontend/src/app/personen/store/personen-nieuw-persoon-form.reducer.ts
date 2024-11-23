@@ -1,5 +1,7 @@
-import {Action, createReducer} from '@ngrx/store';
+import {Action, createReducer, on} from '@ngrx/store';
 import {createFormGroupState, FormGroupState, onNgrxForms} from "ngrx-forms";
+import {nieuwNatuurlijkPersoonAangemaakt, oudersVanNatuurlijkPersoonAangemaakt} from "./personen.acties";
+import {OudersVoorPersoonFormState} from "./ouders-voor-persoon.reducer";
 
 export const personenNieuwFormFeatureKey = 'personenNieuwForm';
 
@@ -33,6 +35,10 @@ export const thePersonenNieuwFormInitialState: PersonenNieuwFormState = {
 const createThePersonenNieuwFormReducer = createReducer(
   thePersonenNieuwFormInitialState,
   onNgrxForms(),
+  on(nieuwNatuurlijkPersoonAangemaakt, (state: PersonenNieuwFormState, {natuurlijkPersoon}) => ({
+    ...state,
+    nieuwNatuurlijkPersoon: initialFormState
+  })),
 
 
 );

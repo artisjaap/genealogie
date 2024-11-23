@@ -30,6 +30,8 @@ export const getToonDocumenten = createSelector(getPopupInfo, state => state.too
 export const getToonDocumentenData = createSelector(getPopupInfo, state => state.toonDocumentPopup.dialogData);
 export const getVoegRelatieToeMet = createSelector(getPopupInfo, state => state.toonVoegRelatieToeMet.state);
 export const getVoegRelatieToeMetData = createSelector(getPopupInfo, state => state.toonVoegRelatieToeMet.dialogData);
+export const getVooroudersVan = createSelector(getPersonenState, state => state.vooroudersVan);
+export const getNakomelingenVan = createSelector(getPersonenState, state => state.nakomelingenVan);
 
 
 export const getPersoonVoorRelatie = createSelector(getPopupInfo, state => state.toonPersoonVoorRelatie.state);

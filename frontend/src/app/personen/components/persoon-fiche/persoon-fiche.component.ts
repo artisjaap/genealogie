@@ -12,7 +12,7 @@ import {
 } from "../../store/personen.selector";
 import {NatuurlijkPersoonFicheDto} from "../../../model/natuurlijk-persoon-fiche-dto";
 import {Observable, take} from "rxjs";
-import {AsyncPipe, JsonPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {UploadDocumentComponent} from "../upload-document/upload-document.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
@@ -32,16 +32,16 @@ import {
   faDiagramPredecessor,
   faDiagramSuccessor,
   faEdit,
-  faFileText,
-  faPerson,
+  faFileText, faMars,
+  faPerson, faVenus,
 } from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 import {DocumentPopupComponent} from "../document-popup/document-popup.component";
 import {VoegRelatieToeMetComponent} from "../voeg-relatie-toe-met/voeg-relatie-toe-met.component";
 import {TippyDirective} from "@ngneat/helipopper";
 import {UpdateHuwelijkComponent} from "./update-huwelijk/update-huwelijk.component";
-import {UpdatePersoonsgegevensComponent} from "../update-persoonsgegevens/update-persoonsgegevens.component";
 import {FamilieTreeComponent} from "../familie-tree/familie-tree.component";
+import {UpdatePersoonsgegevensComponent} from "./update-persoonsgegevens/update-persoonsgegevens.component";
 @Component({
   selector: 'app-persoon-fiche',
   standalone: true,
@@ -54,7 +54,8 @@ import {FamilieTreeComponent} from "../familie-tree/familie-tree.component";
     FontAwesomeModule,
     NgOptimizedImage,
     TippyDirective,
-    FamilieTreeComponent
+    FamilieTreeComponent,
+    NgClass
   ],
   templateUrl: './persoon-fiche.component.html',
   styleUrl: './persoon-fiche.component.scss'
@@ -188,5 +189,7 @@ export class PersoonFicheComponent {
 
   protected readonly UpdateHuwelijkComponent = UpdateHuwelijkComponent;
   protected readonly UpdatePersoonsgegevensComponent = UpdatePersoonsgegevensComponent;
+  protected readonly faVenus = faVenus;
+  protected readonly faMars = faMars;
 }
 

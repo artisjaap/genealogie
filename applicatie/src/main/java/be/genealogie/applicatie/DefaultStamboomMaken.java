@@ -31,8 +31,9 @@ public class DefaultStamboomMaken implements StamboomMaken {
         List<StamboomDto> kinderen = kinderenVan.stream().map(GenealogischDriekhoekje::getKind).map(this::nakomelingenVan).toList();
 
         return StamboomDto.builder()
-                .naam(persoon.volledigeNaam())
-                .kinderen(kinderen)
+                .name(persoon.volledigeNaam())
+                .children(kinderen)
+                .value(List.of(persoon.getId().toString()))
                 .build();
     }
 
@@ -51,8 +52,9 @@ public class DefaultStamboomMaken implements StamboomMaken {
 
 
         return StamboomDto.builder()
-                .naam(persoon.volledigeNaam())
-                .kinderen(kinderen)
+                .name(persoon.volledigeNaam())
+                .children(kinderen)
+                .value(List.of(persoon.getId().toString()))
                 .build();
     }
 }

@@ -35,13 +35,20 @@ public class DefaultRelatiesZoeken implements ReleatiesZoeken{
                         .persoon2(modelMapper.map(relatie.getPersoon2(), NatuurlijkPersoonDTO.class))
                         .gehuwdOp(relatie.getGehuwedOp())
                         .gehuwdTe(relatie.getGehuwedTe())
-                        .kinderen(genealogischDriekhoekjeRepository
-                                .findByMoederAndVader(relatie.vrouw(), relatie.man())
+                        .kinderen(getByMoederAndVader(relatie)
                                 .stream()
                                 .map(GenealogischDriekhoekje::getKind)
                                 .map(kind -> modelMapper.map(kind, NatuurlijkPersoonDTO.class))
                                 .toList()
                         )
                         .build()).toList();
+    }
+
+    private List<GenealogischDriekhoekje> getByMoederAndVader(Relatie relatie) {
+        List<GenealogischDriekhoekje> byMoederAndVader = genealogischDriekhoekjeRepository.findByMoederAndVader(relatie.vrouw(), relatie.man());
+        if(byMoederAndVader.isEmpty()) {
+            return genealogischDriekhoekjeRepository.findByMoederOrVader(relatie.man(), relatie.vrouw());
+        }
+        return byMoederAndVader;
     }
 }

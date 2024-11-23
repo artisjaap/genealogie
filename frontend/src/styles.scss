@@ -89,6 +89,10 @@ body {
       flex-flow: row wrap;
     }
 
+    .full-width {
+      justify-content: space-between;
+    }
+
     .infocard-sectie-acties {
       display: flex;
       flex-flow: row nowrap;

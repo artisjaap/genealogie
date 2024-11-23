@@ -1,6 +1,8 @@
-import {Action, createReducer} from '@ngrx/store';
-import {createFormGroupState, FormGroupState, onNgrxForms} from "ngrx-forms";
+import {Action, createReducer, on} from '@ngrx/store';
+import {createFormGroupState, FormGroupState, onNgrxForms, updateGroup} from "ngrx-forms";
 import {PersonenNieuwFormState} from "./personen-nieuw-persoon-form.reducer";
+import {nakomelingenVanGeladen, oudersVanNatuurlijkPersoonAangemaakt} from "./personen.acties";
+import {PersoonDataState} from "./personen-persoon.reducer";
 
 export const oudersVoorPersoonFormFeatureKey = 'oudersVoorPersoonForm';
 
@@ -41,6 +43,11 @@ export const theOudersVoorPersoonFormInitialState: OudersVoorPersoonFormState = 
 const createOudersVoorPersoonFormReducer = createReducer(
   theOudersVoorPersoonFormInitialState,
   onNgrxForms(),
+  on(oudersVanNatuurlijkPersoonAangemaakt, (state: OudersVoorPersoonFormState, {genealogischDriehoekje}) => ({
+    ...state,
+    oudersVoorPersoon: initialFormState
+  })),
+
 
 
 );

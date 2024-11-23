@@ -40,6 +40,9 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
         NatuurlijkPersoonDTO vader = genealogischDriekhoekjeZoeken.vaderVan(persoonDto).orElse(null);
         List<RelatieDto> relaties = releatiesZoeken.relatiesMet(persoonDto);
         List<NatuurlijkPersoonDTO> kinderen = genealogischDriekhoekjeZoeken.kinderenVan(persoonDto);
+        List<NatuurlijkPersoonDTO> broersEnZussen = genealogischDriekhoekjeZoeken.broersEnZussenVan(persoonDto);
+        List<NatuurlijkPersoonDTO> nevenEnNichten = genealogischDriekhoekjeZoeken.nevenEnNichtenVan(persoonDto);
+        List<NatuurlijkPersoonDTO> oomsEnTantes = genealogischDriekhoekjeZoeken.oomsEnTantesVan(persoonDto);
         List<DocumentHeaderDto> documenten = documentZoeken.alleDocumentenVan(persoonDto);
 
         return NatuurlijkPersoonFicheDto.builder()
@@ -48,6 +51,9 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
                 .moeder(moeder)
                 .relaties(relaties)
                 .kinderen(kinderen)
+                .broersEnZussen(broersEnZussen)
+                .nevemEnNichten(nevenEnNichten)
+                .oomsEnTantes(oomsEnTantes)
                 .documenten(documenten)
                 .build();
     }
