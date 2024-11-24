@@ -84,9 +84,9 @@
             </div>
           </div>
           <div class="familie-box-content">
-            <div *ngFor="let kind of persoonFiche.broersEnZussen" class="link-action" [routerLink]="['/personen/detail', kind.id]">
-              <fa-icon class="geslacht" [icon]="kind.geslacht==='MAN'?faMars:faVenus"></fa-icon>
-              {{ kind.naam }} {{ kind.voornaam }}
+            <div *ngFor="let kind of persoonFiche.broersEnZussen" class="link-action" [ngClass]="{'is-half':kind.isHalf}" [routerLink]="['/personen/detail', kind.natuurlijkPersoon.id]">
+              <fa-icon class="geslacht" [icon]="kind.natuurlijkPersoon.geslacht==='MAN'?faMars:faVenus"></fa-icon>
+              {{ kind.natuurlijkPersoon.naam }} {{ kind.natuurlijkPersoon.voornaam }}
             </div>
           </div>
         </div>

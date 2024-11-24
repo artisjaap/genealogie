@@ -1,5 +1,6 @@
 package be.genealogie.applicatie;
 
+import be.genealogie.domein.dto.BroerOfZusDto;
 import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
 import be.genealogie.domein.entiteit.GenealogischDriekhoekje;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
@@ -29,7 +30,7 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
     public Optional<NatuurlijkPersoonDTO> moederVan(NatuurlijkPersoonDTO persoon) {
         NatuurlijkPersoon persoonDb = persoonRepository.getById(persoon.getId());
         return genealogischDriekhoekjeRepository.findByKind(persoonDb)
-                .map(GenealogischDriekhoekje::getMoeder)
+                .map(GenealogischDriekhoekje::moeder)
                 .map(moeder -> modelMapper.map(moeder, NatuurlijkPersoonDTO.class));
     }
 
@@ -37,14 +38,14 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
     public Optional<NatuurlijkPersoonDTO> vaderVan(NatuurlijkPersoonDTO persoon) {
         NatuurlijkPersoon persoonDb = persoonRepository.getById(persoon.getId());
         return genealogischDriekhoekjeRepository.findByKind(persoonDb)
-                .map(GenealogischDriekhoekje::getVader)
+                .map(GenealogischDriekhoekje::vader)
                 .map(vader -> modelMapper.map(vader, NatuurlijkPersoonDTO.class));
     }
 
     @Override
     public List<NatuurlijkPersoonDTO> kinderenVan(NatuurlijkPersoonDTO persoon) {
         NatuurlijkPersoon persoonDb = persoonRepository.getById(persoon.getId());
-        return genealogischDriekhoekjeRepository.findByMoederOrVader(persoonDb, persoonDb)
+        return genealogischDriekhoekjeRepository.zoekOpOuder(persoonDb)
                 .stream()
                 .map(GenealogischDriekhoekje::getKind)
                 .map(kind -> modelMapper.map(kind, NatuurlijkPersoonDTO.class))
@@ -52,14 +53,17 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
     }
 
     @Override
-    public List<NatuurlijkPersoonDTO> broersEnZussenVan(NatuurlijkPersoonDTO persoon) {
+    public List<BroerOfZusDto> broersEnZussenVan(NatuurlijkPersoonDTO persoon) {
         NatuurlijkPersoon persoonDb = persoonRepository.getById(persoon.getId());
         Optional<GenealogischDriekhoekje> driehoekjeOptional = genealogischDriekhoekjeRepository.findByKind(persoonDb);
-        return driehoekjeOptional.map(driehoekje -> genealogischDriekhoekjeRepository.findByMoederAndVader(driehoekje.getMoeder(), driehoekje.getVader())
+        return driehoekjeOptional.map(driehoekje -> genealogischDriekhoekjeRepository.zoekOpEenVanDeOuders(driehoekje.getOuder1(), driehoekje.getOuder2())
                     .stream()
-                    .map(GenealogischDriekhoekje::getKind)
-                    .filter(p -> !Objects.equals(persoon.getId(), p.getId()))
-                    .map(p -> modelMapper.map(p, NatuurlijkPersoonDTO.class))
+                    .filter(p -> !Objects.equals(persoon.getId(), p.getKind().getId()))
+                    .map(huidigDriehoekje ->
+                        BroerOfZusDto.builder()
+                                .natuurlijkPersoon(modelMapper.map(huidigDriehoekje.getKind(), NatuurlijkPersoonDTO.class))
+                                .isHalf(!huidigDriehoekje.heeftDezelfdeOudersAls(driehoekje))
+                                .build())
                     .collect(Collectors.toList())).orElseGet(List::of);
     }
 

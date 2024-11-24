@@ -38,11 +38,4 @@ public class Relatie {
     @Column(name = "GEHUWD_TE")
     private String gehuwedTe;
 
-    public NatuurlijkPersoon man() {
-        return (persoon1.getGeslacht() == Geslacht.MAN)?persoon1:persoon2;
-    }
-
-    public NatuurlijkPersoon vrouw() {
-        return (persoon1.getGeslacht() == Geslacht.VROUW)?persoon1:persoon2;
-    }
 }

@@ -45,10 +45,6 @@ public class DefaultRelatiesZoeken implements ReleatiesZoeken{
     }
 
     private List<GenealogischDriekhoekje> getByMoederAndVader(Relatie relatie) {
-        List<GenealogischDriekhoekje> byMoederAndVader = genealogischDriekhoekjeRepository.findByMoederAndVader(relatie.vrouw(), relatie.man());
-        if(byMoederAndVader.isEmpty()) {
-            return genealogischDriekhoekjeRepository.findByMoederOrVader(relatie.man(), relatie.vrouw());
-        }
-        return byMoederAndVader;
+        return genealogischDriekhoekjeRepository.zoekOpBeideOuders(relatie.getPersoon1(), relatie.getPersoon2());
     }
 }

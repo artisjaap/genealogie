@@ -1,9 +1,6 @@
 package be.genealogie.applicatie;
 
-import be.genealogie.domein.dto.DocumentHeaderDto;
-import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
-import be.genealogie.domein.dto.NatuurlijkPersoonFicheDto;
-import be.genealogie.domein.dto.RelatieDto;
+import be.genealogie.domein.dto.*;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
 import be.genealogie.domein.repository.NatuurlijkPersoonRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +37,7 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
         NatuurlijkPersoonDTO vader = genealogischDriekhoekjeZoeken.vaderVan(persoonDto).orElse(null);
         List<RelatieDto> relaties = releatiesZoeken.relatiesMet(persoonDto);
         List<NatuurlijkPersoonDTO> kinderen = genealogischDriekhoekjeZoeken.kinderenVan(persoonDto);
-        List<NatuurlijkPersoonDTO> broersEnZussen = genealogischDriekhoekjeZoeken.broersEnZussenVan(persoonDto);
+        List<BroerOfZusDto> broersEnZussen = genealogischDriekhoekjeZoeken.broersEnZussenVan(persoonDto);
         List<NatuurlijkPersoonDTO> nevenEnNichten = genealogischDriekhoekjeZoeken.nevenEnNichtenVan(persoonDto);
         List<NatuurlijkPersoonDTO> oomsEnTantes = genealogischDriekhoekjeZoeken.oomsEnTantesVan(persoonDto);
         List<DocumentHeaderDto> documenten = documentZoeken.alleDocumentenVan(persoonDto);

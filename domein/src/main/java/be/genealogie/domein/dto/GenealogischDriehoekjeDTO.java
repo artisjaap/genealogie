@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GenealogischDriehoekjeDTO {
     private NatuurlijkPersoonDTO kind;
-    private NatuurlijkPersoonDTO moeder;
-    private NatuurlijkPersoonDTO vader;
+    private NatuurlijkPersoonDTO ouder1;
+    private NatuurlijkPersoonDTO ouder2;
 }

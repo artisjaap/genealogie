@@ -45,7 +45,7 @@ public class DefaultStamboomMaken implements StamboomMaken {
 
     private StamboomDto vooroudersVan(NatuurlijkPersoon persoon) {
         Optional<GenealogischDriekhoekje> driehoekje = genealogischDriekhoekjeRepository.findByKind(persoon);
-        List<StamboomDto> kinderen = driehoekje.map(d -> Stream.of(d.getMoeder(), d.getVader())
+        List<StamboomDto> kinderen = driehoekje.map(d -> Stream.of(d.getOuder1(), d.getOuder2())
                 .filter(Objects::nonNull)
                 .map(this::vooroudersVan)
                 .toList()).orElse(Collections.emptyList());

@@ -24,9 +24,9 @@ public class DefaultGenealogischDriekhoekjeMaken implements GenealogischDriekhoe
     @Override
     public GenealogischDriehoekjeDTO maakDriehoekje(GenealogischDriehoekjeDTO dto) {
         NatuurlijkPersoon kind = natuurlijkPersoonRepository.getById(dto.getKind().getId());
-        NatuurlijkPersoon moeder = natuurlijkPersoonRepository.getById(dto.getMoeder().getId());
-        NatuurlijkPersoon vader = natuurlijkPersoonRepository.getById(dto.getVader().getId());
-        GenealogischDriekhoekje genealogischDriekhoekje = GenealogischDriekhoekje.builder().kind(kind).moeder(moeder).vader(vader).build();
+        NatuurlijkPersoon ouder1 = natuurlijkPersoonRepository.getById(dto.getOuder1().getId());
+        NatuurlijkPersoon ouder2 = natuurlijkPersoonRepository.getById(dto.getOuder2().getId());
+        GenealogischDriekhoekje genealogischDriekhoekje = GenealogischDriekhoekje.builder().kind(kind).ouder1(ouder1).ouder2(ouder2).build();
         GenealogischDriekhoekje opgeslagenDriekhoekje = genealogischDriekhoekjeRepository.save(genealogischDriekhoekje);
         return modelMapper.map(opgeslagenDriekhoekje, GenealogischDriehoekjeDTO.class);
     }
@@ -38,8 +38,8 @@ public class DefaultGenealogischDriekhoekjeMaken implements GenealogischDriekhoe
         NatuurlijkPersoon kindUitDB = natuurlijkPersoonRepository.getById(kind.getId());
 
         GenealogischDriekhoekje genealogischDriekhoekje = GenealogischDriekhoekje.builder()
-                .vader(relatie.man())
-                .moeder(relatie.vrouw())
+                .ouder1(relatie.getPersoon1())
+                .ouder2(relatie.getPersoon2())
                 .kind(kindUitDB)
                 .build();
 
@@ -64,8 +64,8 @@ public class DefaultGenealogischDriekhoekjeMaken implements GenealogischDriekhoe
                 .build());
 
         return maakDriehoekje(GenealogischDriehoekjeDTO.builder()
-                .moeder(moeder)
-                .vader(vader)
+                .ouder1(moeder)
+                .ouder2(vader)
                 .kind(kind)
                 .build());
 
