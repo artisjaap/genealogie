@@ -98,9 +98,10 @@
             </div>
           </div>
           <div class="familie-box-content">
-            <div *ngFor="let kind of persoonFiche.oomsEnTantes" class="link-action" [routerLink]="['/personen/detail', kind.id]">
-              <fa-icon class="geslacht" [icon]="kind.geslacht==='MAN'?faMars:faVenus"></fa-icon>
-              {{ kind.naam }} {{ kind.voornaam }}
+            <div *ngFor="let nonkelTante of persoonFiche.nonkelsEnTantes" >
+              <fa-icon class="geslacht" [icon]="nonkelTante.natuurlijkPersoon.geslacht==='MAN'?faMars:faVenus"></fa-icon>
+              <span class="link-action" [routerLink]="['/personen/detail', nonkelTante.natuurlijkPersoon.id]">{{ nonkelTante.natuurlijkPersoon.naam }} {{ nonkelTante.natuurlijkPersoon.voornaam }}</span>
+              <ng-container *ngIf="nonkelTante.aangetrouwd.length > 0">(<span *ngFor="let a of nonkelTante.aangetrouwd" [ngClass]="{'is-half':!a.actief}" class="link-action" [routerLink]="['/personen/detail', a.natuurlijkPersoon.id]"> {{a.natuurlijkPersoon.naam}} {{a.natuurlijkPersoon.voornaam}}</span>)</ng-container>
             </div>
           </div>
         </div>

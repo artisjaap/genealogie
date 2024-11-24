@@ -15,4 +15,7 @@ public interface RelatieRepository {
 
     Optional<Relatie> findByPersoon1AndPersoon2(NatuurlijkPersoon persoon1, NatuurlijkPersoon persoon2);
 
+    default List<Relatie> zoekRelatiesMet(NatuurlijkPersoon persoon){
+        return findByPersoon1OrPersoon2(persoon, persoon);
+    }
 }

@@ -2,6 +2,7 @@ package be.genealogie.applicatie;
 
 import be.genealogie.domein.dto.BroerOfZusDto;
 import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
+import be.genealogie.domein.dto.NonkelsEnTantesDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,5 +19,5 @@ public interface GenealogischDriekhoekjeZoeken {
 
     List<NatuurlijkPersoonDTO> nevenEnNichtenVan(NatuurlijkPersoonDTO persoonDto);
 
-    List<NatuurlijkPersoonDTO> oomsEnTantesVan(NatuurlijkPersoonDTO persoonDto);
+    List<NonkelsEnTantesDto> nonkelsEnTantes(NatuurlijkPersoonDTO persoonDto);
 }

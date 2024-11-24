@@ -198,8 +198,8 @@ export class PersonenEffects {
   ) {}
 
   private oudersFormDataNaarDto(value: OudersVoorPersoonFormValue, persoon: NatuurlijkPersoonFicheDto | undefined) {
-    let moeder: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.persoon1naam, value.persoon1voornaam, 'VROUW', new Date(value.persoon1geborenOp), "", new Date(value.persoon1overledenOp), "");
-    let vader: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.persoon2naam, value.persoon2voornaam, 'MAN', new Date(value.persoon2geborenOp), "", new Date(value.persoon2overledenOp), "");
+    let vader: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.persoon1naam, value.persoon1voornaam, 'MAN', new Date(value.persoon1geborenOp), "", new Date(value.persoon1overledenOp), "");
+    let moeder: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.persoon2naam, value.persoon2voornaam, 'VROUW', new Date(value.persoon2geborenOp), "", new Date(value.persoon2overledenOp), "");
     let kind: NatuurlijkPersoonDto|undefined = persoon?.natuurlijkPersoon;
 
     return new OudersVanKindDto(moeder, vader, kind);

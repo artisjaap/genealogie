@@ -39,7 +39,7 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
         List<NatuurlijkPersoonDTO> kinderen = genealogischDriekhoekjeZoeken.kinderenVan(persoonDto);
         List<BroerOfZusDto> broersEnZussen = genealogischDriekhoekjeZoeken.broersEnZussenVan(persoonDto);
         List<NatuurlijkPersoonDTO> nevenEnNichten = genealogischDriekhoekjeZoeken.nevenEnNichtenVan(persoonDto);
-        List<NatuurlijkPersoonDTO> oomsEnTantes = genealogischDriekhoekjeZoeken.oomsEnTantesVan(persoonDto);
+        List<NonkelsEnTantesDto> nonkelsEnTantes = genealogischDriekhoekjeZoeken.nonkelsEnTantes(persoonDto);
         List<DocumentHeaderDto> documenten = documentZoeken.alleDocumentenVan(persoonDto);
 
         return NatuurlijkPersoonFicheDto.builder()
@@ -50,7 +50,7 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
                 .kinderen(kinderen)
                 .broersEnZussen(broersEnZussen)
                 .nevemEnNichten(nevenEnNichten)
-                .oomsEnTantes(oomsEnTantes)
+                .nonkelsEnTantes(nonkelsEnTantes)
                 .documenten(documenten)
                 .build();
     }

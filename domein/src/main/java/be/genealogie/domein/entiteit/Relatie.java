@@ -1,6 +1,7 @@
 package be.genealogie.domein.entiteit;
 
 import be.genealogie.domein.Geslacht;
+import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,4 +39,11 @@ public class Relatie {
     @Column(name = "GEHUWD_TE")
     private String gehuwedTe;
 
+    public boolean gescheiden() {
+        return gescheidenOp != null;
+    }
+
+    public NatuurlijkPersoon partnerVan(NatuurlijkPersoon persoon) {
+        return (persoon1.getId().equals(persoon.getId()))?persoon2:persoon1 ;
+    }
 }
