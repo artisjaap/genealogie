@@ -19,6 +19,7 @@ public class RelatieDto {
     private NatuurlijkPersoonDTO persoon2;
     private LocalDate gehuwdOp;
     private String gehuwdTe;
+    private Boolean uitElkaar;
     private List<NatuurlijkPersoonDTO> kinderen;
 
     public NatuurlijkPersoonDTO getMan() {

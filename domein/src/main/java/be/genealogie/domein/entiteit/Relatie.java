@@ -39,6 +39,9 @@ public class Relatie {
     @Column(name = "GEHUWD_TE")
     private String gehuwedTe;
 
+    @Column(name = "UIT_ELKAAR")
+    private Boolean uitElkaar;
+
     public boolean gescheiden() {
         return gescheidenOp != null;
     }

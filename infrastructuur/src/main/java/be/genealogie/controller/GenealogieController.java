@@ -39,15 +39,15 @@ public class GenealogieController {
         return ResponseEntity.ok(relatieRegistratie.maakHuwelijk(relatieMet));
     }
 
-    @PutMapping("/relatie/{id}/huwelijk")
-    public ResponseEntity<RelatieDto> huwelijkToevoegen(@PathVariable Long id, @RequestBody HuwelijkDto huwelijk){
-        return ResponseEntity.ok(relatieWijzigen.voegHuwelijkToe(id, huwelijk));
+    @PutMapping("/relatie/{id}")
+    public ResponseEntity<RelatieDto> huwelijkToevoegen(@PathVariable Long id, @RequestBody RelatieUpdateDto huwelijk){
+        return ResponseEntity.ok(relatieWijzigen.wijzigRelatie(id, huwelijk));
     }
 
-    @PutMapping("/relatie/{id}/scheiding")
-    public ResponseEntity<RelatieDto> scheidingToevoegen(@PathVariable Long id, @RequestBody ScheidingDto scheiding){
-        return ResponseEntity.ok(relatieWijzigen.voegScheidingToe(id, scheiding));
-    }
+//    @PutMapping("/relatie/{id}/scheiding")
+//    public ResponseEntity<RelatieDto> scheidingToevoegen(@PathVariable Long id, @RequestBody ScheidingDto scheiding){
+//        return ResponseEntity.ok(relatieWijzigen.voegScheidingToe(id, scheiding));
+//    }
 
     @GetMapping("/nakomelingen/{persoonId}")
     public ResponseEntity<StamboomDto> nakomelingenVanPersoon(@PathVariable Long persoonId){

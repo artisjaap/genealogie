@@ -1,6 +1,6 @@
 package be.genealogie.applicatie;
 
-import be.genealogie.domein.dto.HuwelijkDto;
+import be.genealogie.domein.dto.RelatieUpdateDto;
 import be.genealogie.domein.dto.RelatieDto;
 import be.genealogie.domein.dto.ScheidingDto;
 import be.genealogie.domein.entiteit.Relatie;
@@ -16,11 +16,12 @@ public class DefaultRelatieWijzigen implements RelatieWijzigen {
     private final ModelMapper modelMapper;
 
     @Override
-    public RelatieDto voegHuwelijkToe(Long relatieId, HuwelijkDto huwelijk) {
+    public RelatieDto wijzigRelatie(Long relatieId, RelatieUpdateDto huwelijk) {
         Relatie relatie = relatieRepository.getById(relatieId)
                 .toBuilder()
                 .gehuwedOp(huwelijk.huwelijkDatum())
                 .gehuwedTe(huwelijk.gemeente())
+                .uitElkaar(huwelijk.uitElkaar())
                 .build();
         Relatie save = relatieRepository.save(relatie);
         return modelMapper.map(save, RelatieDto.class);

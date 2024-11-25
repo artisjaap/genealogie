@@ -1,15 +1,21 @@
+<form [formGroup]="huwelijksgegevensForm">
 <div class="infocard">
   <p class="infocard-titel">Wijzig huwelijk</p>
   <mat-form-field>
     <mat-label>Huwelijk</mat-label>
-    <input #huwelijkOp matInput [matDatepicker]="pickerHuwelijk" [formControl]="date">
+    <input  matInput [matDatepicker]="pickerHuwelijk" formControlName="gehuwdOp">
     <mat-datepicker-toggle matIconSuffix [for]="pickerHuwelijk"></mat-datepicker-toggle>
     <mat-datepicker #pickerHuwelijk></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Gemeente</mat-label>
-    <input #huwelijkTe matInput maxlength="256" >
+    <input  matInput maxlength="256" formControlName="gehuwdTe">
   </mat-form-field>
-  <button type="button" mat-raised-button (click)="opslaan(huwelijkTe)">Wijzigen</button>
-</div>
 
+
+  <mat-checkbox class="example-margin" formControlName="uitElkaar">Uit elkaar</mat-checkbox>
+
+
+  <button type="button" mat-raised-button (click)="opslaan()">Wijzigen</button>
+</div>
+</form>

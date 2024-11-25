@@ -5,7 +5,7 @@ import {DocumentTypeDto} from "../../model/document-type-dto";
 import {RelatieDto} from "../../model/relatie-dto";
 import {GenealogischDriehoekjeDto} from "../../model/genealogisch-driehoekje-dto";
 import {DialogData} from "../../model/document-upload-data-dts";
-import {HuwelijkDto} from "../../model/huwelijk-dto";
+import {RelatieUpdateDto} from "../../model/relatie-update-dto";
 import {StamboomEchartDto} from "../../model/stamboom-echart-dto";
 import {PersoonsgegevensDto} from "../../model/persoonsgegevens-dto";
 
@@ -38,8 +38,8 @@ export const documentTypesGeladen = createAction('[NATUURLIJK PERSOON - Document
 
 export const documentOpgeladen = createAction('[NATUURLIJK PERSOON] document opgeladen');
 
-export const wijzigHuwelijk = createAction('[NATUURLIJK PERSOON] wijzig huwelijk', props<{huwelijk: HuwelijkDto}>());
-export const huwelijkGewijzigd = createAction('[NATUURLIJK PERSOON] huwelijk gewijzigd');
+export const wijzigRelatie = createAction('[NATUURLIJK PERSOON] wijzig relatie', props<{relatie: RelatieUpdateDto}>());
+export const relatieGewijzigd = createAction('[NATUURLIJK PERSOON] relatie gewijzigd');
 export const wijzigPersoonsgegevens = createAction('[NATUURLIJK PERSOON] wijzig persoonsgegevens', props<{persoonsgegevens: PersoonsgegevensDto}>());
 export const persoonsgegevensGewijzigd = createAction('[NATUURLIJK PERSOON] persoonsgegevens gewijzigd');
 

@@ -35,6 +35,7 @@ public class DefaultRelatiesZoeken implements ReleatiesZoeken{
                         .persoon2(modelMapper.map(relatie.getPersoon2(), NatuurlijkPersoonDTO.class))
                         .gehuwdOp(relatie.getGehuwedOp())
                         .gehuwdTe(relatie.getGehuwedTe())
+                        .uitElkaar(relatie.getUitElkaar())
                         .kinderen(getByMoederAndVader(relatie)
                                 .stream()
                                 .map(GenealogischDriekhoekje::getKind)

@@ -12,8 +12,8 @@
                      [icon]="persoonFiche.natuurlijkPersoon.geslacht==='MAN'?faMars:faVenus"></fa-icon>
           </div>
           <div class="infocard-sectie-acties">
-            <span><fa-icon [icon]="faEdit" tpTrigger="click" [tpData]="persoonFiche"
-                           [tp]="UpdatePersoonsgegevensComponent"></fa-icon></span>
+            <span><fa-icon [icon]="faEdit" tpTrigger="click"
+                           [tp]="UpdatePersoonsgegevensComponent" ></fa-icon></span>
             <span class="actie" (click)="documentToevoegen(persoonFiche.natuurlijkPersoon, null)"><fa-icon
               [icon]="faFileText"></fa-icon></span>
             <span class="actie" (click)="oudersToevoegen(persoonFiche.natuurlijkPersoon, null)"><fa-icon
@@ -132,7 +132,7 @@
       <span class="actie" (click)="voegRelatieToeMet(persoonFiche.natuurlijkPersoon)"><fa-icon
         [icon]="faDiagramPredecessor"></fa-icon></span>
       <div class="infocard-row-flow">
-        <div class="relatie-box" *ngFor="let relatie of persoonFiche.relaties">
+        <div class="relatie-box" *ngFor="let relatie of persoonFiche.relaties" [ngClass]="{'uit-elkaar':relatie.uitElkaar}">
           <div class="relatie-titel">
             <div class="relatie">
               <span class="link-action"

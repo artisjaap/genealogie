@@ -8,7 +8,7 @@ import {KindUitRelatieDto} from "../model/kind-uit-relatie-dto";
 import {GenealogischDriehoekjeDto} from "../model/genealogisch-driehoekje-dto";
 import {RelatieDto} from "../model/relatie-dto";
 import {RelatieMetNieuwNatuurlijkPersoonDto} from "../model/relatie-met-nieuw-natuurlijk-persoon-dto";
-import {HuwelijkDto} from "../model/huwelijk-dto";
+import {RelatieUpdateDto} from "../model/relatie-update-dto";
 import {ScheidingDto} from "../model/scheiding-dto";
 import {StamboomEchartDto} from "../model/stamboom-echart-dto";
 import {PersoonsgegevensDto} from "../model/persoonsgegevens-dto";
@@ -50,8 +50,8 @@ export class NatuurlijkPersoonService {
 
   }
 
-  wijzigHuwelijk(wijzigHuwelijk: HuwelijkDto): Observable<RelatieDto> {
-    return this.http.put<RelatieDto>(`api/genealogie/relatie/${wijzigHuwelijk.id}/huwelijk`, wijzigHuwelijk);
+  wijzigHuwelijk(wijzigHuwelijk: RelatieUpdateDto): Observable<RelatieDto> {
+    return this.http.put<RelatieDto>(`api/genealogie/relatie/${wijzigHuwelijk.id}`, wijzigHuwelijk);
   }
 
   wijzigPersoonsgegevens(wijzigPersoonsgegevens: PersoonsgegevensDto): Observable<NatuurlijkPersoonFicheDto> {

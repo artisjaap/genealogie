@@ -6,7 +6,8 @@ export class RelatieDto {
                      public persoon2: NatuurlijkPersoonDto,
                      public gehuwdOp: Date | null,
                      public gehuwdTe: string | null,
-                     public kinderen: NatuurlijkPersoonDto[] | null) {
+                     public kinderen: NatuurlijkPersoonDto[] | null,
+                     public uitElkaar: Boolean | null) {
   }
 }
 

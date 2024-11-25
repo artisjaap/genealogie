@@ -75,6 +75,7 @@ export class UpdatePersoonsgegevensComponent {
     this.tippy.props.maxWidth = '600px';
 
 
+
   }
 
   opslaan() {

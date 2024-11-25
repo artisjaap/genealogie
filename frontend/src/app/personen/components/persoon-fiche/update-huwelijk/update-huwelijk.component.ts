@@ -7,9 +7,13 @@ import {NgrxFormsModule, NgrxValueConverters} from "ngrx-forms";
 import {MatButton} from "@angular/material/button";
 import {Store} from "@ngrx/store";
 import {PersonenState} from "../../../store/personen.reducer";
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {wijzigHuwelijk} from "../../../store/personen.acties";
-import {HuwelijkDto} from "../../../../model/huwelijk-dto";
+import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
+import {wijzigRelatie, wijzigPersoonsgegevens} from "../../../store/personen.acties";
+import {RelatieUpdateDto} from "../../../../model/relatie-update-dto";
+import {getGeladenPeroonFiche} from "../../../store/personen.selector";
+import {PersoonsgegevensDto} from "../../../../model/persoonsgegevens-dto";
+import {RelatieDto} from "../../../../model/relatie-dto";
+import {MatCheckbox} from "@angular/material/checkbox";
 
 @Component({
   selector: 'app-update-huwelijk',
@@ -25,6 +29,7 @@ import {HuwelijkDto} from "../../../../model/huwelijk-dto";
     NgrxFormsModule,
     MatButton,
     ReactiveFormsModule,
+    MatCheckbox,
 
   ],
   templateUrl: './update-huwelijk.component.html',
@@ -33,14 +38,17 @@ import {HuwelijkDto} from "../../../../model/huwelijk-dto";
 export class UpdateHuwelijkComponent implements OnInit {
   tippy = inject(TIPPY_REF);
 
-  readonly date = new FormControl(null);
+  private formBuilder = inject(FormBuilder);
+  huwelijksgegevensForm = this.formBuilder.group({
+    id: new FormControl<number>(0, [Validators.required]),
+    gehuwdOp:  new FormControl<Date | null>(null),
+    gehuwdTe: [''],
+    uitElkaar: new FormControl<Boolean | null>(false),
+  });
 
   constructor(private store: Store<PersonenState>) {
 
   }
-
-  dateValueConverter = NgrxValueConverters.dateToISOString;
-
 
   ngOnInit() {
 
@@ -50,12 +58,42 @@ export class UpdateHuwelijkComponent implements OnInit {
     this.tippy.props.zIndex = 1;
     this.tippy.props.theme = 'light'
 
+    let relatie: RelatieDto = this.tippy.data;
+
+    this.huwelijksgegevensForm = this.formBuilder.group({
+      id: new FormControl<number>(relatie.id),
+      gehuwdOp: new FormControl<Date | null>(relatie.gehuwdOp),
+      gehuwdTe: [relatie.gehuwdTe],
+      uitElkaar:  new FormControl<Boolean | null>(!!relatie.uitElkaar),
+
+    });
+
   }
 
-  opslaan(huwelijkTe: HTMLInputElement) {
 
-    let huwelijk: HuwelijkDto = new HuwelijkDto(this.tippy.data.id, this.date.value, huwelijkTe.value);
-    this.store.dispatch(wijzigHuwelijk({huwelijk}));
+
+  opslaan() {
+
+    let huwelijk: RelatieUpdateDto = new RelatieUpdateDto(this.tippy.data.id, this.huwelijksgegevensForm.value.gehuwdOp,
+      this.huwelijksgegevensForm.value.gehuwdTe, this.huwelijksgegevensForm.value.uitElkaar);
+    this.store.dispatch(wijzigRelatie({relatie: huwelijk}));
     this.tippy.hide();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

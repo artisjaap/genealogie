@@ -4,7 +4,7 @@ import {NatuurlijkPersoonService} from "../../service/NatuurlijkPersoonService";
 import {
   documentOpgeladen,
   documentTypesGeladen,
-  huwelijkGewijzigd,
+  relatieGewijzigd,
   laadDocumentTypes, laadNakomelingenVan,
   laadNatuurlijkPersoonFiche, laadVooroudersVan,
   maakNatuurlijkPersoonVoorRelatie,
@@ -17,7 +17,7 @@ import {
   oudersVanNatuurlijkPersoonAangemaakt,
   personenGevonden,
   relatieMetNatuurlijkPersoonAangemaakt, vooroudersVanGeladen,
-  wijzigHuwelijk, wijzigPersoonsgegevens,
+  wijzigRelatie, wijzigPersoonsgegevens,
   zoekPersonen
 } from "./personen.acties";
 import {catchError, EMPTY, exhaustMap, filter, map, tap, withLatestFrom} from "rxjs";
@@ -107,7 +107,7 @@ export class PersonenEffects {
       oudersVanNatuurlijkPersoonAangemaakt,
       relatieMetNatuurlijkPersoonAangemaakt,
       documentOpgeladen,
-      huwelijkGewijzigd),
+      relatieGewijzigd),
     withLatestFrom(this.store$.select(getGeladenPeroonFiche)),
     filter(([data, fiche]:[any, NatuurlijkPersoonFicheDto | undefined]) => !!fiche),
     exhaustMap(([data, fiche]:[any, NatuurlijkPersoonFicheDto | undefined]) => this.natuurlijkPersoonService.laadFicheVoorNatuurlijkPersoon(fiche?fiche.natuurlijkPersoon.id:0)
@@ -149,10 +149,10 @@ export class PersonenEffects {
 
   wijzigHuwelijk$ = createEffect(
     () => this.actions$.pipe(
-      ofType(wijzigHuwelijk),
-      exhaustMap(data => this.natuurlijkPersoonService.wijzigHuwelijk(data.huwelijk)
+      ofType(wijzigRelatie),
+      exhaustMap(data => this.natuurlijkPersoonService.wijzigHuwelijk(data.relatie)
         .pipe(
-          map(documentTypes => huwelijkGewijzigd())
+          map(documentTypes => relatieGewijzigd())
         ))
   ));
 
@@ -161,7 +161,7 @@ export class PersonenEffects {
       ofType(wijzigPersoonsgegevens),
       exhaustMap(data => this.natuurlijkPersoonService.wijzigPersoonsgegevens(data.persoonsgegevens)
         .pipe(
-          map(documentTypes => huwelijkGewijzigd())
+          map(documentTypes => relatieGewijzigd())
         ))
     ));
 
