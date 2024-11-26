@@ -1,0 +1,21 @@
+.persoon-reference {
+  position: relative;
+
+  .geslacht {
+    margin: 0 5px;
+  }
+
+  .overleden {
+    font-size: 8px;
+    position: absolute;
+    right: -6px;
+    top: -2px;
+    color: gray;
+  }
+
+  &.highlight {
+    color: lightskyblue;
+
+  }
+
+}

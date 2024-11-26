@@ -1,0 +1,6 @@
+<span class="persoon-reference" [ngClass]="{'highlight': highlight}">
+  <fa-icon *ngIf="toonGeslacht" class="geslacht" [icon]="natuurlijkPersoon?.geslacht==='MAN'?faMars:faVenus"></fa-icon>
+  <span class="value link-action" [routerLink]="['/personen/detail', natuurlijkPersoon?.id]">{{ natuurlijkPersoon?.naam }} {{ natuurlijkPersoon?.voornaam }}</span>
+  <fa-icon *ngIf="natuurlijkPersoon?.overledenOp" class="overleden" [icon]="faCross"></fa-icon>
+
+</span>
