@@ -27,6 +27,14 @@ export class FamilieTreeComponent implements OnInit {
       let data : any[] = [voorouder];
 
       this.optionsVoorouders =  {
+        toolbox: {
+          feature: {
+            saveAsImage: {
+              type: 'png'
+            },
+
+          }
+        },
         tooltip: {
           trigger: 'item',
           triggerOn: 'mousemove'
@@ -44,7 +52,8 @@ export class FamilieTreeComponent implements OnInit {
             label: {
               position: 'right',
               verticalAlign: 'middle',
-              align: 'left'
+              align: 'left',
+              fontSize: 9
             },
             leaves: {
               label: {
@@ -70,6 +79,14 @@ export class FamilieTreeComponent implements OnInit {
       let data : any[] = [nakomelingen];
 
       this.optionsNakomelingen =  {
+        toolbox: {
+          feature: {
+            saveAsImage: {
+              type: 'png'
+            },
+
+          }
+        },
         tooltip: {
           trigger: 'item',
           triggerOn: 'mousemove'

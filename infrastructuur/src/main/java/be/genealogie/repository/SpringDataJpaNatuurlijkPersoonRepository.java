@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface SpringDataJpaNatuurlijkPersoonRepository extends JpaRepository<NatuurlijkPersoon, Long>, NatuurlijkPersoonRepository {
 
-    List<NatuurlijkPersoon> findByNaamLikeOrVoornaamLike(String naam, String voornaam);
+    List<NatuurlijkPersoon> findByNaamLikeIgnoreCaseOrVoornaamLikeIgnoreCase(String naam, String voornaam);
 
     default List<NatuurlijkPersoon> findByNaamLikeOrVoornaamLike(String naam){
         String naamMetWildcard = QueryUtils.metDbWildcard(naam);
-        return findByNaamLikeOrVoornaamLike(naamMetWildcard, naamMetWildcard);
+        return findByNaamLikeIgnoreCaseOrVoornaamLikeIgnoreCase(naamMetWildcard, naamMetWildcard);
     }
 
 }

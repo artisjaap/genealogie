@@ -13,12 +13,7 @@
           <input formControlName="voornaam" matInput maxlength="256">
         </mat-form-field>
       </div>
-      <div class="form-line">
-        <mat-radio-group aria-label="Geslacht" formControlName="geslacht" >
-          <mat-radio-button value="MAN">Man</mat-radio-button>
-          <mat-radio-button value="VROUW">Vrouw</mat-radio-button>
-        </mat-radio-group>
-      </div>
+
       <div class="infocard-row">
         <mat-form-field>
           <mat-label>Geboren Op</mat-label>
@@ -43,8 +38,19 @@
           <input formControlName="overledenTe" matInput maxlength="256">
         </mat-form-field>
       </div>
+      <div class="infocard-row">
+        <mat-radio-group aria-label="Geslacht" formControlName="geslacht" >
+          <mat-radio-button value="MAN">Man</mat-radio-button>
+          <mat-radio-button value="VROUW">Vrouw</mat-radio-button>
+        </mat-radio-group>
+      </div>
 
-      <button type="button" mat-raised-button (click)="opslaan()">Wijzigen</button>
+
+      <div class="button-bar">
+        <button type="button" mat-button (click)="close()">Sluiten</button>
+        <button type="button" mat-raised-button (click)="opslaan()">Opslaan</button>
+      </div>
+
     </div>
   </div>
 

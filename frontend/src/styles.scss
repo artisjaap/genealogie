@@ -102,6 +102,12 @@ body {
       }
     }
 
+    .button-bar {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-around;
+    }
+
     .row-acties {
       display: flex;
       flex-flow: row nowrap;
@@ -114,6 +120,10 @@ body {
     .infocard-sectie-titel {
       font-weight: bold;
       font-size: 1.5em;
+
+      .actie {
+        font-size: 0.7em;
+      }
     }
   }
 }
@@ -133,6 +143,12 @@ body {
     flex-flow: row nowrap;
     justify-content: center;
   }
+
+  .button-bar {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+  }
 }
 
 .form-titel {
@@ -144,6 +160,8 @@ body {
   font-weight: bold;
   font-size: 2em;
 }
+
+
 
 .actie {
   cursor: pointer;

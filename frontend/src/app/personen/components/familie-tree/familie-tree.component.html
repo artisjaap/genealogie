@@ -1,5 +1,5 @@
 
 <span class="infocard-sectie-titel">Voorouders Van </span>
-<div echarts [options]="optionsVoorouders" class="demo-chart" (chartClick)="clickNode($event)"></div>
+<div echarts [options]="optionsVoorouders" class="demo-chart" (chartClick)="clickNode($event)" [initOpts]="{renderer: 'svg'}"></div>
 <span class="infocard-sectie-titel">Nakomelingen Van </span>
-<div echarts [options]="optionsNakomelingen" class="demo-chart" (chartClick)="clickNode($event)" ></div>
+<div echarts [options]="optionsNakomelingen" class="demo-chart" (chartClick)="clickNode($event)" [initOpts]="{renderer: 'svg'}"  ></div>

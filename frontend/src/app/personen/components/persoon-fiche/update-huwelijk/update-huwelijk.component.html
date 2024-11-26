@@ -1,21 +1,35 @@
 <form [formGroup]="huwelijksgegevensForm">
-<div class="infocard">
-  <p class="infocard-titel">Wijzig huwelijk</p>
-  <mat-form-field>
-    <mat-label>Huwelijk</mat-label>
-    <input  matInput [matDatepicker]="pickerHuwelijk" formControlName="gehuwdOp">
-    <mat-datepicker-toggle matIconSuffix [for]="pickerHuwelijk"></mat-datepicker-toggle>
-    <mat-datepicker #pickerHuwelijk></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Gemeente</mat-label>
-    <input  matInput maxlength="256" formControlName="gehuwdTe">
-  </mat-form-field>
+  <div class="infocard">
+    <p class="infocard-titel">Wijzig huwelijk</p>
+
+    <div class="infocard-body">
+      <div class="infocard-sectie">
+        <div class="infocard-row">
+          <mat-form-field>
+            <mat-label>Huwelijk</mat-label>
+            <input matInput [matDatepicker]="pickerHuwelijk" formControlName="gehuwdOp">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerHuwelijk"></mat-datepicker-toggle>
+            <mat-datepicker #pickerHuwelijk></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="infocard-row">
+          <mat-form-field>
+            <mat-label>Gemeente</mat-label>
+            <input matInput maxlength="256" formControlName="gehuwdTe">
+          </mat-form-field>
+        </div>
+        <div class="infocard-row">
+
+          <mat-checkbox class="example-margin" formControlName="uitElkaar">Uit elkaar</mat-checkbox>
+
+        </div>
+        <div class="button-bar">
+          <button type="button" mat-button (click)="close()">Sluiten</button>
+          <button type="button" mat-raised-button (click)="opslaan()">Opslaan</button>
+        </div>
+      </div>
+    </div>
 
 
-  <mat-checkbox class="example-margin" formControlName="uitElkaar">Uit elkaar</mat-checkbox>
-
-
-  <button type="button" mat-raised-button (click)="opslaan()">Wijzigen</button>
-</div>
+  </div>
 </form>

@@ -94,7 +94,7 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
                 .stream()
                 .map(relatie -> AangetrouwdDto.builder()
                         .natuurlijkPersoon(modelMapper.map(relatie.partnerVan(persoon), NatuurlijkPersoonDTO.class))
-                        .actief(!relatie.gescheiden())
+                        .actief(!Optional.ofNullable(relatie.getUitElkaar()).orElse(false))
                         .build())
                 .toList();
     }

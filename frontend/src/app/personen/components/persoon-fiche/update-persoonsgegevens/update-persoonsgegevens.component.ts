@@ -93,4 +93,8 @@ export class UpdatePersoonsgegevensComponent {
     this.store.dispatch(wijzigPersoonsgegevens({persoonsgegevens}));
     this.tippy.hide();
   }
+
+  close() {
+    this.tippy.hide();
+  }
 }

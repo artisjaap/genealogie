@@ -1,4 +1,4 @@
-<p class="form-titel">Ouders toevoegen aan persoon <fa-icon (click)="close()" [icon]="faXmark"></fa-icon></p>
+<p class="form-titel">Ouders toevoegen aan persoon </p>
 
 <ng-container *ngIf="formState$ | async as formState">
 
@@ -66,6 +66,11 @@
 
     </div>
 
-    <button type="button" mat-raised-button (click)="opslaan()">Opslaan</button>
+    <div class="button-bar">
+      <button type="button" mat-button (click)="close()">Sluiten</button>
+      <button type="button" mat-raised-button (click)="opslaan()">Opslaan</button>
+    </div>
+
+
   </form>
 </ng-container>

@@ -41,7 +41,7 @@ export class UpdateHuwelijkComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
   huwelijksgegevensForm = this.formBuilder.group({
     id: new FormControl<number>(0, [Validators.required]),
-    gehuwdOp:  new FormControl<Date | null>(null),
+    gehuwdOp: new FormControl<Date | null>(null),
     gehuwdTe: [''],
     uitElkaar: new FormControl<Boolean | null>(false),
   });
@@ -64,12 +64,11 @@ export class UpdateHuwelijkComponent implements OnInit {
       id: new FormControl<number>(relatie.id),
       gehuwdOp: new FormControl<Date | null>(relatie.gehuwdOp),
       gehuwdTe: [relatie.gehuwdTe],
-      uitElkaar:  new FormControl<Boolean | null>(!!relatie.uitElkaar),
+      uitElkaar: new FormControl<Boolean | null>(!!relatie.uitElkaar),
 
     });
 
   }
-
 
 
   opslaan() {
@@ -80,20 +79,9 @@ export class UpdateHuwelijkComponent implements OnInit {
     this.tippy.hide();
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  close() {
+    this.tippy.hide();
+  }
 
 
 }

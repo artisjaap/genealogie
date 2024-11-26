@@ -6,27 +6,45 @@
   </div>
 </div>
 
-<div class="table"  *ngIf=" gevondenPersonen$ | async as gevondenPersonen">
-  <!-- Header Row -->
-  <div class="table-row header">
-    <div class="table-cell">Naam</div>
-    <div class="table-cell">Voornaam</div>
-    <div class="table-cell">Geboren Op</div>
-    <div class="table-cell">Geboren Te</div>
-    <div class="table-cell">Overleden Op</div>
-    <div class="table-cell">Overleden Te</div>
-    <div class="table-cell">Acties</div>
-  </div>
+<div class="infocard">
+  <table mat-table [dataSource]="datasource">
+    <!-- Name Column -->
+    <ng-container matColumnDef="naam">
+      <th mat-header-cell *matHeaderCellDef> Naam</th>
+      <td mat-cell *matCellDef="let element"> {{ element.naam }}</td>
+    </ng-container>
+    <ng-container matColumnDef="voornaam">
+      <th mat-header-cell *matHeaderCellDef> Voornaam</th>
+      <td mat-cell *matCellDef="let element"> {{ element.voornaam }}</td>
+    </ng-container>
+    <ng-container matColumnDef="geborenOp">
+      <th mat-header-cell *matHeaderCellDef> Geboren Op</th>
+      <td mat-cell *matCellDef="let element"> {{ element.geborenOp | date: 'dd/MM/yyyy' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="geborenTe">
+      <th mat-header-cell *matHeaderCellDef> Geboren Te</th>
+      <td mat-cell *matCellDef="let element"> {{ element.geborenTe }}</td>
+    </ng-container>
+    <ng-container matColumnDef="overledenOp">
+      <th mat-header-cell *matHeaderCellDef> Overleden Op</th>
+      <td mat-cell *matCellDef="let element"> {{ element.overledenOp | date: 'dd/MM/yyyy'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="overledenTe">
+      <th mat-header-cell *matHeaderCellDef> Overleden Te</th>
+      <td mat-cell *matCellDef="let element"> {{ element.overledenTe }}</td>
+    </ng-container>
+    <ng-container matColumnDef="acties">
+      <th mat-header-cell *matHeaderCellDef> Acties</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="actie" [routerLink]="['/personen', 'detail', element.id]">
+          <fa-icon size="2x" [icon]="faBars"></fa-icon>
+        </span>
+      </td>
+    </ng-container>
 
-  <!-- Data Rows -->
-  <div class="table-row" *ngFor="let persoon of gevondenPersonen">
-    <div class="table-cell">{{ persoon.naam }}</div>
-    <div class="table-cell">{{ persoon.voornaam }}</div>
-    <div class="table-cell">{{ persoon.geborenOp }}</div>
-    <div class="table-cell">{{ persoon.geborenTe }}</div>
-    <div class="table-cell">{{ persoon.overledenOp }}</div>
-    <div class="table-cell">{{ persoon.overledenTe }}</div>
-    <div class="table-cell"><span [routerLink]="['/personen', 'detail', persoon.id]"><fa-icon [icon]="faInfo"></fa-icon></span></div>
-  </div>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 </div>
+
 
