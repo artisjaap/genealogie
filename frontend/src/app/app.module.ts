@@ -9,13 +9,15 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {NgrxFormsModule} from "ngrx-forms";
 import {EffectsModule} from "@ngrx/effects";
-import {provideHttpClient} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptors} from "@angular/common/http";
 import {PersonenModule} from "./personen/personen.module";
 import {AdminModule} from "./admin/admin.module";
 import {NavigatieComponent} from "./components/navigatie/navigatie.component";
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {provideMomentDateAdapter} from "@angular/material-moment-adapter";
 import {popperVariation, provideTippyConfig, tooltipVariation} from "@ngneat/helipopper";
+import {LoginModule} from "./login/login.module";
+import {authInterceptor} from "./service/HttpInterceptor";
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +30,7 @@ import {popperVariation, provideTippyConfig, tooltipVariation} from "@ngneat/hel
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
     NgrxFormsModule,
     PersonenModule,
+    LoginModule,
     AdminModule,
     NavigatieComponent,
     FontAwesomeModule,
@@ -53,7 +56,7 @@ import {popperVariation, provideTippyConfig, tooltipVariation} from "@ngneat/hel
       },
     }),
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(withInterceptors([authInterceptor]))
 ],
   bootstrap: [AppComponent]
 })
