@@ -10,27 +10,37 @@
             <img src="/assets/person.png">
             <fa-icon class="geslacht"  [ngClass]="{'man':persoonFiche.natuurlijkPersoon.geslacht==='MAN', 'vrouw':persoonFiche.natuurlijkPersoon.geslacht==='VROUW'}"
                      [icon]="persoonFiche.natuurlijkPersoon.geslacht==='MAN'?faMars:faVenus"></fa-icon>
+
+            <span class="sterrebeeld">
+<!--              <svg-icon-sprite  [src]="'assets/sprites/sprite.svg#Aquarius'" [width]="'32px'" [viewBox]="'0 0 749.2 339.58'"></svg-icon-sprite>-->
+
+            </span>
+
           </div>
           <div class="infocard-sectie-acties">
-            <span><fa-icon [icon]="faEdit" tpTrigger="click"
+            <span><fa-icon class="actie" [icon]="faEdit" tpTrigger="click"
                            [tp]="UpdatePersoonsgegevensComponent" ></fa-icon></span>
             <span class="actie" (click)="documentToevoegen(persoonFiche.natuurlijkPersoon, null)"><fa-icon
               [icon]="faFileText"></fa-icon></span>
-            <span class="actie" (click)="oudersToevoegen(persoonFiche.natuurlijkPersoon, null)"><fa-icon
-              [icon]="faDiagramPredecessor"></fa-icon></span>
+
+            <span class="actie" (click)="oudersToevoegen(persoonFiche.natuurlijkPersoon, null)">
+              <svg-icon-sprite [src]="'assets/sprites/sprite.svg#family-pants'" [width]="'18px'" [viewBox]="'0 0 512 512'"></svg-icon-sprite>
+
+            </span>
+
 
           </div>
         </div>
         <div class="eigenschappen">
           <div class="eigenschap">
+            <span class="label">Voornaam </span>
+            <span class="value">{{ persoonFiche.natuurlijkPersoon.voornaam }}</span>
+          </div>
+          <div class="eigenschap">
             <span class="label">Naam </span>
             <span class="value">{{ persoonFiche.natuurlijkPersoon.naam }}</span>
           </div>
 
-          <div class="eigenschap">
-            <span class="label">Voornaam </span>
-            <span class="value">{{ persoonFiche.natuurlijkPersoon.voornaam }}</span>
-          </div>
 
           <div class="eigenschap">
             <span class="label">Geboren </span>
@@ -112,7 +122,7 @@
           <div class="familie-box-content">
             <div *ngFor="let kind of persoonFiche.nevenEnNichten" class="link-action" [routerLink]="['/personen/detail', kind.id]">
               <fa-icon class="geslacht" [icon]="kind.geslacht==='MAN'?faMars:faVenus"></fa-icon>
-              {{ kind.naam }} {{ kind.voornaam }}
+              {{ kind.voornaam }} {{ kind.naam }}
             </div>
           </div>
         </div>
@@ -139,12 +149,13 @@
             </div>
             <div class="spacer"></div>
             <div class="acties">
-              <span><fa-icon [icon]="faEdit" tpTrigger="click" [tpData]="relatie"
+              <span class="actie"><fa-icon [icon]="faEdit" tpTrigger="click" [tpData]="relatie"
                              [tp]="UpdateHuwelijkComponent"></fa-icon></span>
               <span class="actie" (click)="documentToevoegen(null, relatie)"><fa-icon
                 [icon]="faFileText"></fa-icon></span>
-              <span class="actie" (click)="persoonAanRelatieToevoegen(null, relatie)"><fa-icon
-                [icon]="faDiagramSuccessor"></fa-icon></span>
+              <span class="actie" (click)="persoonAanRelatieToevoegen(null, relatie)">
+              <svg-icon-sprite [src]="'assets/sprites/sprite.svg#child'" [width]="'16px'" [viewBox]="'0 0 320 512'"></svg-icon-sprite>
+              </span>
             </div>
           </div>
           <div class="relatie-subtitel">

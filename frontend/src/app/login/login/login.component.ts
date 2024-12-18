@@ -8,6 +8,7 @@ import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angula
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
+import {IconSpriteModule} from "ng-svg-icon-sprite";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ import {MatInput} from "@angular/material/input";
     MatFormField,
     MatInput,
     MatLabel,
-    MatSuffix
+    MatSuffix,
+    IconSpriteModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'

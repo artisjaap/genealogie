@@ -5,14 +5,14 @@
   <form class="default-form" [ngrxFormState]="formState">
     <div class="form-line">
       <mat-form-field>
-        <mat-label>Naam</mat-label>
-        <input matInput maxlength="256" placeholder="Naam"
-               [ngrxFormControlState]="formState.controls.naam">
-      </mat-form-field>
-      <mat-form-field>
         <mat-label>Voornaam</mat-label>
         <input matInput maxlength="256" placeholder="Voornamen"
                [ngrxFormControlState]="formState.controls.voornaam">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Naam</mat-label>
+        <input matInput maxlength="256" placeholder="Naam"
+               [ngrxFormControlState]="formState.controls.naam">
       </mat-form-field>
     </div>
     <div class="form-line">

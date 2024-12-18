@@ -43,6 +43,7 @@ import {UpdateHuwelijkComponent} from "./update-huwelijk/update-huwelijk.compone
 import {FamilieTreeComponent} from "../familie-tree/familie-tree.component";
 import {UpdatePersoonsgegevensComponent} from "./update-persoonsgegevens/update-persoonsgegevens.component";
 import {PersoonReferenceComponent} from "../persoon-reference/persoon-reference.component";
+import {IconSpriteModule} from "ng-svg-icon-sprite";
 @Component({
   selector: 'app-persoon-fiche',
   standalone: true,
@@ -58,7 +59,8 @@ import {PersoonReferenceComponent} from "../persoon-reference/persoon-reference.
     FamilieTreeComponent,
     NgClass,
     DatePipe,
-    PersoonReferenceComponent
+    PersoonReferenceComponent,
+    IconSpriteModule
   ],
   templateUrl: './persoon-fiche.component.html',
   styleUrl: './persoon-fiche.component.scss'

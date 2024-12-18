@@ -7,7 +7,8 @@
     "build": "ng build",
     "buildtst": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate:svg-sprite": "svg2sprite ./src/assets/icons ./src/assets/sprites/sprite.svg --stripAttrs fill --stripAttrs stroke --stripAttrs id"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +32,7 @@
     "@ngrx/store": "^18.1.1",
     "@ngrx/store-devtools": "^18.1.1",
     "echarts": "^5.5.1",
+    "ng-svg-icon-sprite": "^1.14.0",
     "ngrx-forms": "^8.0.0",
     "ngx-echarts": "^18.0.0",
     "rxjs": "~7.8.0",
@@ -48,6 +50,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.5.4"
+    "typescript": "~5.5.4",
+    "svg2sprite-cli": "^2.0.1"
   }
 }
