@@ -5,9 +5,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class LoginUserDto {
+public class LoginUserResponseDto {
+    private String naam;
+    private String voornaam;
     private String email;
-    private String password;
-
-
 }

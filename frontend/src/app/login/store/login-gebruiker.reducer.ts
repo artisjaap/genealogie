@@ -1,14 +1,11 @@
 import {Action, createReducer, on} from "@ngrx/store";
-import {GebruikerDto} from "../../model/login-dto";
-import {personenGevonden} from "../../personen/store/personen.acties";
-import {PersoonDataState} from "../../personen/store/personen-persoon.reducer";
-import {gebruikerIngelogged} from "./login.acties";
-import {LoginState} from "./login.reducer";
+import {LoginResponseDto} from "../../model/login-dto";
+import {gebruikerIngelogged, nieuweGebruikerAangemaakt} from "./login.acties";
 
 export const loginPersoonFeatureKey = 'loginPersoon';
 
 export interface LoginPersoonState {
-  ingelogdeGebruiker: GebruikerDto | undefined;
+  ingelogdeGebruiker: LoginResponseDto | undefined;
 }
 
 export const loginPersoonInitialState: LoginPersoonState = {
@@ -17,9 +14,14 @@ export const loginPersoonInitialState: LoginPersoonState = {
 
 const createLoginPersoonReducer = createReducer(
   loginPersoonInitialState,
-  on(gebruikerIngelogged, (state: LoginPersoonState, {gebruiker}) => ({
+  on(gebruikerIngelogged, (state: LoginPersoonState, {loginUser}) => ({
     ...state,
-   ingelogdeGebruiker: gebruiker
+    ingelogdeGebruiker: loginUser
+
+  })),
+  on(nieuweGebruikerAangemaakt, (state: LoginPersoonState, {loginUser}) => ({
+    ...state,
+    ingelogdeGebruiker: loginUser
 
   })),
 );

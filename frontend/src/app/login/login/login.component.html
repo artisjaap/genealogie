@@ -1,2 +1,27 @@
-<p>login works!</p>
-<button (click)="login()">login</button>
+
+<form [formGroup]="loginForm">
+  <div class="infocard">
+    <p class="infocard-titel">Login</p>
+    <div class="infocard-body">
+      <div class="infocard-sectie">
+        <div class="infocard-row">
+          <mat-form-field>
+            <mat-label>email</mat-label>
+            <input matInput formControlName="login">
+          </mat-form-field>
+        </div>
+        <div class="infocard-row">
+          <mat-form-field>
+            <mat-label>wachtwoord</mat-label>
+            <input matInput formControlName="wachtwoord" type="password">
+          </mat-form-field>
+        </div>
+        <div class="infocard-row">
+          <button type="button" (click)="login()">login</button>
+          <span [routerLink]="['/login', 'registreer']">registreer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+

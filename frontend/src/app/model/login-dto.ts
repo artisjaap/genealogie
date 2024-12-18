@@ -12,9 +12,17 @@ export class RegistreerGebruikerDto {
   }
 }
 
-export class GebruikerDto {
+export class LoginUserResponseDto {
   public constructor(public naam: string,
-                     public email: string,
+                     public voornaam: string,
+                     public email: string){
+
+  }
+}
+
+export class LoginResponseDto {
+  public constructor(public gebruiker: LoginUserResponseDto,
+                     public expiresIn: number,
                      public token: string) {
   }
 }

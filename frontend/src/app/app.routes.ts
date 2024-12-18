@@ -1,6 +1,7 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
+import {isIngelogged} from "./login/guard/AuthGuard";
 
 const routes: Routes = [
   {
@@ -11,10 +12,12 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate: [isIngelogged],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
   },
   {
     path: 'personen',
+    canActivate: [isIngelogged],
     loadChildren: () => import('./personen/personen.module').then(m => m.PersonenModule),
   },
   {

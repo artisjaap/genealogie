@@ -1,7 +1,8 @@
 package be.genealogie.controller;
 
-import be.genealogie.controller.dto.LoginResponse;
+import be.genealogie.controller.dto.LoginResponseDto;
 import be.genealogie.controller.dto.LoginUserDto;
+import be.genealogie.controller.dto.LoginUserResponseDto;
 import be.genealogie.controller.dto.RegisterUserDto;
 import be.genealogie.domein.entiteit.Gebruiker;
 import be.genealogie.service.AuthenticationService;
@@ -24,21 +25,28 @@ public class AuthenticatieController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<Gebruiker> register(@RequestBody RegisterUserDto registerUserDto) {
+    public ResponseEntity<LoginResponseDto> register(@RequestBody RegisterUserDto registerUserDto) {
         Gebruiker registeredUser = authenticationService.signup(registerUserDto);
-
-        return ResponseEntity.ok(registeredUser);
+        return authenticate(LoginUserDto.builder()
+                .email(registerUserDto.getEmail())
+                .password(registerUserDto.getPassword())
+                .build());
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
+    public ResponseEntity<LoginResponseDto> authenticate(@RequestBody LoginUserDto loginUserDto) {
         Gebruiker authenticatedUser = authenticationService.authenticate(loginUserDto);
 
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
-        LoginResponse loginResponse = LoginResponse.builder()
+        LoginResponseDto loginResponse = LoginResponseDto.builder()
                 .token(jwtToken)
                 .expiresIn(jwtService.getExpirationTime())
+                .gebruiker(LoginUserResponseDto.builder()
+                        .email(loginUserDto.getEmail())
+                        .naam(authenticatedUser.getNaam())
+                        .voornaam(authenticatedUser.getVoornaam())
+                        .build())
                 .build();
 
         return ResponseEntity.ok(loginResponse);

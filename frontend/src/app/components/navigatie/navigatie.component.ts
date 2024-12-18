@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
+import {LoginWidgetComponent} from "../../login/components/login-widget/login-widget.component";
 
 @Component({
   selector: 'app-navigatie',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    LoginWidgetComponent
   ],
   templateUrl: './navigatie.component.html',
   styleUrl: './navigatie.component.scss'

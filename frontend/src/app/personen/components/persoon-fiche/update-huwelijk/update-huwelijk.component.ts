@@ -39,6 +39,7 @@ export class UpdateHuwelijkComponent implements OnInit {
   tippy = inject(TIPPY_REF);
 
   private formBuilder = inject(FormBuilder);
+
   huwelijksgegevensForm = this.formBuilder.group({
     id: new FormControl<number>(0, [Validators.required]),
     gehuwdOp: new FormControl<Date | null>(null),

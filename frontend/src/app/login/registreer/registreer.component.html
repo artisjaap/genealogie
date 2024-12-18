@@ -1,2 +1,37 @@
-<p>registreer works!</p>
-<button (click)="registreer()">registreer</button>
+<p>Registreer</p>
+<form [formGroup]="registreerForm">
+  <div class="infocard">
+    <p class="infocard-titel">Registreer gebruiker</p>
+    <div class="infocard-body">
+      <div class="infocard-sectie">
+        <div class="infocard-row">
+          <mat-form-field>
+            <mat-label>email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+        </div>
+        <div class="infocard-row">
+          <mat-form-field>
+            <mat-label>wachtwoord</mat-label>
+            <input matInput formControlName="wachtwoord" type="password">
+          </mat-form-field>
+        </div>
+        <div class="infocard-row">
+          <mat-form-field>
+            <mat-label>Voornaam</mat-label>
+            <input matInput formControlName="voornaam">
+          </mat-form-field>
+        </div>
+        <div class="infocard-row">
+          <mat-form-field>
+            <mat-label>Naam</mat-label>
+            <input matInput formControlName="naam">
+          </mat-form-field>
+        </div>
+        <div class="infocard-row">
+          <button type="button" (click)="registreer()">registreer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
