@@ -1,5 +1,6 @@
 package be.genealogie.applicatie;
 
+import be.genealogie.applicatie.mapper.NatuurlijkPersoonMapper;
 import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
 import be.genealogie.domein.repository.NatuurlijkPersoonRepository;
@@ -26,6 +27,6 @@ public class DefaultNatuurlijkPersoonWijzigen implements NatuurlijkPersoonWijzig
                 .overledenTe(persoon.getOverledenTe())
                 .build();
         NatuurlijkPersoon save = natuurlijkPersoonRepository.save(gewijzigdePersoon);
-        return modelMapper.map(save, NatuurlijkPersoonDTO.class);
+        return NatuurlijkPersoonMapper.map(save);
     }
 }

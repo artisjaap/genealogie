@@ -1,10 +1,10 @@
 package be.genealogie.applicatie;
 
+import be.genealogie.applicatie.mapper.NatuurlijkPersoonMapper;
 import be.genealogie.domein.dto.*;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
 import be.genealogie.domein.repository.NatuurlijkPersoonRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,18 +16,18 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
     private final ReleatiesZoeken releatiesZoeken;
     private final DocumentZoeken documentZoeken;
     private final NatuurlijkPersoonRepository natuurlijkPersoonRepository;
-    private final ModelMapper modelMapper;
+
 
     @Override
     public List<NatuurlijkPersoonDTO> alle() {
         List<NatuurlijkPersoon> all = natuurlijkPersoonRepository.findAll();
-        return mapLijst(all);
+        return NatuurlijkPersoonMapper.mapLijst(all);
     }
 
     @Override
     public List<NatuurlijkPersoonDTO> voorZoekstring(String zoekString) {
         List<NatuurlijkPersoon> all = natuurlijkPersoonRepository.findByNaamLikeOrVoornaamLike(zoekString);
-        return mapLijst(all);
+        return NatuurlijkPersoonMapper.mapLijst(all);
     }
 
     @Override
@@ -57,12 +57,9 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
 
     private NatuurlijkPersoonDTO natuurlijkPersoonDTO(Long persoonId) {
         NatuurlijkPersoon persoon = natuurlijkPersoonRepository.getById(persoonId);
-        NatuurlijkPersoonDTO persoonDto = modelMapper.map(persoon, NatuurlijkPersoonDTO.class);
-        return persoonDto;
+        return NatuurlijkPersoonMapper.map(persoon);
     }
 
 
-    private List<NatuurlijkPersoonDTO> mapLijst(List<NatuurlijkPersoon> all) {
-        return all.stream().map(e -> modelMapper.map(e, NatuurlijkPersoonDTO.class)).toList();
-    }
+
 }

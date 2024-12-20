@@ -7,7 +7,13 @@ import java.util.List;
 
 @Builder
 @Data
-public class NonkelsEnTantesDto {
+public class NonkelsEnTantesDto implements HeeftNatuurlijkPersoonDto {
     private NatuurlijkPersoonDTO natuurlijkPersoon;
     private List<AangetrouwdDto> aangetrouwd;
+
+
+    @Override
+    public NatuurlijkPersoonDTO natuurlijkPersoon() {
+        return natuurlijkPersoon;
+    }
 }

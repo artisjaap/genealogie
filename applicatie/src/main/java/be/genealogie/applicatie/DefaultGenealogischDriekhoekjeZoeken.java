@@ -1,12 +1,9 @@
 package be.genealogie.applicatie;
 
-import be.genealogie.domein.dto.AangetrouwdDto;
-import be.genealogie.domein.dto.BroerOfZusDto;
-import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
-import be.genealogie.domein.dto.NonkelsEnTantesDto;
+import be.genealogie.applicatie.mapper.NatuurlijkPersoonMapper;
+import be.genealogie.domein.dto.*;
 import be.genealogie.domein.entiteit.GenealogischDriekhoekje;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
-import be.genealogie.domein.entiteit.Relatie;
 import be.genealogie.domein.repository.GenealogischDriekhoekjeRepository;
 import be.genealogie.domein.repository.NatuurlijkPersoonRepository;
 import be.genealogie.domein.repository.RelatieRepository;
@@ -31,7 +28,7 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
         NatuurlijkPersoon persoonDb = persoonRepository.getById(persoon.getId());
         return genealogischDriekhoekjeRepository.findByKind(persoonDb)
                 .map(GenealogischDriekhoekje::moeder)
-                .map(moeder -> modelMapper.map(moeder, NatuurlijkPersoonDTO.class));
+                .map(NatuurlijkPersoonMapper::map);
     }
 
     @Override
@@ -39,7 +36,7 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
         NatuurlijkPersoon persoonDb = persoonRepository.getById(persoon.getId());
         return genealogischDriekhoekjeRepository.findByKind(persoonDb)
                 .map(GenealogischDriekhoekje::vader)
-                .map(vader -> modelMapper.map(vader, NatuurlijkPersoonDTO.class));
+                .map(NatuurlijkPersoonMapper::map);
     }
 
     @Override
@@ -48,9 +45,12 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
         return genealogischDriekhoekjeRepository.zoekOpOuder(persoonDb)
                 .stream()
                 .map(GenealogischDriekhoekje::getKind)
-                .map(kind -> modelMapper.map(kind, NatuurlijkPersoonDTO.class))
+                .map(NatuurlijkPersoonMapper::map)
+                .sorted(HeeftNatuurlijkPersoonDto.sorteerOpGeboortedatum())
                 .toList();
     }
+
+
 
     @Override
     public List<BroerOfZusDto> broersEnZussenVan(NatuurlijkPersoonDTO persoon) {
@@ -61,9 +61,10 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
                 .filter(p -> !Objects.equals(persoon.getId(), p.getKind().getId()))
                 .map(huidigDriehoekje ->
                         BroerOfZusDto.builder()
-                                .natuurlijkPersoon(modelMapper.map(huidigDriehoekje.getKind(), NatuurlijkPersoonDTO.class))
+                                .natuurlijkPersoon(NatuurlijkPersoonMapper.map(huidigDriehoekje.getKind()))
                                 .isHalf(!huidigDriehoekje.heeftDezelfdeOudersAls(driehoekje))
                                 .build())
+                .sorted(HeeftNatuurlijkPersoonDto.sorteerOpGeboortedatum())
                 .collect(Collectors.toList())).orElseGet(List::of);
     }
 
@@ -77,13 +78,14 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
         NatuurlijkPersoon persoonDb = persoonRepository.getById(persoon.getId());
         return genealogischDriekhoekjeRepository.findByKind(persoonDb)
                 .map(driehoekje ->
-                        Stream.of(broersEnZussenVan(modelMapper.map(driehoekje.getOuder1(), NatuurlijkPersoonDTO.class)),
-                                        broersEnZussenVan(modelMapper.map(driehoekje.getOuder2(), NatuurlijkPersoonDTO.class)))
+                        Stream.of(broersEnZussenVan(NatuurlijkPersoonMapper.map(driehoekje.getOuder1())),
+                                        broersEnZussenVan(NatuurlijkPersoonMapper.map(driehoekje.getOuder2())))
                                 .flatMap(Collection::stream)
                                 .map(broefOfZus -> NonkelsEnTantesDto.builder()
-                                        .natuurlijkPersoon(broefOfZus.getNatuurlijkPersoon())
-                                        .aangetrouwd(aangetrouwdMet(broefOfZus.getNatuurlijkPersoon()))
+                                        .natuurlijkPersoon(broefOfZus.natuurlijkPersoon())
+                                        .aangetrouwd(aangetrouwdMet(broefOfZus.natuurlijkPersoon()))
                                         .build())
+                                .sorted(HeeftNatuurlijkPersoonDto.sorteerOpGeboortedatum())
                                 .toList()
                 ).orElseGet(Collections::emptyList);
     }
@@ -93,9 +95,10 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
         return relatieRepository.zoekRelatiesMet(persoon)
                 .stream()
                 .map(relatie -> AangetrouwdDto.builder()
-                        .natuurlijkPersoon(modelMapper.map(relatie.partnerVan(persoon), NatuurlijkPersoonDTO.class))
+                        .natuurlijkPersoon(NatuurlijkPersoonMapper.map(relatie.partnerVan(persoon)))
                         .actief(!Optional.ofNullable(relatie.getUitElkaar()).orElse(false))
                         .build())
+                .sorted(HeeftNatuurlijkPersoonDto.sorteerOpGeboortedatum())
                 .toList();
     }
 }

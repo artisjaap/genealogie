@@ -1,7 +1,7 @@
 package be.genealogie.applicatie;
 
-import be.genealogie.domein.dto.RelatieUpdateDto;
 import be.genealogie.domein.dto.RelatieDto;
+import be.genealogie.domein.dto.RelatieUpdateDto;
 import be.genealogie.domein.dto.ScheidingDto;
 
 public interface RelatieWijzigen {

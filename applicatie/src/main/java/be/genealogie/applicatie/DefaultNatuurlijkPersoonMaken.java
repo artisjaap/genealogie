@@ -1,11 +1,15 @@
 package be.genealogie.applicatie;
 
+import be.genealogie.applicatie.mapper.NatuurlijkPersoonMapper;
 import be.genealogie.applicatie.validatie.NatuurlijkPersoonValidator;
-import be.genealogie.domein.dto.*;
-import be.genealogie.domein.entiteit.Relatie;
+import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
+import be.genealogie.domein.dto.NieuwNatuurlijkPersoonDTO;
+import be.genealogie.domein.dto.RelatieDto;
+import be.genealogie.domein.dto.RelatieMetNieuwNatuurlijkPersoonDto;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
-import be.genealogie.domein.repository.RelatieRepository;
+import be.genealogie.domein.entiteit.Relatie;
 import be.genealogie.domein.repository.NatuurlijkPersoonRepository;
+import be.genealogie.domein.repository.RelatieRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -25,7 +29,7 @@ public class DefaultNatuurlijkPersoonMaken implements NatuurlijkPersoonMaken {
         NatuurlijkPersoon natuurlijkPersoon = modelMapper.map(natuurlijkPersoonDTO, NatuurlijkPersoon.class);
         natuurlijkPersoonValidator.valideerVoorInsert(natuurlijkPersoon);
         NatuurlijkPersoon gewijzigdNatuurlijkPersoon = natuurlijkPersoonRepository.save(natuurlijkPersoon);
-        return modelMapper.map(gewijzigdNatuurlijkPersoon, NatuurlijkPersoonDTO.class);
+        return NatuurlijkPersoonMapper.map(gewijzigdNatuurlijkPersoon);
     }
 
     @Override

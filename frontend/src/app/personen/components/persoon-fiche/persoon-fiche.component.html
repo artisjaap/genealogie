@@ -12,7 +12,7 @@
                      [icon]="persoonFiche.natuurlijkPersoon.geslacht==='MAN'?faMars:faVenus"></fa-icon>
 
             <span class="sterrebeeld">
-<!--              <svg-icon-sprite  [src]="'assets/sprites/sprite.svg#Aquarius'" [width]="'32px'" [viewBox]="'0 0 749.2 339.58'"></svg-icon-sprite>-->
+              <svg-icon-sprite  [src]="'assets/sprites/sprite.svg#' + persoonFiche.natuurlijkPersoon.sterrenbeeld" [width]="'32px'" [viewBox]="sterrenbeeldViewbox[persoonFiche.natuurlijkPersoon.sterrenbeeld!]"></svg-icon-sprite>
 
             </span>
 
@@ -41,6 +41,10 @@
             <span class="value">{{ persoonFiche.natuurlijkPersoon.naam }}</span>
           </div>
 
+          <div class="eigenschap">
+            <span class="label">Leeftijd </span>
+            <span class="value">{{ persoonFiche.natuurlijkPersoon.leeftijd }} </span>
+          </div>
 
           <div class="eigenschap">
             <span class="label">Geboren </span>

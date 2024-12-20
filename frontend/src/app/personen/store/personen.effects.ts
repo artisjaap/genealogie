@@ -186,7 +186,7 @@ export class PersonenEffects {
 
 
   private formDataNaarDto(formData : NatuurlijkPersoonFormValue): NatuurlijkPersoonDto{
-    return new NatuurlijkPersoonDto(0, formData.naam, formData.voornaam, formData.geslacht, new Date(formData.geborenOp), '', new Date(formData.overledenOp), '');
+    return new NatuurlijkPersoonDto(0, formData.naam, formData.voornaam, formData.geslacht, new Date(formData.geborenOp), '', new Date(formData.overledenOp), '', null, null);
   }
 
   constructor(
@@ -198,8 +198,8 @@ export class PersonenEffects {
   ) {}
 
   private oudersFormDataNaarDto(value: OudersVoorPersoonFormValue, persoon: NatuurlijkPersoonFicheDto | undefined) {
-    let vader: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.persoon1naam, value.persoon1voornaam, 'MAN', new Date(value.persoon1geborenOp), "", new Date(value.persoon1overledenOp), "");
-    let moeder: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.persoon2naam, value.persoon2voornaam, 'VROUW', new Date(value.persoon2geborenOp), "", new Date(value.persoon2overledenOp), "");
+    let vader: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.persoon1naam, value.persoon1voornaam, 'MAN', new Date(value.persoon1geborenOp), "", new Date(value.persoon1overledenOp), "", null, null);
+    let moeder: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.persoon2naam, value.persoon2voornaam, 'VROUW', new Date(value.persoon2geborenOp), "", new Date(value.persoon2overledenOp), "", null, null);
     let kind: NatuurlijkPersoonDto|undefined = persoon?.natuurlijkPersoon;
 
     return new OudersVanKindDto(moeder, vader, kind);
@@ -207,7 +207,7 @@ export class PersonenEffects {
 
   private kindRelatieFormDataNaarDto(value: NatuurlijkPersoonVoorRelatieFormValue, relatieDto : RelatieDto | null) : KindUitRelatieDto{
     let relatie: RelatieIdDto = new RelatieIdDto(relatieDto?relatieDto.id:0);
-    let natuurlijkPersoon: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.naam, value.voornaam, value.geslacht, new Date(value.geborenOp), null, new Date(value.overledenOp), null);
+    let natuurlijkPersoon: NatuurlijkPersoonDto = new NatuurlijkPersoonDto(0, value.naam, value.voornaam, value.geslacht, new Date(value.geborenOp), null, new Date(value.overledenOp), null, null, null);
     return new KindUitRelatieDto(relatie, natuurlijkPersoon);
   }
 
@@ -215,7 +215,7 @@ export class PersonenEffects {
 
     return new RelatieMetNieuwNatuurlijkPersoonDto(
       bestaandPersoon,
-      new NatuurlijkPersoonDto(0, value.naam, value.voornaam, value.geslacht, new Date(value.geborenOp), "", new Date(value.overledenOp), ""),
+      new NatuurlijkPersoonDto(0, value.naam, value.voornaam, value.geslacht, new Date(value.geborenOp), "", new Date(value.overledenOp), "", null, null),
       null,
       null
     );

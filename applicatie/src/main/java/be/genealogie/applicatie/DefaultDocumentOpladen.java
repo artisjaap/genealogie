@@ -1,6 +1,10 @@
 package be.genealogie.applicatie;
 
-import be.genealogie.domein.dto.*;
+import be.genealogie.applicatie.mapper.NatuurlijkPersoonMapper;
+import be.genealogie.domein.dto.DocumentDto;
+import be.genealogie.domein.dto.DocumentToegevoegdDto;
+import be.genealogie.domein.dto.DocumentTypeDto;
+import be.genealogie.domein.dto.RelatieDto;
 import be.genealogie.domein.entiteit.Document;
 import be.genealogie.domein.entiteit.NatuurlijkPersoon;
 import be.genealogie.domein.entiteit.Relatie;
@@ -19,8 +23,8 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class DefaultDocumentOpladen implements DocumentOpladen{
-    
+public class DefaultDocumentOpladen implements DocumentOpladen {
+
     private final ApplicationProperties applicationProperties;
     private final DocumentRepository documentRepository;
     private final DocumentTypeRepository documentTypeRepository;
@@ -41,19 +45,19 @@ public class DefaultDocumentOpladen implements DocumentOpladen{
         File file = new File(basePath + subPath, documentDto.getOrigineleFilename());
 
         DocumentToegevoegdDto.DocumentToegevoegdDtoBuilder builder = DocumentToegevoegdDto.builder()
-            .documentType(documentTypeDto)
+                .documentType(documentTypeDto)
                 .relatieDto(Optional.ofNullable(relatie).map(r -> modelMapper.map(r, RelatieDto.class)).orElse(null))
-                .natuurlijkPersoonDTO(Optional.ofNullable(natuurlijkPersoon).map(np -> modelMapper.map(np, NatuurlijkPersoonDTO.class)).orElse(null))
+                .natuurlijkPersoonDTO(Optional.ofNullable(natuurlijkPersoon).map(NatuurlijkPersoonMapper::map).orElse(null))
                 .pathNaarDocument(documentDto.getOrigineleFilename());
         try {
             FileUtils.writeByteArrayToFile(file, documentDto.getBytes());
 
             documentRepository.save(Document.builder()
-                            .documentType(documentTypeRepository.getById(documentDto.getDocumentTypeId()))
-                            .relatie(relatie)
-                            .natuurlijkPersoon(natuurlijkPersoon)
-                            .transcript(documentDto.getTranscript())
-                            .pathNaarDocument(subPath + documentDto.getOrigineleFilename())
+                    .documentType(documentTypeRepository.getById(documentDto.getDocumentTypeId()))
+                    .relatie(relatie)
+                    .natuurlijkPersoon(natuurlijkPersoon)
+                    .transcript(documentDto.getTranscript())
+                    .pathNaarDocument(subPath + documentDto.getOrigineleFilename())
 
                     .build());
         } catch (IOException e) {
@@ -63,10 +67,10 @@ public class DefaultDocumentOpladen implements DocumentOpladen{
     }
 
     private String berekenSubPath(Relatie relatie, NatuurlijkPersoon natuurlijkPersoon, DocumentTypeDto documentTypeDto) {
-        if(relatie != null){
+        if (relatie != null) {
             return documentTypeDto.getCode() + "/R" + relatie.getId() + "/";
         }
-        if(natuurlijkPersoon != null){
+        if (natuurlijkPersoon != null) {
             return documentTypeDto.getCode() + "/N" + natuurlijkPersoon.getId() + "/";
         }
         return documentTypeDto.getCode() + "/";

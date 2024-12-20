@@ -1,5 +1,6 @@
 package be.genealogie.applicatie;
 
+import be.genealogie.applicatie.mapper.NatuurlijkPersoonMapper;
 import be.genealogie.domein.dto.NatuurlijkPersoonDTO;
 import be.genealogie.domein.dto.RelatieDto;
 import be.genealogie.domein.entiteit.GenealogischDriekhoekje;
@@ -31,15 +32,15 @@ public class DefaultRelatiesZoeken implements ReleatiesZoeken{
         return relaties.stream()
                 .map(relatie -> RelatieDto.builder()
                         .id(relatie.getId())
-                        .persoon1(modelMapper.map(relatie.getPersoon1(), NatuurlijkPersoonDTO.class))
-                        .persoon2(modelMapper.map(relatie.getPersoon2(), NatuurlijkPersoonDTO.class))
+                        .persoon1(NatuurlijkPersoonMapper.map(relatie.getPersoon1()))
+                        .persoon2(NatuurlijkPersoonMapper.map(relatie.getPersoon2()))
                         .gehuwdOp(relatie.getGehuwedOp())
                         .gehuwdTe(relatie.getGehuwedTe())
                         .uitElkaar(relatie.getUitElkaar())
                         .kinderen(getByMoederAndVader(relatie)
                                 .stream()
                                 .map(GenealogischDriekhoekje::getKind)
-                                .map(kind -> modelMapper.map(kind, NatuurlijkPersoonDTO.class))
+                                .map(NatuurlijkPersoonMapper::map)
                                 .toList()
                         )
                         .build()).toList();

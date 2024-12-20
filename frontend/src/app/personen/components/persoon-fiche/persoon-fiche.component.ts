@@ -68,6 +68,7 @@ import {IconSpriteModule} from "ng-svg-icon-sprite";
 export class PersoonFicheComponent {
   readonly dialog = inject(MatDialog);
 
+  public sterrenbeeldViewbox:any = {};
 
   public persoonFiche$: Observable<NatuurlijkPersoonFicheDto | undefined>;
   private documentDialogRef: MatDialogRef<UploadDocumentComponent, any> | undefined;
@@ -77,6 +78,19 @@ export class PersoonFicheComponent {
 
   constructor(private store: Store<PersonenState>) {
     this.persoonFiche$ = store.select(getGeladenPeroonFiche);
+
+    this.sterrenbeeldViewbox['KREEFT'] = "0 0 637.58 498.08";
+    this.sterrenbeeldViewbox['BOOGSCHUTTER'] = "0 0 494.28 509.95";
+    this.sterrenbeeldViewbox['LEEUW'] = "0 0 515.44 507.57";
+    this.sterrenbeeldViewbox['MAAGD'] = "0 0 645.62 497.17";
+    this.sterrenbeeldViewbox['RAM'] = "0 0 546.03 510.83";
+    this.sterrenbeeldViewbox['SCHORPIOEN'] = "0 0 715.43 510.66";
+    this.sterrenbeeldViewbox['STEENBOK'] = "0 0 551.6 497.9";
+    this.sterrenbeeldViewbox['STIER'] = "0 0 429.44 510.83";
+    this.sterrenbeeldViewbox['TWEELINGEN'] = "0 0 451.14 497.29";
+    this.sterrenbeeldViewbox['VISSEN'] = "0 0 429.31 479.15";
+    this.sterrenbeeldViewbox['WATERMAN'] = "0 0 749.2 339.58";
+    this.sterrenbeeldViewbox['WEEGSCHAAL'] = "0 0 681.73 514.01";
 
     store.select(getToonDocumenten).subscribe(toon => {
       if (toon) {
@@ -198,5 +212,7 @@ export class PersoonFicheComponent {
   protected readonly faMars = faMars;
   protected readonly faRing = faRing;
   protected readonly faMultiply = faMultiply;
+
+
 }
 

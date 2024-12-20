@@ -6,6 +6,8 @@ export class NatuurlijkPersoonDto {
                      public geborenOp: Date | null,
                      public geborenTe: string | null,
                      public overledenOp: Date | null,
-                     public overledenTe: string | null) {
+                     public overledenTe: string | null,
+                     public leeftijd: number | null,
+                     public sterrenbeeld: string | null) {
   }
 }

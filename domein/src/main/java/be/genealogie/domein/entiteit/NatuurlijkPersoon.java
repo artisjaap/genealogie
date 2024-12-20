@@ -1,6 +1,7 @@
 package be.genealogie.domein.entiteit;
 
 import be.genealogie.domein.Geslacht;
+import be.genealogie.domein.utils.LocalDateUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Data
 @Table(name = "NATUURLIJK_PERSOON")
@@ -46,5 +48,11 @@ public class NatuurlijkPersoon {
 
     public String volledigeNaam() {
         return voornaam + " " + naam;
+    }
+
+    public Integer leeftijd() {
+        return Optional.ofNullable(geborenOp)
+                .map(geborenOp -> LocalDateUtils.berekenLeeftijd(geborenOp, Optional.ofNullable(overledenOp).orElse(LocalDate.now())))
+                .orElse(null);
     }
 }
