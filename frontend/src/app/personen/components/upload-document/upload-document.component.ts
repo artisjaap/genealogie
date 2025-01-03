@@ -7,7 +7,6 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {PersonenState} from "../../store/personen.reducer";
 import {Store} from "@ngrx/store";
 import {getGeladenDocumentTypes} from "../../store/personen.selector";
-import {DocumentTypeDto} from "../../../model/document-type-dto";
 import {NgrxFormsModule} from "ngrx-forms";
 import {
   MAT_DIALOG_DATA,
@@ -19,10 +18,10 @@ import {
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
-import {DialogData} from "../../../model/document-upload-data-dts";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {documentOpgeladen, sluitDocumentPopup} from "../../store/personen.acties";
+import {DialogData, DocumentTypeDto} from "../../../model/genealogie-dto";
 
 
 @Component({

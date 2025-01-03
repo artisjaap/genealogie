@@ -2,21 +2,25 @@ import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
 import {Store} from "@ngrx/store";
-import {getGevondenPersonen, getPersonenNieuwForm} from "../../store/personen.selector";
-import {maakNieuwNatuurlijkPersoon, zoekPersonen} from "../../store/personen.acties";
-import {async, first, Observable, tap} from "rxjs";
-import {NatuurlijkPersoonDto} from "../../../model/natuurlijk-persoon-dto";
+import {getGevondenPersonen} from "../../store/personen.selector";
+import {zoekPersonen} from "../../store/personen.acties";
 import {AsyncPipe, DatePipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
-import {faBars, faCircleInfo, faInfo, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {
-  MatCell, MatCellDef,
+  MatCell,
+  MatCellDef,
   MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
   MatTable,
   MatTableDataSource
 } from "@angular/material/table";
+import {NatuurlijkPersoonDto} from "../../../model/genealogie-dto";
 
 
 @Component({

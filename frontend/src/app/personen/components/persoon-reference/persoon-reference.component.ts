@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {NatuurlijkPersoonDto} from "../../../model/natuurlijk-persoon-dto";
 import {RouterLink} from "@angular/router";
 import {faCross, faMars, faVenus} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {NgClass, NgIf} from "@angular/common";
+import {NatuurlijkPersoonDto} from "../../../model/genealogie-dto";
 
 @Component({
   selector: 'app-persoon-reference',

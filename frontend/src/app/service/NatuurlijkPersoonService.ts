@@ -1,17 +1,20 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {NatuurlijkPersoonDto} from "../model/natuurlijk-persoon-dto";
+import {
+  GenealogischDriehoekjeDto,
+  KindUitRelatieDto,
+  NatuurlijkPersoonDto,
+  NatuurlijkPersoonFicheDto,
+  OudersVanKindDto,
+  PersoonsgegevensDto,
+  RelatieDto,
+  RelatieMetNieuwNatuurlijkPersoonDto,
+  RelatieUpdateDto,
+  ScheidingDto,
+  StamboomEchartDto
+} from "../model/genealogie-dto";
 import {Observable} from "rxjs";
-import {NatuurlijkPersoonFicheDto} from "../model/natuurlijk-persoon-fiche-dto";
-import {OudersVanKindDto} from "../model/ouders-van-kind-dto";
-import {KindUitRelatieDto} from "../model/kind-uit-relatie-dto";
-import {GenealogischDriehoekjeDto} from "../model/genealogisch-driehoekje-dto";
-import {RelatieDto} from "../model/relatie-dto";
-import {RelatieMetNieuwNatuurlijkPersoonDto} from "../model/relatie-met-nieuw-natuurlijk-persoon-dto";
-import {RelatieUpdateDto} from "../model/relatie-update-dto";
-import {ScheidingDto} from "../model/scheiding-dto";
-import {StamboomEchartDto} from "../model/stamboom-echart-dto";
-import {PersoonsgegevensDto} from "../model/persoonsgegevens-dto";
+
 
 @Injectable({
   providedIn: 'root'

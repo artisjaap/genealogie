@@ -1,8 +1,8 @@
 import {Action, createReducer, on} from '@ngrx/store';
-import {NatuurlijkPersoonDto} from "../../model/natuurlijk-persoon-dto";
 import {
   documentOpgeladen,
-  documentTypesGeladen, nakomelingenVanGeladen,
+  documentTypesGeladen,
+  nakomelingenVanGeladen,
   natuurlijkPersoonFicheGeladen,
   natuurlijkPersoonVoorRelatieAangemaakt,
   oudersVanNatuurlijkPersoonAangemaakt,
@@ -15,12 +15,16 @@ import {
   toonDocumentPopup,
   toonOudersVanPersoon,
   toonPersoonVoorRelatie,
-  toonVoegRelatieToeMet, vooroudersVanGeladen
+  toonVoegRelatieToeMet,
+  vooroudersVanGeladen
 } from "./personen.acties";
-import {NatuurlijkPersoonFicheDto} from "../../model/natuurlijk-persoon-fiche-dto";
-import {DocumentTypeDto} from "../../model/document-type-dto";
-import {DialogData} from "../../model/document-upload-data-dts";
-import {StamboomEchartDto} from "../../model/stamboom-echart-dto";
+import {
+  DialogData,
+  DocumentTypeDto,
+  NatuurlijkPersoonDto,
+  NatuurlijkPersoonFicheDto,
+  StamboomEchartDto
+} from "../../model/genealogie-dto";
 
 export const personenInfoFeatureKey = 'personenInfo';
 
@@ -31,7 +35,7 @@ export interface PersoonDataState {
   vooroudersVan: StamboomEchartDto | undefined,
   nakomelingenVan: StamboomEchartDto | undefined,
   documentTypes: DocumentTypeDto[],
-  popups : {
+  popups: {
     toonDocumentPopup: {
       state: boolean,
       dialogData: DialogData | null
@@ -56,9 +60,9 @@ export const personenInitialState: PersoonDataState = {
   gevondenPersonen: [],
   geladenPersoonFiche: undefined,
   vooroudersVan: undefined,
-  nakomelingenVan:  undefined,
+  nakomelingenVan: undefined,
   documentTypes: [],
-  popups : {
+  popups: {
     toonDocumentPopup: {
       state: false,
       dialogData: null
@@ -167,15 +171,15 @@ const createThePersonenReducer = createReducer(
     }
   })),
   on(sluitDocumentPopup, (state: PersoonDataState) => ({
-  ...state,
-  popups: {
-    ...state.popups,
-    toonDocumentPopup: {
-      state: false,
-      dialogData: null
+    ...state,
+    popups: {
+      ...state.popups,
+      toonDocumentPopup: {
+        state: false,
+        dialogData: null
+      }
     }
-  }
-})),
+  })),
   on(documentOpgeladen, (state: PersoonDataState) => ({
     ...state,
     popups: {

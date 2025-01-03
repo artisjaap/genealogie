@@ -8,17 +8,14 @@ import {
   getPersoonVoorRelatie,
   getPersoonVoorRelatieData,
   getToonDocumenten,
-  getToonDocumentenData, getVoegRelatieToeMet
+  getToonDocumentenData,
+  getVoegRelatieToeMet
 } from "../../store/personen.selector";
-import {NatuurlijkPersoonFicheDto} from "../../../model/natuurlijk-persoon-fiche-dto";
 import {Observable, take} from "rxjs";
 import {AsyncPipe, DatePipe, JsonPipe, NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {UploadDocumentComponent} from "../upload-document/upload-document.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {NatuurlijkPersoonDto} from "../../../model/natuurlijk-persoon-dto";
-import {RelatieDto} from "../../../model/relatie-dto";
-import {DialogData} from "../../../model/document-upload-data-dts";
 import {OudersVanPersoonComponent} from "../ouders-van-persoon/ouders-van-persoon.component";
 import {PersoonVoorRelatieComponent} from "../persoon-voor-relatie/persoon-voor-relatie.component";
 import {
@@ -32,8 +29,12 @@ import {
   faDiagramPredecessor,
   faDiagramSuccessor,
   faEdit,
-  faFileText, faMars, faMultiply,
-  faPerson, faRing, faVenus,
+  faFileText,
+  faMars,
+  faMultiply,
+  faPerson,
+  faRing,
+  faVenus,
 } from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 import {DocumentPopupComponent} from "../document-popup/document-popup.component";
@@ -44,6 +45,8 @@ import {FamilieTreeComponent} from "../familie-tree/familie-tree.component";
 import {UpdatePersoonsgegevensComponent} from "./update-persoonsgegevens/update-persoonsgegevens.component";
 import {PersoonReferenceComponent} from "../persoon-reference/persoon-reference.component";
 import {IconSpriteModule} from "ng-svg-icon-sprite";
+import {DialogData, NatuurlijkPersoonDto, NatuurlijkPersoonFicheDto, RelatieDto} from "../../../model/genealogie-dto";
+
 @Component({
   selector: 'app-persoon-fiche',
   standalone: true,

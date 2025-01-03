@@ -3,17 +3,14 @@ import {TIPPY_REF} from "@ngneat/helipopper";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {NgrxFormsModule, NgrxValueConverters} from "ngrx-forms";
+import {NgrxFormsModule} from "ngrx-forms";
 import {MatButton} from "@angular/material/button";
 import {Store} from "@ngrx/store";
 import {PersonenState} from "../../../store/personen.reducer";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {wijzigRelatie, wijzigPersoonsgegevens} from "../../../store/personen.acties";
-import {RelatieUpdateDto} from "../../../../model/relatie-update-dto";
-import {getGeladenPeroonFiche} from "../../../store/personen.selector";
-import {PersoonsgegevensDto} from "../../../../model/persoonsgegevens-dto";
-import {RelatieDto} from "../../../../model/relatie-dto";
+import {wijzigRelatie} from "../../../store/personen.acties";
 import {MatCheckbox} from "@angular/material/checkbox";
+import {RelatieDto, RelatieUpdateDto} from "../../../../model/genealogie-dto";
 
 @Component({
   selector: 'app-update-huwelijk',

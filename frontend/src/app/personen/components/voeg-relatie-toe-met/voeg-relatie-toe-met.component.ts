@@ -15,7 +15,7 @@ import {Store} from "@ngrx/store";
 import {getPersoonVoorRelatieMetForm} from "../../store/personen.selector";
 import {maakRelatieMet, sluitVoegRelatieToeMet} from "../../store/personen.acties";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
-import {NatuurlijkPersoonDto} from "../../../model/natuurlijk-persoon-dto";
+import {NatuurlijkPersoonDto} from "../../../model/genealogie-dto";
 
 @Component({
   selector: 'app-voeg-relatie-toe-met',

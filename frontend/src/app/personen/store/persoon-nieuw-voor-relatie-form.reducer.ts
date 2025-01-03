@@ -1,7 +1,6 @@
 import {Action, createReducer, on} from '@ngrx/store';
 import {createFormGroupState, FormGroupState, onNgrxForms} from "ngrx-forms";
-import {PersonenNieuwFormState} from "./personen-nieuw-persoon-form.reducer";
-import {natuurlijkPersoonVoorRelatieAangemaakt, relatieMetNatuurlijkPersoonAangemaakt} from "./personen.acties";
+import {natuurlijkPersoonVoorRelatieAangemaakt} from "./personen.acties";
 
 export const personenNieuwVoorRelatieFormFeatureKey = 'personenNieuwVoorRelatieForm';
 

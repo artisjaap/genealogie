@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {DocumentTypeDto} from "../model/document-type-dto";
+import {DocumentTypeDto} from "../model/genealogie-dto";
 
 @Injectable({
   providedIn: 'root'

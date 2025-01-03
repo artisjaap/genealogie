@@ -10,12 +10,11 @@ import {Store} from "@ngrx/store";
 import {getPersoonVoorRelatieForm} from "../../store/personen.selector";
 import {maakNatuurlijkPersoonVoorRelatie, sluitPersoonVoorRelatie} from "../../store/personen.acties";
 import {NatuurlijkPersoonVoorRelatieFormValue} from "../../store/persoon-nieuw-voor-relatie-form.reducer";
-import {provideNativeDateAdapter} from "@angular/material/core";
-import {DialogData} from "../../../model/document-upload-data-dts";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {MatRadioModule} from "@angular/material/radio";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {DialogData} from "../../../model/genealogie-dto";
 
 @Component({
   selector: 'app-persoon-voor-relatie',

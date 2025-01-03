@@ -7,6 +7,8 @@ import be.genealogie.domein.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,8 +43,10 @@ public class NatuurlijkPersoonController {
         return ResponseEntity.ok(natuurlijkPersoonZoeken.alle());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("zoek")
-    public ResponseEntity<List<NatuurlijkPersoonDTO>> zoekNatuurlijkePersonen(@RequestParam String zoekString) {
+    public ResponseEntity<List<NatuurlijkPersoonDTO>> zoekNatuurlijkePersonen(@RequestParam String zoekString, Authentication authentication) {
+        log.info("Login" + authentication.getName());
         return ResponseEntity.ok(natuurlijkPersoonZoeken.voorZoekstring(zoekString));
     }
 

@@ -26,7 +26,7 @@ public class AuthenticatieController {
 
     @PostMapping("/signup")
     public ResponseEntity<LoginResponseDto> register(@RequestBody RegisterUserDto registerUserDto) {
-        Gebruiker registeredUser = authenticationService.signup(registerUserDto);
+        authenticationService.signup(registerUserDto);
         return authenticate(LoginUserDto.builder()
                 .email(registerUserDto.getEmail())
                 .password(registerUserDto.getPassword())

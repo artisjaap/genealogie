@@ -1,5 +1,4 @@
 import {Component, ElementRef, inject, ViewChild} from '@angular/core';
-import {DialogData} from "../../../model/document-upload-data-dts";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({

@@ -2,13 +2,18 @@ package be.genealogie.service;
 
 import be.genealogie.controller.dto.LoginUserDto;
 import be.genealogie.controller.dto.RegisterUserDto;
+import be.genealogie.domein.GebruikerRole;
 import be.genealogie.domein.entiteit.Gebruiker;
+import be.genealogie.domein.entiteit.Machtiging;
 import be.genealogie.domein.repository.GebruikerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,11 +23,18 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public Gebruiker signup(RegisterUserDto input) {
+
+        List<Machtiging> machtigingen = new ArrayList<>();
+        if(gebruikerRepository.count() == 0){
+            machtigingen.add(Machtiging.builder().machtiging(GebruikerRole.ROLE_ADMIN).build());
+        }
+
         Gebruiker gebruiker = Gebruiker.builder()
                 .voornaam(input.getNaam())
                 .naam(input.getVoornaam())
                 .email(input.getEmail())
                 .password(passwordEncoder.encode(input.getPassword()))
+                .machtigingen(machtigingen)
                 .build();
 
         return gebruikerRepository.save(gebruiker);
