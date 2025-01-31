@@ -13,24 +13,22 @@ import {MatCheckbox} from "@angular/material/checkbox";
 import {RelatieDto, RelatieUpdateDto} from "../../../../model/genealogie-dto";
 
 @Component({
-  selector: 'app-update-huwelijk',
-  standalone: true,
-  imports: [
-    MatDatepicker,
-    MatDatepickerInput,
-    MatDatepickerToggle,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatSuffix,
-    NgrxFormsModule,
-    MatButton,
-    ReactiveFormsModule,
-    MatCheckbox,
-
-  ],
-  templateUrl: './update-huwelijk.component.html',
-  styleUrl: './update-huwelijk.component.scss'
+    selector: 'app-update-huwelijk',
+    imports: [
+        MatDatepicker,
+        MatDatepickerInput,
+        MatDatepickerToggle,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        MatSuffix,
+        NgrxFormsModule,
+        MatButton,
+        ReactiveFormsModule,
+        MatCheckbox,
+    ],
+    templateUrl: './update-huwelijk.component.html',
+    styleUrl: './update-huwelijk.component.scss'
 })
 export class UpdateHuwelijkComponent implements OnInit {
   tippy = inject(TIPPY_REF);

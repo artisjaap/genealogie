@@ -15,13 +15,11 @@ import {MatRadioModule} from "@angular/material/radio";
 
 
 @Component({
-  selector: 'app-persoon-nieuw-fiche',
-  standalone: true,
-  providers: [],
-
-  imports: [MatFormFieldModule, MatRadioModule, MatInputModule,MatButtonModule, MatIconModule, MatDatepickerModule, AsyncPipe, NgrxFormsModule, NgIf],
-  templateUrl: './persoon-nieuw-fiche.component.html',
-  styleUrl: './persoon-nieuw-fiche.component.scss'
+    selector: 'app-persoon-nieuw-fiche',
+    providers: [],
+    imports: [MatFormFieldModule, MatRadioModule, MatInputModule, MatButtonModule, MatIconModule, MatDatepickerModule, AsyncPipe, NgrxFormsModule, NgIf],
+    templateUrl: './persoon-nieuw-fiche.component.html',
+    styleUrl: './persoon-nieuw-fiche.component.scss'
 })
 export class PersoonNieuwFicheComponent {
   formState$: Observable<FormGroupState<NatuurlijkPersoonFormValue>>;

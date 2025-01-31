@@ -15,28 +15,24 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 @Component({
-  selector: 'app-ouders-van-persoon',
-  standalone: true,
-  providers: [],
-
-  imports: [
-    AsyncPipe,
-    MatButton,
-    MatDatepicker,
-    MatDatepickerInput,
-    MatDatepickerToggle,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatSuffix,
-    NgIf,
-    NgrxFormsModule,
-    FaIconComponent,
-
-
-  ],
-  templateUrl: './ouders-van-persoon.component.html',
-  styleUrl: './ouders-van-persoon.component.scss'
+    selector: 'app-ouders-van-persoon',
+    providers: [],
+    imports: [
+        AsyncPipe,
+        MatButton,
+        MatDatepicker,
+        MatDatepickerInput,
+        MatDatepickerToggle,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        MatSuffix,
+        NgIf,
+        NgrxFormsModule,
+        FaIconComponent,
+    ],
+    templateUrl: './ouders-van-persoon.component.html',
+    styleUrl: './ouders-van-persoon.component.scss'
 })
 export class OudersVanPersoonComponent {
   protected readonly faXmark = faXmark;

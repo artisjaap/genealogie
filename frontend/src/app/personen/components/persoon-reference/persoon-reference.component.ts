@@ -6,16 +6,15 @@ import {NgClass, NgIf} from "@angular/common";
 import {NatuurlijkPersoonDto} from "../../../model/genealogie-dto";
 
 @Component({
-  selector: 'app-persoon-reference',
-  standalone: true,
-  imports: [
-    RouterLink,
-    FaIconComponent,
-    NgIf,
-    NgClass
-  ],
-  templateUrl: './persoon-reference.component.html',
-  styleUrl: './persoon-reference.component.scss'
+    selector: 'app-persoon-reference',
+    imports: [
+        RouterLink,
+        FaIconComponent,
+        NgIf,
+        NgClass
+    ],
+    templateUrl: './persoon-reference.component.html',
+    styleUrl: './persoon-reference.component.scss'
 })
 export class PersoonReferenceComponent {
   @Input() natuurlijkPersoon!: NatuurlijkPersoonDto | null;

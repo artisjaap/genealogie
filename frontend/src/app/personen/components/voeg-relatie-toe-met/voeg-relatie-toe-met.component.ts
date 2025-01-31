@@ -18,8 +18,7 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {NatuurlijkPersoonDto} from "../../../model/genealogie-dto";
 
 @Component({
-  selector: 'app-voeg-relatie-toe-met',
-  standalone: true,
+    selector: 'app-voeg-relatie-toe-met',
     imports: [
         AsyncPipe,
         FaIconComponent,
@@ -36,8 +35,8 @@ import {NatuurlijkPersoonDto} from "../../../model/genealogie-dto";
         NgIf,
         NgrxFormsModule
     ],
-  templateUrl: './voeg-relatie-toe-met.component.html',
-  styleUrl: './voeg-relatie-toe-met.component.scss'
+    templateUrl: './voeg-relatie-toe-met.component.html',
+    styleUrl: './voeg-relatie-toe-met.component.scss'
 })
 export class VoegRelatieToeMetComponent {
   protected readonly faXmark = faXmark;

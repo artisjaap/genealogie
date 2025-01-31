@@ -25,31 +25,30 @@ import {DialogData, DocumentTypeDto} from "../../../model/genealogie-dto";
 
 
 @Component({
-  selector: 'app-upload-document',
-  standalone: true,
-  imports: [
-    NgSwitch,
-    NgSwitchCase,
-    NgIf,
-    NgSwitchDefault,
-    MatFormField,
-    MatSelect,
-    MatOption,
-    AsyncPipe,
-    NgrxFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-    JsonPipe,
-    FaIconComponent,
-  ],
-  templateUrl: './upload-document.component.html',
-  styleUrl: './upload-document.component.scss'
+    selector: 'app-upload-document',
+    imports: [
+        NgSwitch,
+        NgSwitchCase,
+        NgIf,
+        NgSwitchDefault,
+        MatFormField,
+        MatSelect,
+        MatOption,
+        AsyncPipe,
+        NgrxFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose,
+        JsonPipe,
+        FaIconComponent,
+    ],
+    templateUrl: './upload-document.component.html',
+    styleUrl: './upload-document.component.scss'
 })
 export class UploadDocumentComponent {
   protected readonly faXmark = faXmark;

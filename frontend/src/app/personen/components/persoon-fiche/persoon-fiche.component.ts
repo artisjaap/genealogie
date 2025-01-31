@@ -48,25 +48,24 @@ import {IconSpriteModule} from "ng-svg-icon-sprite";
 import {DialogData, NatuurlijkPersoonDto, NatuurlijkPersoonFicheDto, RelatieDto} from "../../../model/genealogie-dto";
 
 @Component({
-  selector: 'app-persoon-fiche',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    NgIf,
-    NgForOf,
-    JsonPipe,
-    RouterLink,
-    FontAwesomeModule,
-    NgOptimizedImage,
-    TippyDirective,
-    FamilieTreeComponent,
-    NgClass,
-    DatePipe,
-    PersoonReferenceComponent,
-    IconSpriteModule
-  ],
-  templateUrl: './persoon-fiche.component.html',
-  styleUrl: './persoon-fiche.component.scss'
+    selector: 'app-persoon-fiche',
+    imports: [
+        AsyncPipe,
+        NgIf,
+        NgForOf,
+        JsonPipe,
+        RouterLink,
+        FontAwesomeModule,
+        NgOptimizedImage,
+        TippyDirective,
+        FamilieTreeComponent,
+        NgClass,
+        DatePipe,
+        PersoonReferenceComponent,
+        IconSpriteModule
+    ],
+    templateUrl: './persoon-fiche.component.html',
+    styleUrl: './persoon-fiche.component.scss'
 })
 export class PersoonFicheComponent {
   readonly dialog = inject(MatDialog);

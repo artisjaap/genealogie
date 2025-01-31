@@ -11,22 +11,21 @@ import {MatInput} from "@angular/material/input";
 import {IconSpriteModule} from "ng-svg-icon-sprite";
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    RouterLink,
-    ReactiveFormsModule,
-    MatDatepicker,
-    MatDatepickerInput,
-    MatDatepickerToggle,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatSuffix,
-    IconSpriteModule
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    imports: [
+        RouterLink,
+        ReactiveFormsModule,
+        MatDatepicker,
+        MatDatepickerInput,
+        MatDatepickerToggle,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        MatSuffix,
+        IconSpriteModule
+    ],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   private formBuilder = inject(FormBuilder);

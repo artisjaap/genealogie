@@ -8,14 +8,13 @@ import {LoginUserResponseDto} from "../../../model/login-dto";
 import {AsyncPipe, NgIf} from "@angular/common";
 
 @Component({
-  selector: 'app-login-widget',
-  standalone: true,
-  imports: [
-    NgIf,
-    AsyncPipe
-  ],
-  templateUrl: './login-widget.component.html',
-  styleUrl: './login-widget.component.scss'
+    selector: 'app-login-widget',
+    imports: [
+        NgIf,
+        AsyncPipe
+    ],
+    templateUrl: './login-widget.component.html',
+    styleUrl: './login-widget.component.scss'
 })
 export class LoginWidgetComponent {
   ingelogdeGebruiker$: Observable<LoginUserResponseDto|undefined>;

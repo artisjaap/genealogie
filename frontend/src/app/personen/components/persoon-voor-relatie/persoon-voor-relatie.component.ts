@@ -17,25 +17,22 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {DialogData} from "../../../model/genealogie-dto";
 
 @Component({
-  selector: 'app-persoon-voor-relatie',
-  standalone: true,
-  providers: [],
-
-  imports: [
-    AsyncPipe,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-
-    MatSuffix,
-    NgIf,
-    NgrxFormsModule,
-    MatRadioModule,
-    FaIconComponent
-  ],
-  templateUrl: './persoon-voor-relatie.component.html',
-  styleUrl: './persoon-voor-relatie.component.scss'
+    selector: 'app-persoon-voor-relatie',
+    providers: [],
+    imports: [
+        AsyncPipe,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSuffix,
+        NgIf,
+        NgrxFormsModule,
+        MatRadioModule,
+        FaIconComponent
+    ],
+    templateUrl: './persoon-voor-relatie.component.html',
+    styleUrl: './persoon-voor-relatie.component.scss'
 })
 export class PersoonVoorRelatieComponent {
   protected readonly faXmark = faXmark;

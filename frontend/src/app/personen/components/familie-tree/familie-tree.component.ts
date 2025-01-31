@@ -8,14 +8,13 @@ import {getNakomelingenVan, getVooroudersVan} from "../../store/personen.selecto
 import {laadNatuurlijkPersoonFiche} from "../../store/personen.acties";
 
 @Component({
-  selector: 'app-familie-tree',
-  standalone: true,
-  imports: [CommonModule, NgxEchartsDirective],
-  templateUrl: './familie-tree.component.html',
-  styleUrl: './familie-tree.component.scss',
-  providers: [
-    provideEcharts(),
-  ]
+    selector: 'app-familie-tree',
+    imports: [CommonModule, NgxEchartsDirective],
+    templateUrl: './familie-tree.component.html',
+    styleUrl: './familie-tree.component.scss',
+    providers: [
+        provideEcharts(),
+    ]
 })
 export class FamilieTreeComponent implements OnInit {
 

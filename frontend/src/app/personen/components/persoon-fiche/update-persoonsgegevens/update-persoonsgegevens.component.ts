@@ -13,23 +13,22 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {PersoonsgegevensDto} from "../../../../model/genealogie-dto";
 
 @Component({
-  selector: 'app-update-persoonsgegevens',
-  standalone: true,
-  imports: [
-    MatButton,
-    MatDatepicker,
-    MatDatepickerInput,
-    MatDatepickerToggle,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatSuffix,
-    ReactiveFormsModule,
-    MatRadioButton,
-    MatRadioGroup
-  ],
-  templateUrl: './update-persoonsgegevens.component.html',
-  styleUrl: './update-persoonsgegevens.component.scss'
+    selector: 'app-update-persoonsgegevens',
+    imports: [
+        MatButton,
+        MatDatepicker,
+        MatDatepickerInput,
+        MatDatepickerToggle,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        MatSuffix,
+        ReactiveFormsModule,
+        MatRadioButton,
+        MatRadioGroup
+    ],
+    templateUrl: './update-persoonsgegevens.component.html',
+    styleUrl: './update-persoonsgegevens.component.scss'
 })
 export class UpdatePersoonsgegevensComponent {
   tippy = inject(TIPPY_REF);

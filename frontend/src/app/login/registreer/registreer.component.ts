@@ -8,16 +8,15 @@ import {MatInput} from "@angular/material/input";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'app-registreer',
-  standalone: true,
+    selector: 'app-registreer',
     imports: [
         MatFormField,
         MatInput,
         MatLabel,
         ReactiveFormsModule
     ],
-  templateUrl: './registreer.component.html',
-  styleUrl: './registreer.component.scss'
+    templateUrl: './registreer.component.html',
+    styleUrl: './registreer.component.scss'
 })
 export class RegistreerComponent {
 
