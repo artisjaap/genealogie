@@ -3,7 +3,7 @@ import {NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {isIngelogged} from "./login/guard/AuthGuard";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: AppComponent,
