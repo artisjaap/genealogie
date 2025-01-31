@@ -21,7 +21,6 @@ import {NatuurlijkPersoonDto} from "../../../model/genealogie-dto";
     selector: 'app-voeg-relatie-toe-met',
     imports: [
         AsyncPipe,
-        FaIconComponent,
         MatButton,
         MatDatepicker,
         MatDatepickerInput,

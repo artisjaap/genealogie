@@ -9,9 +9,9 @@ import {NatuurlijkPersoonDto} from "../../../model/genealogie-dto";
     selector: 'app-persoon-reference',
     imports: [
         RouterLink,
-        FaIconComponent,
         NgIf,
-        NgClass
+        NgClass,
+        FaIconComponent,
     ],
     templateUrl: './persoon-reference.component.html',
     styleUrl: './persoon-reference.component.scss'

@@ -5,27 +5,20 @@ import {LoginState} from "../store/login.reducer";
 import {LoginDto} from "../../model/login-dto";
 import {RouterLink} from "@angular/router";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
-import {MatFormField, MatLabel, MatSuffix} from "@angular/material/form-field";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {IconSpriteModule} from "ng-svg-icon-sprite";
 
 @Component({
-    selector: 'app-login',
-    imports: [
-        RouterLink,
-        ReactiveFormsModule,
-        MatDatepicker,
-        MatDatepickerInput,
-        MatDatepickerToggle,
-        MatFormField,
-        MatInput,
-        MatLabel,
-        MatSuffix,
-        IconSpriteModule
-    ],
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.scss'
+  selector: 'app-login',
+  imports: [
+    RouterLink,
+    ReactiveFormsModule,
+    MatFormField,
+    MatInput,
+    MatLabel,
+  ],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   private formBuilder = inject(FormBuilder);

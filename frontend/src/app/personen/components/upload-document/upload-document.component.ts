@@ -27,10 +27,6 @@ import {DialogData, DocumentTypeDto} from "../../../model/genealogie-dto";
 @Component({
     selector: 'app-upload-document',
     imports: [
-        NgSwitch,
-        NgSwitchCase,
-        NgIf,
-        NgSwitchDefault,
         MatFormField,
         MatSelect,
         MatOption,
@@ -40,12 +36,8 @@ import {DialogData, DocumentTypeDto} from "../../../model/genealogie-dto";
         MatInputModule,
         FormsModule,
         MatButtonModule,
-        MatDialogTitle,
-        MatDialogContent,
-        MatDialogActions,
-        MatDialogClose,
-        JsonPipe,
-        FaIconComponent,
+
+      FaIconComponent,
     ],
     templateUrl: './upload-document.component.html',
     styleUrl: './upload-document.component.scss'

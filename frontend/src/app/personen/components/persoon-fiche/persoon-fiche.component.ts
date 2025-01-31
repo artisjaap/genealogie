@@ -44,7 +44,6 @@ import {UpdateHuwelijkComponent} from "./update-huwelijk/update-huwelijk.compone
 import {FamilieTreeComponent} from "../familie-tree/familie-tree.component";
 import {UpdatePersoonsgegevensComponent} from "./update-persoonsgegevens/update-persoonsgegevens.component";
 import {PersoonReferenceComponent} from "../persoon-reference/persoon-reference.component";
-import {IconSpriteModule} from "ng-svg-icon-sprite";
 import {DialogData, NatuurlijkPersoonDto, NatuurlijkPersoonFicheDto, RelatieDto} from "../../../model/genealogie-dto";
 
 @Component({
@@ -53,16 +52,13 @@ import {DialogData, NatuurlijkPersoonDto, NatuurlijkPersoonFicheDto, RelatieDto}
         AsyncPipe,
         NgIf,
         NgForOf,
-        JsonPipe,
         RouterLink,
         FontAwesomeModule,
-        NgOptimizedImage,
         TippyDirective,
         FamilieTreeComponent,
         NgClass,
         DatePipe,
         PersoonReferenceComponent,
-        IconSpriteModule
     ],
     templateUrl: './persoon-fiche.component.html',
     styleUrl: './persoon-fiche.component.scss'

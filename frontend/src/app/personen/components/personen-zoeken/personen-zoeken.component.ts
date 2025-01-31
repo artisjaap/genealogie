@@ -26,7 +26,7 @@ import {NatuurlijkPersoonDto} from "../../../model/genealogie-dto";
 @Component({
     selector: 'app-personen-zoeken',
     imports: [
-        RouterLink, MatButtonModule, AsyncPipe, NgIf, JsonPipe, NgForOf, FaIconComponent, MatTable, MatColumnDef, MatHeaderCell, MatCell, MatHeaderRow, MatRow, MatRowDef, MatHeaderRowDef, MatCellDef, MatHeaderCellDef, DatePipe
+        RouterLink, MatButtonModule, FaIconComponent, MatTable, MatColumnDef, MatHeaderCell, MatCell, MatHeaderRow, MatRow, MatRowDef, MatHeaderRowDef, MatCellDef, MatHeaderCellDef, DatePipe
     ],
     templateUrl: './personen-zoeken.component.html',
     styleUrl: './personen-zoeken.component.scss'

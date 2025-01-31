@@ -29,7 +29,7 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
         MatSuffix,
         NgIf,
         NgrxFormsModule,
-        FaIconComponent,
+
     ],
     templateUrl: './ouders-van-persoon.component.html',
     styleUrl: './ouders-van-persoon.component.scss'
