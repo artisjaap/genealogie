@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources")
-@ExtendWith(WebDriverManager.class)
 public class CucumberIntegrationTest {
 
 

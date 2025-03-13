@@ -1,5 +1,6 @@
 package be.genealogie.controller;
 
+import io.cucumber.java.Scenario;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +45,7 @@ public class World {
 
 
     private String token;
+    private Scenario scenario;
 
     public void setToken(String token) {
         this.token = token;
@@ -53,8 +55,9 @@ public class World {
         return token;
     }
 
-    @PostConstruct
-    public void init() {
+    public void init(Scenario scenario) {
+        this.scenario = scenario;
+
         System.out.println("Initializing World");
         if (!webDriverContainer.isRunning()) {
             System.out.println("Starting World");
@@ -68,7 +71,8 @@ public class World {
         System.out.println("Stopping World");
         if (webDriverContainer.isRunning()) {
             System.out.println("stop World");
-            vncRecordingContainer.saveRecordingToFile(new File("./test2.mp4"));
+            String filename = "./" + scenario.getId() + ".mp4";
+            vncRecordingContainer.saveRecordingToFile(new File(filename));
             webDriverContainer.stop();
             vncRecordingContainer.stop();
 
