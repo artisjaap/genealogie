@@ -52,7 +52,7 @@ public class AuthenticationSteps extends SpringIntegrationTest{
         }).start();
 
         try {
-            world.getDriver().get("http://localhost:" + port);
+            world.getDriver().get("http://host.containers.internal:" + port);
         }catch (Exception e) {
 
         }finally {

@@ -28,7 +28,9 @@ public class World {
     private static final BrowserWebDriverContainer<?> webDriverContainer =
             new BrowserWebDriverContainer<>()
                     .withCapabilities(new ChromeOptions().addArguments("--no-sandbox"))
-                    .withNetwork(network);
+                    .withNetwork(network)
+            //        .withNetworkMode("host")
+            ;
                      // WebDriver-container moet in hetzelfde netwerk zitten
 
     // 🔹 VNC Recording container
@@ -36,6 +38,7 @@ public class World {
             new VncRecordingContainer(webDriverContainer)
                     .withVideoFormat(VncRecordingContainer.VncRecordingFormat.MP4)
                     .withNetwork(network)
+                   // .withNetworkMode("host")
                     // Moet in hetzelfde netwerk zitten
             ;
 
@@ -65,7 +68,7 @@ public class World {
         System.out.println("Stopping World");
         if (webDriverContainer.isRunning()) {
             System.out.println("stop World");
-            vncRecordingContainer.saveRecordingToFile(new File("c:/TMP/test2.mp4"));
+            vncRecordingContainer.saveRecordingToFile(new File("./test2.mp4"));
             webDriverContainer.stop();
             vncRecordingContainer.stop();
 
