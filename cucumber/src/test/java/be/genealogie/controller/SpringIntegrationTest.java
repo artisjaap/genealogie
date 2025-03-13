@@ -3,7 +3,6 @@ package be.genealogie.controller;
 import be.genealogie.GenealogieApplication;
 import be.genealogie.testcontainers.TestcontainersConfiguration;
 import io.cucumber.spring.CucumberContextConfiguration;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 //import org.springframework.test.context.TestPropertySource;

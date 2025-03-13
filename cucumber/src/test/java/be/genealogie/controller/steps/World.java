@@ -1,11 +1,12 @@
-package be.genealogie.controller;
+package be.genealogie.controller.steps;
 
+import be.genealogie.controller.page.InteractieveVelden;
+import be.genealogie.controller.page.InteractieveVeldenFactory;
+import be.genealogie.controller.page.WebPagina;
 import io.cucumber.java.Scenario;
-import jakarta.annotation.PostConstruct;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.testcontainers.containers.BrowserWebDriverContainer;
@@ -13,14 +14,13 @@ import org.testcontainers.containers.Network;
 import org.testcontainers.containers.VncRecordingContainer;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
 
 import static io.cucumber.spring.CucumberTestContext.SCOPE_CUCUMBER_GLUE;
 
 @Scope(SCOPE_CUCUMBER_GLUE)
 @Component
 public class World {
+
 
     // 🔹 Gedeeld netwerk aanmaken
     private static final Network network = Network.newNetwork();
@@ -46,6 +46,7 @@ public class World {
 
     private String token;
     private Scenario scenario;
+    private WebPagina huidigePagina = WebPagina.LOGIN;
 
     public void setToken(String token) {
         this.token = token;
@@ -78,12 +79,18 @@ public class World {
 
         }
 
-
-
     }
 
 
     public WebDriver getDriver() {
         return webDriverContainer.getWebDriver();
+    }
+
+    public WebPagina huidigePagina() {
+        return huidigePagina;
+    }
+
+    public void naarPagina(WebPagina pagina){
+        this.huidigePagina = pagina;
     }
 }

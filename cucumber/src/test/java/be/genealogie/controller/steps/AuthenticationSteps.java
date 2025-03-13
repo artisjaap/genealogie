@@ -1,17 +1,15 @@
-package be.genealogie.controller;
+package be.genealogie.controller.steps;
 
+import be.genealogie.controller.AuthenticatieController;
+import be.genealogie.controller.SpringIntegrationTest;
 import be.genealogie.controller.dto.LoginResponseDto;
 import be.genealogie.controller.dto.RegisterUserDto;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 
-public class AuthenticationSteps extends SpringIntegrationTest{
+public class AuthenticationSteps extends SpringIntegrationTest {
 
     @Autowired
     private AuthenticatieController authenticatieController;
