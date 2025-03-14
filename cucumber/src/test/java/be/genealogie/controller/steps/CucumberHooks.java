@@ -13,13 +13,24 @@ public class CucumberHooks extends SpringIntegrationTest {
   @Autowired
   private World world;
 
-  @Before
-  public void before(Scenario scenario) {
-    world.init(scenario);
+  @Before("@Browser")
+  public void beforeBrowser() {
+    world.startBrowserVoor();
   }
 
-  @After
-  public void after(Scenario scenario) {
-    world.stopWebdriver();
+  @After("@Browser")
+  public void afterBrowser() {
+    world.stopBrowser();
+  }
+
+
+  @Before("@Recording")
+  public void beforeRecording() {
+    world.startRecording();
+  }
+
+  @After("@Recording")
+  public void afterRecording(Scenario scenario) {
+    world.stopRecording(scenario);
   }
 }

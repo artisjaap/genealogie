@@ -1,4 +1,5 @@
 Feature: Registreer een gebruiker
+  @Browser @Recording
   Scenario: Registreer een gebruiker
     When Start chrome op de homepage
     And Klik op registreer link
@@ -10,6 +11,7 @@ Feature: Registreer een gebruiker
     And wacht 2 seconden
     And Klik op menu zoeken
 
+  @Browser @Recording
   Scenario: Login met gebruiker
     When Start chrome op de homepage
     And Vul john.doe@gmail.com in als email
