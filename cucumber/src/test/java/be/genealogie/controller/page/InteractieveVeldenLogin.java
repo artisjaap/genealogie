@@ -47,7 +47,8 @@ public class InteractieveVeldenLogin extends AbstractInteractiveVelden{
     public WebPagina navigeerMetActie(NavigatieActie actie) {
         return switch (actie) {
             case REGISTREER -> WebPagina.REGISTER;
-            case LOGIN -> WebPagina.LOGIN;
+            case LOGIN -> WebPagina.ZOEKEN;
+            default -> throw new UnsupportedOperationException("Actie " +actie+" bestaat niet op pagina " + huidigePagina());
         };
     }
 }

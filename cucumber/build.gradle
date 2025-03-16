@@ -18,6 +18,8 @@ dependencies {
     testImplementation  'mysql:mysql-connector-java:8.0.33'
     testImplementation 'org.flywaydb:flyway-mysql:11.3.4'
 
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.16.1'
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '4.16.1'
 

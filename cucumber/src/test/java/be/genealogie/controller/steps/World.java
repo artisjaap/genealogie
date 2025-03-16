@@ -17,8 +17,10 @@ import org.springframework.stereotype.Component;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.containers.VncRecordingContainer;
+import org.testcontainers.containers.wait.strategy.WaitAllStrategy;
 
 import java.io.File;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import static io.cucumber.spring.CucumberTestContext.SCOPE_CUCUMBER_GLUE;
@@ -40,6 +42,7 @@ public class World {
             new VncRecordingContainer(webDriverContainer)
                     .withVideoFormat(VncRecordingContainer.VncRecordingFormat.MP4)
                     .withNetwork(network);
+
     @Getter
     @Setter
     private String token;
@@ -49,36 +52,29 @@ public class World {
     public void startBrowserVoor() {
         if (!webDriverContainer.isRunning()) {
             webDriverContainer.start();
-            //    vncRecordingContainer.start();
+            webDriverContainer.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         }
     }
 
     public void startRecording() {
         vncRecordingContainer.start();
-
     }
 
     public void stopRecording(Scenario scenario) {
         String filename = maakFilename(scenario);
         vncRecordingContainer.saveRecordingToFile(new File(filename));
         vncRecordingContainer.stop();
-
-
     }
 
     private String maakFilename(Scenario scenario) {
         return StringUtils.geldigeBestandsnaam(String.format("%s@%s-%s.mp4", scenario.getStatus(), LocalDateTime.now(), scenario.getName()));
     }
 
-
     public void stopBrowser() {
         if (webDriverContainer.isRunning()) {
             webDriverContainer.stop();
-
         }
-
     }
-
 
     public WebDriver getDriver() {
         return webDriverContainer.getWebDriver();
@@ -89,6 +85,7 @@ public class World {
     }
 
     public void naarPagina(WebPagina pagina) {
+        log.info("Ik ben nu op pagina {}", pagina);
         this.huidigePagina = pagina;
     }
 }

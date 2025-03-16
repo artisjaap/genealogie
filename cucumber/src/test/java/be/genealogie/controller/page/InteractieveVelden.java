@@ -9,6 +9,26 @@ public interface InteractieveVelden {
 
     WebElement loginLink();
 
+    WebElement zoekenLink();
+
+    WebElement nieuwPersoonLink();
+
+    WebElement opslaanLink();
+
+    WebElement relatieToevoegenLink();
+
+    WebElement oudersToevoegenLink();
+
+    WebElement wijzigFicheLink();
+
+    WebElement kindToevoegenAanRelatie();
+
+    WebElement manRadioButton();
+
+    WebElement vrouwRadioButton();
+
+    WebElement zoekInput();
+
     WebElement emailInput();
 
     WebElement voornaamInput();
@@ -17,7 +37,13 @@ public interface InteractieveVelden {
 
     WebElement wachtwoordInput();
 
+    WebElement geborenInput();
+
+    WebElement overledenInput();
+
     WebPagina navigeerMetActie(NavigatieActie actie);
+
+    WebElement voorActieLink(LinkActie actie);
 
     WebElement menuLinkZoeken();
 }

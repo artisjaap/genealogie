@@ -15,7 +15,7 @@ public class InteractieveVeldenRegistreer extends AbstractInteractiveVelden{
 
     public InteractieveVeldenRegistreer(World world){
         super(world);
-    };
+    }
 
     @Override
     public WebPagina huidigePagina() {
@@ -50,7 +50,7 @@ public class InteractieveVeldenRegistreer extends AbstractInteractiveVelden{
     public WebPagina navigeerMetActie(NavigatieActie actie) {
         return switch (actie) {
             case REGISTREER -> WebPagina.REGISTER; //FIXME
-            case LOGIN -> throw new UnsupportedOperationException("Actie bestaat niet op deze pagina");
+            default -> throw new UnsupportedOperationException("Actie " +actie+" bestaat niet op pagina " + huidigePagina());
         };
     }
 }

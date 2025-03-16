@@ -3,9 +3,12 @@ package be.genealogie.controller.steps;
 import be.genealogie.controller.SpringIntegrationTest;
 import be.genealogie.controller.page.InteractieveVelden;
 import be.genealogie.controller.page.InteractieveVeldenFactory;
+import be.genealogie.controller.page.LinkActie;
 import be.genealogie.controller.page.NavigatieActie;
+import be.genealogie.domein.Geslacht;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -38,9 +41,30 @@ public class BrowserSteps extends SpringIntegrationTest {
         world.naarPagina(velden.navigeerMetActie(NavigatieActie.REGISTREER));
     }
 
-    @When("Klik op login link")
-    public void klikOpLoginKnop()  {
-        velden().loginLink().click();
+    @When("klik op {linkActie} actie")
+    public void klikOpActie(LinkActie linkActie)  {
+        velden().voorActieLink(linkActie).click();
+        world.naarPagina(velden().navigeerMetActie(linkActie.navigatieActie()));
+    }
+
+    @When("Klikt op geslacht {geslacht}")
+    public void geslachtMan(Geslacht geslacht)  {
+        WebElement webElement = geslacht == Geslacht.MAN ?
+                velden().manRadioButton() :
+                velden().vrouwRadioButton();
+        webElement.click();
+    }
+
+    @When("Vult {alfanumeriek} in als geboortedatum")
+    public void vulGeboortedatumIn(String date){
+        velden().geborenInput().sendKeys(date);
+    }
+
+    @When("gebruiker {email} logt in met wachtwoord {alfanumeriek}")
+    public void gebruikerLogtIn(String email, String wachtwoord){
+        vulEmailIn(email);
+        vulWachtwoordIn(wachtwoord);
+        klikOpActie(LinkActie.LOGIN);
     }
 
     @When("Vul {email} in als email")
@@ -67,7 +91,6 @@ public class BrowserSteps extends SpringIntegrationTest {
     public void menuItem(){
         velden().menuLinkZoeken().click();
     }
-
 
     private InteractieveVelden velden(){
         return interactiveVeldenFactory.voorPagina(world.huidigePagina());
