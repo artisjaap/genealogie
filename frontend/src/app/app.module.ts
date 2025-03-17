@@ -18,6 +18,7 @@ import {provideMomentDateAdapter} from "@angular/material-moment-adapter";
 import {popperVariation, provideTippyConfig, tooltipVariation} from "@ngneat/helipopper";
 import {LoginModule} from "./login/login.module";
 import {authInterceptor} from "./service/HttpInterceptor";
+import {SvgIconComponent} from "./components/common/svg-icon/svg-icon.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,8 @@ import {authInterceptor} from "./service/HttpInterceptor";
     AdminModule,
     NavigatieComponent,
     FontAwesomeModule,
+    SvgIconComponent,
+
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
