@@ -25,7 +25,7 @@ public class AuthenticationService {
     public Gebruiker signup(RegisterUserDto input) {
 
         List<Machtiging> machtigingen = new ArrayList<>();
-        if(gebruikerRepository.count() == 0){
+        if (gebruikerRepository.count() == 0) {
             machtigingen.add(Machtiging.builder().machtiging(GebruikerRole.ROLE_ADMIN).build());
         }
 
@@ -51,4 +51,6 @@ public class AuthenticationService {
         return gebruikerRepository.findByEmail(input.getEmail())
                 .orElseThrow();
     }
+
+
 }
