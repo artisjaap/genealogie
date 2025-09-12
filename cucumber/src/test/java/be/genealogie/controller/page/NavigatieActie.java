@@ -1,0 +1,5 @@
+package be.genealogie.controller.page;
+
+public enum NavigatieActie {
+    REGISTREER, LOGIN, NIEUWE_PERSOON, OPSLAAN, WIJZIG_FICHE, PERSOON_TOEVOEGEN_AAN_RELATIE, OUDERS_TOEVOEGEN, RELATIE_TOEVOEGEN
+}

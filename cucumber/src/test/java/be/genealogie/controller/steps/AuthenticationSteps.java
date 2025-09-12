@@ -1,5 +1,7 @@
-package be.genealogie.controller;
+package be.genealogie.controller.steps;
 
+import be.genealogie.controller.AuthenticatieController;
+import be.genealogie.controller.SpringIntegrationTest;
 import be.genealogie.controller.dto.LoginResponseDto;
 import be.genealogie.controller.dto.RegisterUserDto;
 import io.cucumber.java.en.When;
@@ -7,13 +9,14 @@ import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
-public class AuthenticationSteps extends SpringIntegrationTest{
+public class AuthenticationSteps extends SpringIntegrationTest {
 
     @Autowired
     private AuthenticatieController authenticatieController;
 
     @Autowired
     private World world;
+
 
     @When("Gebruiker meldt zich aan")
     public void gebruiker_meldt_zich_aan() {

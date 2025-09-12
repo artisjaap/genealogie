@@ -5,4 +5,5 @@ import be.genealogie.domein.repository.DocumentRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SpringDataJpaDocumentRepository extends JpaRepository<Document, Long>, DocumentRepository {
+
 }

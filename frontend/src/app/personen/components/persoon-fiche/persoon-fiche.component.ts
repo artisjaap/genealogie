@@ -45,21 +45,23 @@ import {FamilieTreeComponent} from "../familie-tree/familie-tree.component";
 import {UpdatePersoonsgegevensComponent} from "./update-persoonsgegevens/update-persoonsgegevens.component";
 import {PersoonReferenceComponent} from "../persoon-reference/persoon-reference.component";
 import {DialogData, NatuurlijkPersoonDto, NatuurlijkPersoonFicheDto, RelatieDto} from "../../../model/genealogie-dto";
+import {SvgIconComponent} from "../../../components/common/svg-icon/svg-icon.component";
 
 @Component({
     selector: 'app-persoon-fiche',
-    imports: [
-        AsyncPipe,
-        NgIf,
-        NgForOf,
-        RouterLink,
-        FontAwesomeModule,
-        TippyDirective,
-        FamilieTreeComponent,
-        NgClass,
-        DatePipe,
-        PersoonReferenceComponent,
-    ],
+  imports: [
+    AsyncPipe,
+    NgIf,
+    NgForOf,
+    RouterLink,
+    FontAwesomeModule,
+    TippyDirective,
+    FamilieTreeComponent,
+    NgClass,
+    DatePipe,
+    PersoonReferenceComponent,
+    SvgIconComponent,
+  ],
     templateUrl: './persoon-fiche.component.html',
     styleUrl: './persoon-fiche.component.scss'
 })
