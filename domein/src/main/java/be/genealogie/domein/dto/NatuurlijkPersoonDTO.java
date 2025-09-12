@@ -1,15 +1,17 @@
 package be.genealogie.domein.dto;
 
 import be.genealogie.domein.Geslacht;
-import be.genealogie.domein.utils.LocalDateUtils;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class NatuurlijkPersoonDTO implements HeeftNatuurlijkPersoonDto {
     private Long id;
     private String naam;
@@ -21,8 +23,6 @@ public class NatuurlijkPersoonDTO implements HeeftNatuurlijkPersoonDto {
     private Geslacht geslacht;
     private Integer leeftijd;
     private String sterrenbeeld;
-
-
 
     @Override
     public NatuurlijkPersoonDTO natuurlijkPersoon() {

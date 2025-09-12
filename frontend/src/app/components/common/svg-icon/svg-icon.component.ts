@@ -12,5 +12,5 @@ import {Component, Input} from '@angular/core';
 })
 export class SvgIconComponent {
   @Input() icon: string = "";
-  @Input() width: string | number = 20; // e.g. 18, '18', '18px', '1.5rem'
+  @Input() width: string | number = 18; // e.g. 18, '18', '18px', '1.5rem'
 }
