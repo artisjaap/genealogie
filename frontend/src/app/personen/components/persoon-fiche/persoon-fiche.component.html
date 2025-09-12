@@ -12,8 +12,8 @@
                      [icon]="persoonFiche.natuurlijkPersoon.geslacht==='MAN'?faMars:faVenus"></fa-icon>
 
             <span class="sterrebeeld">
-<!--              <svg-icon-sprite  [src]="'assets/sprites/sprite.svg#' + persoonFiche.natuurlijkPersoon.sterrenbeeld" [width]="'32px'" [viewBox]="sterrenbeeldViewbox[persoonFiche.natuurlijkPersoon.sterrenbeeld!]"></svg-icon-sprite>-->
-
+              <!-- Voorbeeld gebruik van de SVG sprite component -->
+              <app-svg-icon icon="BOOGSCHUTTER" [width]="'24px'"></app-svg-icon>
             </span>
 
           </div>
@@ -25,7 +25,6 @@
 
             <span class="actie" (click)="oudersToevoegen(persoonFiche.natuurlijkPersoon, null)">
               <app-svg-icon icon="family-pants"></app-svg-icon>
-<!--              <svg-icon-sprite [src]="'assets/sprites/sprite.svg#family-pants'" [width]="'18px'" [viewBox]="'0 0 512 512'"></svg-icon-sprite>-->
                 OU
             </span>
 

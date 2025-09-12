@@ -13,7 +13,7 @@ import java.util.List;
 
 @TestConfiguration(proxyBeanMethods = false)
 public class TestcontainersConfiguration {
-    private static final MySQLContainer<?> MYSQL_DB = new MySQLContainer<>("mysql:latest")
+    private static final MySQLContainer<?> MYSQL_DB = new MySQLContainer<>("mysql:lts")
             .withExposedPorts(3306)
             .withReuse(true);
 
