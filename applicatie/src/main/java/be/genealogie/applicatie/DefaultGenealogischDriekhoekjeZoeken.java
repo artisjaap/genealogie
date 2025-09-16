@@ -70,7 +70,11 @@ public class DefaultGenealogischDriekhoekjeZoeken implements GenealogischDriekho
 
     @Override
     public List<NatuurlijkPersoonDTO> nevenEnNichtenVan(NatuurlijkPersoonDTO persoon) {
-        return List.of();
+        return nonkelsEnTantes(persoon).stream()
+                .map(NonkelsEnTantesDto::getNatuurlijkPersoon)
+                .map(this::kinderenVan)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
     @Override

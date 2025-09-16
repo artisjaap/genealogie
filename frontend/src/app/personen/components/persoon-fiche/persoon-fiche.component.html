@@ -13,7 +13,7 @@
 
             <span class="sterrebeeld">
               <!-- Voorbeeld gebruik van de SVG sprite component -->
-              <app-svg-icon icon="BOOGSCHUTTER" [width]="'24px'"></app-svg-icon>
+              <app-svg-icon [icon]="persoonFiche.natuurlijkPersoon.sterrenbeeld" [width]="'30px'"></app-svg-icon>
             </span>
 
           </div>
@@ -140,7 +140,7 @@
     <div class="infocard-sectie">
       <span class="infocard-sectie-titel">relatie
         <span class="actie" (click)="voegRelatieToeMet(persoonFiche.natuurlijkPersoon)"><fa-icon
-        [icon]="faDiagramPredecessor"></fa-icon></span> </span>
+        [icon]="faLink"></fa-icon></span> </span>
 
       <div class="infocard-row-flow">
         <div class="relatie-box" *ngFor="let relatie of persoonFiche.relaties" [ngClass]="{'uit-elkaar':relatie.uitElkaar}">
@@ -157,8 +157,8 @@
               <span class="actie" (click)="documentToevoegen(null, relatie)"><fa-icon
                 [icon]="faFileText"></fa-icon></span>
               <span class="actie" (click)="persoonAanRelatieToevoegen(null, relatie)">
-<!--              <svg-icon-sprite [src]="'assets/sprites/sprite.svg#child'" [width]="'16px'" [viewBox]="'0 0 320 512'"></svg-icon-sprite>-->
-                REL
+                <app-svg-icon icon="child"></app-svg-icon>
+
               </span>
             </div>
           </div>

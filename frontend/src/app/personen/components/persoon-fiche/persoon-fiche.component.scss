@@ -24,8 +24,9 @@
     height: 36px;
     display: flex;
     justify-content: center;
+    align-items: end;
     background-color: steelblue;
-    color: white;
+    fill: wheat;
   }
 
   .geslacht {
@@ -129,10 +130,11 @@
     padding: 4px 12px;
     border: 1px solid whitesmoke;
     border-radius: 4px 4px 0 0;
+    align-items: center;
 
     .acties {
       display: flex;
-      align-items: center;
+      fill: steelblue;
     }
 
     .relatie {

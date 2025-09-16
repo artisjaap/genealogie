@@ -49,7 +49,7 @@ public class DefaultNatuurlijkPersoonZoeken implements NatuurlijkPersoonZoeken {
                 .relaties(relaties)
                 .kinderen(kinderen)
                 .broersEnZussen(broersEnZussen)
-                .nevemEnNichten(nevenEnNichten)
+                .nevenEnNichten(nevenEnNichten)
                 .nonkelsEnTantes(nonkelsEnTantes)
                 .documenten(documenten)
                 .build();

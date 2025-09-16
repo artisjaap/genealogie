@@ -18,7 +18,7 @@ public class NatuurlijkPersoonFicheDto {
     private List<RelatieDto> relaties;
     private List<NatuurlijkPersoonDTO> kinderen;
     private List<BroerOfZusDto> broersEnZussen;
-    private List<NatuurlijkPersoonDTO> nevemEnNichten;
+    private List<NatuurlijkPersoonDTO> nevenEnNichten;
     private List<NonkelsEnTantesDto> nonkelsEnTantes;
     private List<DocumentHeaderDto> documenten;
 }
