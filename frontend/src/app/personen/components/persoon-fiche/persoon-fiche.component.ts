@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {PersonenState} from "../../store/personen.reducer";
 import {
@@ -11,7 +11,7 @@ import {
   getToonDocumentenData,
   getVoegRelatieToeMet
 } from "../../store/personen.selector";
-import {Observable, take} from "rxjs";
+import {Observable, of, switchMap, take, tap, finalize} from "rxjs";
 import {AsyncPipe, DatePipe, JsonPipe, NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {UploadDocumentComponent} from "../upload-document/upload-document.component";
@@ -47,6 +47,7 @@ import {UpdatePersoonsgegevensComponent} from "./update-persoonsgegevens/update-
 import {PersoonReferenceComponent} from "../persoon-reference/persoon-reference.component";
 import {DialogData, NatuurlijkPersoonDto, NatuurlijkPersoonFicheDto, RelatieDto} from "../../../model/genealogie-dto";
 import {SvgIconComponent} from "../../../components/common/svg-icon/svg-icon.component";
+import {DocumentUtility} from "../../../service/document-utility";
 
 @Component({
     selector: 'app-persoon-fiche',
@@ -63,10 +64,11 @@ import {SvgIconComponent} from "../../../components/common/svg-icon/svg-icon.com
     PersoonReferenceComponent,
     SvgIconComponent
   ],
+  providers: [DocumentUtility],
     templateUrl: './persoon-fiche.component.html',
     styleUrl: './persoon-fiche.component.scss'
 })
-export class PersoonFicheComponent {
+export class PersoonFicheComponent implements OnDestroy {
   readonly dialog = inject(MatDialog);
 
   public persoonFiche$: Observable<NatuurlijkPersoonFicheDto | undefined>;
@@ -75,7 +77,7 @@ export class PersoonFicheComponent {
   private persoonVoorRelatieDialogRef: MatDialogRef<PersoonVoorRelatieComponent, any> | undefined;
   private oudersVoorPersoonDialogRef: MatDialogRef<OudersVanPersoonComponent, any> | undefined;
 
-  constructor(private store: Store<PersonenState>) {
+  constructor(private store: Store<PersonenState>, public documentUtility: DocumentUtility) {
     this.persoonFiche$ = store.select(getGeladenPeroonFiche);
 
     store.select(getToonDocumenten).subscribe(toon => {
@@ -200,6 +202,13 @@ export class PersoonFicheComponent {
   protected readonly faMultiply = faMultiply;
   protected readonly faLink = faLink;
 
+  getDocumentUrl(id: number): string | null {
+    return this.documentUtility.getDocumentUrl(id);
+  }
+
+  ngOnDestroy(): void {
+    this.documentUtility.destroy();
+  }
 
 }
 

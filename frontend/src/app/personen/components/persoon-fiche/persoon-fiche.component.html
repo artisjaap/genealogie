@@ -182,7 +182,7 @@
         <div class="document-preview" *ngFor="let document of persoonFiche.documenten">
           <div class="document-preview-titel">{{ document.type }}</div>
           <div class="document-preview-image" (click)="toonImage(img)">
-            <img #img [src]="'/api/document/'+document.id">
+            <img #img [attr.src]="getDocumentUrl(document.id) || null">
 
           </div>
 
