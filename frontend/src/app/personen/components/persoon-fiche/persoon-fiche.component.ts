@@ -193,7 +193,6 @@ export class PersoonFicheComponent implements OnDestroy {
 
   protected readonly faPerson = faPerson;
   protected readonly faEdit = faEdit;
-
   protected readonly UpdateHuwelijkComponent = UpdateHuwelijkComponent;
   protected readonly UpdatePersoonsgegevensComponent = UpdatePersoonsgegevensComponent;
   protected readonly faVenus = faVenus;

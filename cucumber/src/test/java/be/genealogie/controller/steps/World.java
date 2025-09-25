@@ -1,23 +1,19 @@
 package be.genealogie.controller.steps;
 
 import be.genealogie.applicatie.utils.StringUtils;
-import be.genealogie.controller.page.InteractieveVelden;
-import be.genealogie.controller.page.InteractieveVeldenFactory;
 import be.genealogie.controller.page.WebPagina;
+import be.genealogie.controller.steps.model.ScenarioContext;
 import io.cucumber.java.Scenario;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.containers.VncRecordingContainer;
-import org.testcontainers.containers.wait.strategy.WaitAllStrategy;
 
 import java.io.File;
 import java.time.Duration;
@@ -47,6 +43,7 @@ public class World {
     @Setter
     private String token;
     private WebPagina huidigePagina = WebPagina.LOGIN;
+    private ScenarioContext scenarioContext = new ScenarioContext();
 
 
     public void startBrowserVoor() {
@@ -87,5 +84,9 @@ public class World {
     public void naarPagina(WebPagina pagina) {
         log.info("Ik ben nu op pagina {}", pagina);
         this.huidigePagina = pagina;
+    }
+
+    public ScenarioContext scenarioContext() {
+        return scenarioContext;
     }
 }

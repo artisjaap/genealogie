@@ -26,6 +26,11 @@ public class ParameterTypes {
         return "man".equals(string) ? Geslacht.MAN : Geslacht.VROUW;
     }
 
+    @ParameterType("\\[(.*)\\]")
+    public String referentie(String string){
+        return string;
+    }
+
     @ParameterType("[0-9]{2}/[0-9]{2}/[0-9]{4}")
     public LocalDate datum(String datum){
         return LocalDate.parse(datum, dateFormat);

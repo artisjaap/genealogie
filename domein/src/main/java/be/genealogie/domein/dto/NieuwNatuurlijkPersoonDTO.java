@@ -1,12 +1,13 @@
 package be.genealogie.domein.dto;
 
 import be.genealogie.domein.Geslacht;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
+@Builder
 public class NieuwNatuurlijkPersoonDTO {
     private String naam;
     private String voornaam;

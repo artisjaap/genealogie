@@ -1,10 +1,12 @@
 package be.genealogie.domein.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
+@Builder
 public class RelatieMetNieuwNatuurlijkPersoonDto {
     private Long id;
     private NatuurlijkPersoonDTO persoon1;

@@ -16,10 +16,10 @@ public class DBUtils {
 
     public void cleanDb() {
         documentRepository.deleteAllInBatch();
+        relatieRepository.deleteAllInBatch();
         gebruikerRepository.deleteAllInBatch();
         genealogischDriekhoekjeRepository.deleteAllInBatch();
         natuurlijkPersoonRepository.deleteAllInBatch();
-        relatieRepository.deleteAllInBatch();
     }
 
 }

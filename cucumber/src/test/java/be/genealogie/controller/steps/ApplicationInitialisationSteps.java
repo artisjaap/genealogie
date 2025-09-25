@@ -2,6 +2,7 @@ package be.genealogie.controller.steps;
 
 import be.genealogie.controller.SpringIntegrationTest;
 import be.genealogie.controller.dto.RegisterUserDto;
+import be.genealogie.controller.steps.model.AangemeldeGebruikerDto;
 import be.genealogie.controller.utils.DBUtils;
 import be.genealogie.service.AuthenticationService;
 import io.cucumber.java.en.When;
@@ -13,6 +14,8 @@ public class ApplicationInitialisationSteps extends SpringIntegrationTest {
     private DBUtils dbUtils;
     @Autowired
     private AuthenticationService authenticationService;
+    @Autowired
+    private World world;
 
     @When("een lege applicatie met testgebruiker {alfanumeriek}, {alfanumeriek} met email {email} en wachtwoord {alfanumeriek}")
     public void legeApplicatie(String voornaam, String naam, String email, String password) {
@@ -23,5 +26,11 @@ public class ApplicationInitialisationSteps extends SpringIntegrationTest {
                         .naam(naam)
                         .voornaam(voornaam)
                 .build());
+
+        world.scenarioContext().updateAangemeldeGebruiker(AangemeldeGebruikerDto.builder()
+                        .username(email)
+                        .password(password)
+                .build());
     }
+
 }
